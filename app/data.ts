@@ -1,8 +1,4 @@
-import React from 'react'
-import InnerCol from '../components/layout/InnerCol'
-import List from '../components/layout/List'
-
-const listData = [
+export const listData = [
   {
     title:
       '인공지능의 미래: 기술 발전과 사회적 영향에 대한 심층 분석 인공지능의 미래: 기술 발전과 사회적 영향에 대한 심층 분석 인공지능의 미래: 기술 발전과 사회적 영향에 대한 심층 분석',
@@ -40,13 +36,3 @@ const listData = [
     hashes: ['JavaScript', 'Python', 'C++']
   }
 ]
-
-export default function page() {
-  return (
-    <main>
-      <InnerCol>
-        <List listData={listData} />
-      </InnerCol>
-    </main>
-  )
-}

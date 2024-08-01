@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Button from '../components/shared/Button'
 import Hash from '../components/shared/Hash'
-import MarkDownEditor from '../components/layout/MarkDownEditor'
+import Editor from '../components/MarkDownEditor'
 
-export default function page({}) {
+export default function MarkDownEditor() {
   return (
     <main>
       <div className='flex flex-col min-h-screen'>
@@ -49,7 +49,7 @@ export default function page({}) {
           </div>
         </div>
 
-        <MarkDownEditor />
+        <Editor />
       </div>
     </main>
   )
