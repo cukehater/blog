@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Hash from '../shared/Hash'
 import { format, register } from 'timeago.js'
 import koLocale from 'timeago.js/lib/lang/ko'
-import { listItemType } from '../types/types'
+import { listItemType } from '../../types/types'
 
 register('ko', koLocale)
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { listItemType } from '../types/types'
+import { listItemType } from '../../types/types'
 import ListItem from './ListItem'
 
 export default function List({

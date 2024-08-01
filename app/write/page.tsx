@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Button from '../components/shared/Button'
-import MarkDownEditor from '../components/MarkDownEditor'
 import Hash from '../components/shared/Hash'
+import MarkDownEditor from '../components/layout/MarkDownEditor'
 
 export default function page({}) {
   return (
