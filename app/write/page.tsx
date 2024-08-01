@@ -7,20 +7,8 @@ export default function MarkDownEditor() {
   return (
     <main>
       <div className='flex flex-col min-h-screen'>
-        <div className='h-20 bg-gray-700 bg-opacity-5 flex items-center px-4'>
-          <Button
-            text={
-              <>
-                <Image
-                  src='/assets/images/leave_arrow.svg'
-                  alt='나가기'
-                  width='24'
-                  height='24'
-                />
-                나가기
-              </>
-            }
-          />
+        <div className='h-20 bg-[var(--border-color)]  flex items-center px-4'>
+          <Button text='돌아가기' />
           <div className='flex ml-auto gap-2'>
             <Button text='임시저장' type='secondary' />
             <Button text='출간하기' type='tertiary' />

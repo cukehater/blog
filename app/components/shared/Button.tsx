@@ -14,8 +14,7 @@ export default function Button({ text, type = 'primary' }: Props) {
 }
 
 const styleData = {
-  primary: 'text-[var(--color-primary)] hover:bg-[var(--bg-primary-hover)]',
-  secondary: 'text-[var(--brand-color)] hover:bg-[var(--bg-primary-hover)]',
-  tertiary:
-    'text-[var(--color-secondary)] bg-[var(--brand-color)] opacity-90 hover:opacity-100'
+  primary: 'hover:bg-[var(--button-bg)]',
+  secondary: 'text-[var(--brand-color)] hover:bg-[var(--button-bg)]',
+  tertiary: 'text-black bg-[var(--brand-color)] opacity-90 hover:opacity-100'
 }
