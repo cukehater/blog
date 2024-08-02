@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import Hash from '@/app/shared/components/Hash'
 import { format, register } from 'timeago.js'
 import koLocale from 'timeago.js/lib/lang/ko'
 import { listItemType } from '../../types/types'
+import Hash from '@/app/shared/components/Hash'
 
 register('ko', koLocale)
 
