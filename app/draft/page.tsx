@@ -5,7 +5,7 @@ import { listData } from '@/app/data'
 export default function page() {
   return (
     <main>
-      <InnerCol>
+      <InnerCol className='flex-1 flex flex-col items-center justify-center'>
         <List listData={listData} isTemp={true} />
       </InnerCol>
     </main>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "lottie-react": "^2.4.0",
     "md-editor-rt": "^4.17.4",
     "next": "14.2.5",
     "react": "^18",

@@ -1,6 +1,6 @@
 export default function InnerCol({
   children,
-  className
+  className = ''
 }: {
   children: React.ReactNode
   className?: string

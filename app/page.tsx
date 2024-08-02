@@ -7,9 +7,9 @@ import InnerCol from './shared/components/InnerCol'
 export default function Home() {
   return (
     <main>
-      <InnerCol>
+      <InnerCol className='flex-1 flex flex-col items-center justify-center'>
         <Intro />
-        <Search />
+        {listData.length > 0 && <Search />}
         <List listData={listData} />
       </InnerCol>
     </main>

@@ -28,7 +28,7 @@ const Nav = () => {
       </Link>
 
       <Link href='/draft'>
-        <NavItem content='임시글' />
+        <NavItem content='임시 글' />
       </Link>
       <Link href='/setting'>
         <NavItem content='설정' />
