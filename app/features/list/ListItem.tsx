@@ -33,7 +33,7 @@ export default function ListItem({
         {isTemp && (
           <button
             type='button'
-            className='text-sm underline underline-offset-4'
+            className='text-sm underline underline-offset-4 opacity-70 hover:opacity-100 transition-opacity'
           >
             삭제
           </button>

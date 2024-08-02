@@ -9,7 +9,7 @@ export default function List({
   isTemp?: boolean
 }) {
   return (
-    <article>
+    <article className='mt-10'>
       {listData.map((listItem, index) => (
         <ListItem key={index} listItem={listItem} isTemp={isTemp} />
       ))}

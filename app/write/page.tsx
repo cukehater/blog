@@ -1,13 +1,16 @@
 import Button from '@/app/shared/components/Button'
 import Hash from '@/app/shared/components/Hash'
 import Editor from '@/app/features/MarkDownEditor'
+import Link from 'next/link'
 
 export default function MarkDownEditor() {
   return (
     <main>
       <div className='flex flex-col min-h-screen'>
         <div className='h-20 bg-[var(--border-color)]  flex items-center px-4'>
-          <Button text='돌아가기' />
+          <Link href='/'>
+            <Button text='뒤로가기' />
+          </Link>
           <div className='flex ml-auto gap-2'>
             <Button text='임시저장' type='secondary' />
             <Button text='출간하기' type='tertiary' />

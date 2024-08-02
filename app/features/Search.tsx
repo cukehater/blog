@@ -6,13 +6,13 @@ type Props = {}
 
 export default function Search({}: Props) {
   return (
-    <form className='flex items-center rounded-full w-64 overflow-hidden ml-auto bg-gray-100 mb-6'>
+    <form className='flex items-center rounded-full w-64 overflow-hidden ml-auto bg-[var(--button-bg)]'>
       <input
         type='text'
         placeholder='검색어를 입력해 주세요'
         className='h-10 flex-1 pl-4 text-black bg-transparent text-sm'
       />
-      <button className='h-10 w-16 flex items-center justify-center'>
+      <button className='h-10 w-10 flex items-center justify-center mr-1 invert'>
         <Image
           src='/assets/images/search.svg'
           alt='search'
