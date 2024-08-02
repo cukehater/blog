@@ -2,6 +2,7 @@ import Link from 'next/link'
 import InnerCol from '../shared/components/InnerCol'
 import Image from 'next/image'
 import NavItem from '../shared/components/NavItem'
+import DarkModeToggle from '../features/DarkModeToggle'
 
 export default function Header() {
   return (
@@ -21,7 +22,7 @@ export default function Header() {
 
 const Nav = () => {
   return (
-    <nav className='flex'>
+    <nav className='flex items-center'>
       <Link href='/write'>
         <NavItem content='새 글 작성' />
       </Link>
@@ -35,6 +36,7 @@ const Nav = () => {
       <Link href='/logout'>
         <NavItem content='로그아웃' />
       </Link>
+      <DarkModeToggle />
     </nav>
   )
 }

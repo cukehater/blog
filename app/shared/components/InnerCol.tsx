@@ -6,7 +6,7 @@ export default function InnerCol({
   className?: string
 }) {
   return (
-    <div className={`max-w-[840px] mx-auto relative ${className}`}>
+    <div className={`max-w-[1024px] mx-auto relative ${className}`}>
       {children}
     </div>
   )

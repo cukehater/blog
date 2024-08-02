@@ -9,7 +9,7 @@ export default function MarkDownEditor() {
       <div className='flex flex-col min-h-screen'>
         <div className='h-20 bg-[var(--border-color)]  flex items-center px-4'>
           <Link href='/'>
-            <Button text='뒤로가기' />
+            <Button text='돌아가기' />
           </Link>
           <div className='flex ml-auto gap-2'>
             <Button text='임시저장' type='secondary' />
