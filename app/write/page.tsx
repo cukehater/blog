@@ -1,7 +1,6 @@
-import Image from 'next/image'
-import Button from '../components/shared/Button'
-import Hash from '../components/shared/Hash'
-import Editor from '../components/MarkDownEditor'
+import Button from '@/app/shared/components/Button'
+import Hash from '@/app/shared/components/Hash'
+import Editor from '@/app/features/MarkDownEditor'
 
 export default function MarkDownEditor() {
   return (

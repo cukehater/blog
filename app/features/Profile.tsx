@@ -6,7 +6,7 @@ export default function Intro({}: Props) {
   return (
     <section className='pt-32 pb-12 border-b border-[var(--border-color)] mb-32'>
       <div className='flex items-center gap-8'>
-        <div className='w-32 h-32 rounded-full bg-[var(--border-color)] flex items-center justify-center'>
+        <div className='w-32 h-32 rounded-full bg-zinc-700 flex items-center justify-center'>
           <Image
             src='/assets/images/avatar.svg'
             width={100}

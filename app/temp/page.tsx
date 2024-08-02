@@ -1,7 +1,6 @@
-import React from 'react'
-import InnerCol from '../components/layout/InnerCol'
-import List from '../components/shared/List'
-import { listData } from '../data'
+import InnerCol from '@/app/shared/components/InnerCol'
+import List from '@/app/features/list/List'
+import { listData } from '@/app/data'
 
 export default function page() {
   return (

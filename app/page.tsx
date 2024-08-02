@@ -1,7 +1,7 @@
-import Intro from './components/Intro'
-import InnerCol from './components/layout/InnerCol'
-import List from './components/shared/List'
 import { listData } from './data'
+import List from './features/list/List'
+import Intro from './features/Profile'
+import InnerCol from './shared/components/InnerCol'
 
 export default function Home() {
   return (

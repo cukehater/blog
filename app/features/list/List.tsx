@@ -1,4 +1,3 @@
-import React from 'react'
 import { listItemType } from '../../types/types'
 import ListItem from './ListItem'
 
