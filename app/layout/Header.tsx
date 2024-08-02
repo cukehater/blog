@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const pathname = usePathname()
-  const hideArray = ['/write']
-  const shouldHideHeader = hideArray.includes(pathname)
+  const hideArray = ['/write', '/edit']
+  const shouldHideHeader = hideArray.some(path => pathname.includes(path))
 
   if (shouldHideHeader) return null
 

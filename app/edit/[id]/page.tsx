@@ -2,7 +2,7 @@ import Button from '@/app/shared/components/Button'
 import Hash from '@/app/shared/components/Hash'
 import Editor from '@/app/features/MarkDownEditor'
 import Link from 'next/link'
-import { ArrowSvg } from '../shared/components/svg/ArrowSvg'
+import { ArrowSvg } from '@/app/shared/components/svg/ArrowSvg'
 
 export default function Page() {
   return (

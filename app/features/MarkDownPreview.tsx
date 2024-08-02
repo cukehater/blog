@@ -12,7 +12,7 @@ export default function MarkDownPreview({ contents }: { contents: string }) {
         modelValue={contents}
         previewTheme='github'
         language='en-US'
-        className='flex-1 custom-preview'
+        className='flex-1 custom-preview detail'
         theme='dark'
       />
     </>
