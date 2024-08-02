@@ -1,6 +1,10 @@
 import Image from 'next/image'
 import avatarImage from '@/public/assets/images/avatar.svg'
 import Link from 'next/link'
+import EmailSvg from '../shared/components/svg/EmailSvg'
+import GithubSvg from '../shared/components/svg/GithubSvg'
+import PortfolioSvg from '../shared/components/svg/PortfolioSvg'
+import ResumeSvg from '../shared/components/svg/ResumeSvg'
 
 type Props = {}
 
@@ -20,9 +24,50 @@ export default function Intro({}: Props) {
           </p>
 
           <nav className='flex gap-3 mt-4'>
-            <Nav href='/' text='Portfolio.' />
-            <Nav href='/' text='Github.' />
-            <Nav href='/' text='Resume.' />
+            <Nav
+              href='/'
+              text={
+                <>
+                  <span className='w-4 h-4'>
+                    <EmailSvg />
+                  </span>
+                  E-Mail
+                </>
+              }
+            />
+            <Nav
+              href='/'
+              text={
+                <>
+                  <span className='w-4 h-4'>
+                    <GithubSvg />
+                  </span>
+                  Github
+                </>
+              }
+            />
+            <Nav
+              href='/'
+              text={
+                <>
+                  <span className='w-4 h-4'>
+                    <PortfolioSvg />
+                  </span>
+                  Portfolio
+                </>
+              }
+            />
+            <Nav
+              href='/'
+              text={
+                <>
+                  <span className='w-4 h-4'>
+                    <ResumeSvg />
+                  </span>
+                  Resume
+                </>
+              }
+            />
           </nav>
         </div>
       </div>
@@ -30,11 +75,17 @@ export default function Intro({}: Props) {
   )
 }
 
-const Nav = ({ href, text }: { href: string; text: string }) => {
+const Nav = ({
+  href,
+  text
+}: {
+  href: string
+  text: string | React.ReactNode
+}) => {
   return (
     <Link
       href={href}
-      className='text-sm text-[var(--accent-color)] opacity-80 hover:opacity-100 transition-opacity'
+      className='flex items-center gap-0.5 text-sm text-[var(--accent-color)] opacity-80 hover:opacity-100 transition-opacity'
     >
       {text}
     </Link>

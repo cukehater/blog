@@ -3,7 +3,7 @@ import List from '@/app/features/list/List'
 import { listData } from '@/app/data'
 import ModalConfirm from '../shared/components/ModalConfirm'
 
-export default function page() {
+export default function Page() {
   return (
     <>
       <main>
