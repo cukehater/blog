@@ -1,12 +1,13 @@
 interface Props {
   text: string | React.ReactNode
   type?: keyof typeof styleData
+  className?: string
 }
 
-export default function Button({ text, type = 'primary' }: Props) {
+export default function Button({ text, type = 'primary', className }: Props) {
   return (
     <button
-      className={`${styleData[type]} flex items-center gap-2 px-4 py-2 rounded-md font-medium text-lg`}
+      className={`${styleData[type]} flex items-center gap-2 px-4 py-2 rounded-md font-medium text-lg ${className}`}
     >
       {text}
     </button>

@@ -13,7 +13,7 @@ export default function List({
     return <NoItems text={isTemp ? '임시 글이' : '게시글이'} />
   }
   return (
-    <article className='mt-10'>
+    <article>
       {listData.map((listItem, index) => (
         <ListItem key={index} listItem={listItem} isTemp={isTemp} />
       ))}

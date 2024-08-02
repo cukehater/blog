@@ -4,7 +4,7 @@ import Intro from './features/Profile'
 import Search from './features/Search'
 import InnerCol from './shared/components/InnerCol'
 
-export default function Home() {
+export default function Main() {
   return (
     <main>
       <InnerCol className='flex-1 flex flex-col items-center justify-center'>

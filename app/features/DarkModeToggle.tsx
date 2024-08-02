@@ -7,14 +7,14 @@ export default function DarkModeToggle() {
       className='bg-[var(--border-color)] rounded-md p-1 ml-2'
     >
       <div className='w-7 h-7 hover:rotate-45 transition-transform duration-300'>
-        {/* <DarkImage /> */}
-        <LightImage />
+        {/* <DarkSvg /> */}
+        <LightSvg />
       </div>
     </button>
   )
 }
 
-const DarkImage = () => {
+const DarkSvg = () => {
   return (
     <svg
       fill='var(--color)'
@@ -28,7 +28,7 @@ const DarkImage = () => {
   )
 }
 
-const LightImage = () => {
+const LightSvg = () => {
   return (
     <svg
       fill='var(--color)'

@@ -1,10 +1,18 @@
+'use client'
+
 import Link from 'next/link'
 import InnerCol from '../shared/components/InnerCol'
-import Image from 'next/image'
 import NavItem from '../shared/components/NavItem'
 import DarkModeToggle from '../features/DarkModeToggle'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
+  const pathname = usePathname()
+  const hideArray = ['/write']
+  const shouldHideHeader = hideArray.includes(pathname)
+
+  if (shouldHideHeader) return null
+
   return (
     <>
       <header className='sticky top-0 left-0 w-full z-50 py-5 bg-[var(--background-color)]'>

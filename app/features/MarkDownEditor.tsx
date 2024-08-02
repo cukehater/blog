@@ -12,7 +12,7 @@ export default function MarkDownEditor() {
       modelValue={text}
       onChange={setText}
       language='en-US'
-      className='flex-1'
+      className='flex-1 custom-preview'
       theme='dark'
     />
   )
