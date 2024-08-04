@@ -53,7 +53,7 @@ export default function Page() {
             </div>
           </Link>
 
-          <Button text='목록' type='tertiary' className='font-bold px-12' />
+          <Button text='목록' type='tertiary' className='font-bold px-10' />
 
           <Link
             href='/'

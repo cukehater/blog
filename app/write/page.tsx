@@ -3,12 +3,13 @@ import Hash from '@/app/shared/components/Hash'
 import Editor from '@/app/features/MarkDownEditor'
 import Link from 'next/link'
 import { ArrowSvg } from '../shared/components/svg/ArrowSvg'
+import HashMaker from '../shared/components/HashMaker'
 
 export default function Page() {
   return (
     <div className='flex flex-col min-h-screen'>
       <Nav />
-      <div className='w-1/2 py-8 px-4'>
+      <div className='py-8 px-4'>
         <div>
           <input
             type='text'
@@ -17,17 +18,7 @@ export default function Page() {
           />
         </div>
 
-        <div className='flex gap-2 mt-4 flex-wrap'>
-          <Hash hash='해쉬' />
-          <Hash hash='해쉬' />
-          <Hash hash='해쉬' />
-
-          <input
-            type='text'
-            className='bg-transparent w-40 block'
-            placeholder='태그를 입력해 주세요'
-          />
-        </div>
+        <HashMaker />
       </div>
 
       <Editor />
