@@ -1,6 +1,7 @@
 import NoItems from '@/app/shared/components/NoItems'
-import { listItemType } from '../../types/types'
+
 import ListItem from './ListItem'
+import { listItemType } from '../../types/types'
 
 export default function List({
   listData,

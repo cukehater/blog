@@ -1,28 +1,23 @@
-import Button from '@/app/shared/components/Button'
-import Hash from '@/app/shared/components/Hash'
-import Editor from '@/app/features/MarkDownEditor'
 import Link from 'next/link'
-import { ArrowSvg } from '../shared/components/svg/ArrowSvg'
+
+import Editor from '@/app/features/MarkDownEditor'
+import Button from '@/app/shared/components/Button'
+
 import HashMaker from '../shared/components/HashMaker'
+import { ArrowSvg } from '../shared/components/svg/ArrowSvg'
 
 export default function Page() {
   return (
-    <div className='flex flex-col min-h-screen'>
+    <main className='flex flex-col min-h-screen mt-0'>
       <Nav />
-      <div className='py-8 px-4'>
-        <div>
-          <input
-            type='text'
-            className='w-full text-3xl bg-transparent mb-4'
-            placeholder='제목을 입력해 주세요'
-          />
-        </div>
 
+      <section className='py-8 px-4'>
+        <Title />
         <HashMaker />
-      </div>
+      </section>
 
       <Editor />
-    </div>
+    </main>
   )
 }
 
@@ -44,5 +39,17 @@ const Nav = () => {
         <Button text='발행하기' type='tertiary' />
       </div>
     </nav>
+  )
+}
+
+const Title = () => {
+  return (
+    <div>
+      <input
+        type='text'
+        className='w-full text-3xl bg-transparent mb-4'
+        placeholder='제목을 입력해 주세요'
+      />
+    </div>
   )
 }

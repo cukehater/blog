@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+
 import { v4 as uuid } from 'uuid'
+
 import Hash from './Hash'
 
 export default function HashMaker() {
@@ -20,8 +22,14 @@ export default function HashMaker() {
   }
 
   const checkValid = (value: string) => {
-    if (value.trim() === '') return false
-    else return true
+    if (hashes.includes(value)) {
+      setValue('')
+      return false
+    }
+    if (value.trim() === '') {
+      return false
+    }
+    return true
   }
 
   return (

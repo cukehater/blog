@@ -1,6 +1,7 @@
 'use client'
 
 import Lottie from 'lottie-react'
+
 import loadingLottie from '@/public/assets/lottie/loading.json'
 
 export default function NoItems({ text }: { text: string }) {
