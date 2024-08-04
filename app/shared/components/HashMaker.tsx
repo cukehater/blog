@@ -15,19 +15,24 @@ export default function HashMaker() {
     }
   }
 
+  const handleRemove = (hash: string) => {
+    setHashes(prev => prev.filter(h => h !== hash))
+  }
+
   const checkValid = (value: string) => {
-    if (value === '') return false
+    if (value.trim() === '') return false
     else return true
   }
 
   return (
     <div className='flex gap-2 mt-4 flex-wrap'>
-      {/* <Hash hash='해쉬' />
-      <Hash hash='해쉬' />
-      <Hash hash='해쉬' /> */}
-
       {hashes.map(hash => (
-        <Hash key={uuid()} hash={hash} />
+        <Hash
+          key={uuid()}
+          hash={hash}
+          onRemove={() => handleRemove(hash)}
+          isPointer={true}
+        />
       ))}
 
       <input
