@@ -8,13 +8,13 @@ import { listItemType } from '../../types/types'
 
 export default function ListItem({
   listItem,
-  isTemp
+  isDraft
 }: {
   listItem: listItemType
-  isTemp?: boolean
+  isDraft?: boolean
 }) {
   const { _id, title, description, hashes, registerDate } = listItem
-  const redirectUrl = isTemp
+  const redirectUrl = isDraft
     ? `/write/${_id?.toString()}`
     : `/detail/${_id?.toString()}`
 
@@ -35,7 +35,7 @@ export default function ListItem({
         {_id && (
           <div className='flex justify-between items-center'>
             <p className='text-sm text-gray-500'>{dateFormat(registerDate)}</p>
-            {isTemp && <DeleteDraft id={_id.toString()} />}
+            {isDraft && <DeleteDraft id={_id.toString()} />}
           </div>
         )}
       </div>

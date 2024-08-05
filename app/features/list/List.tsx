@@ -5,10 +5,10 @@ import { listItemType } from '../../types/types'
 
 export default function List({
   listData,
-  isTemp
+  isDraft
 }: {
   listData: listItemType[]
-  isTemp?: boolean
+  isDraft?: boolean
 }) {
   if (listData.length === 0) {
     return <NoItems />
@@ -16,7 +16,7 @@ export default function List({
   return (
     <article className='w-full'>
       {listData.map((listItem, index) => (
-        <ListItem key={index} listItem={listItem} isTemp={isTemp} />
+        <ListItem key={index} listItem={listItem} isDraft={isDraft} />
       ))}
     </article>
   )

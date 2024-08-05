@@ -14,7 +14,7 @@ export default async function Page() {
     <>
       <main>
         <InnerCol className='flex-1 flex flex-col items-center justify-center'>
-          <List listData={listData} isTemp={true} />
+          <List listData={listData} isDraft={true} />
         </InnerCol>
       </main>
     </>
