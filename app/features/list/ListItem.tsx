@@ -32,10 +32,12 @@ export default function ListItem({
             </div>
           )}
         </Link>
-        <div className='flex justify-between items-center'>
-          <p className='text-sm text-gray-500'>{dateFormat(registerDate)}</p>
-          {isTemp && <DeleteDraft />}
-        </div>
+        {_id && (
+          <div className='flex justify-between items-center'>
+            <p className='text-sm text-gray-500'>{dateFormat(registerDate)}</p>
+            {isTemp && <DeleteDraft id={_id.toString()} />}
+          </div>
+        )}
       </div>
     </>
   )
