@@ -1,10 +1,11 @@
 'use client'
 
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+
 import Button from '@/app/shared/components/Button'
 import { ArrowSvg } from '@/app/shared/components/svg/ArrowSvg'
 import { listItemType } from '@/app/types/types'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 interface BottomNavProps {
   previousPost: listItemType[]
@@ -18,17 +19,17 @@ export default function BottomNav({ previousPost, nextPost }: BottomNavProps) {
   const next = nextPost[0]
 
   return (
-    <div className='flex justify-between my-20'>
+    <nav className='flex justify-between my-20'>
       <div className='w-96'>
-        {prev && (
+        {next && (
           <Link
-            href={`/detail/${prev._id}`}
-            className=' flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity'
+            href={`/detail/${next._id}`}
+            className='flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity'
           >
-            <ArrowSvg className='w-10 h-10 mr-2' />
+            <ArrowSvg className='w-7 h-7 mr-2' />
             <div className='flex-1'>
-              <p className='text-sm mb-1'>이전 글</p>
-              <p>{prev.title}</p>
+              <p className='text-xs mb-1'>다음 글</p>
+              <p className='text-lg'>{next.title}</p>
             </div>
           </Link>
         )}
@@ -42,20 +43,19 @@ export default function BottomNav({ previousPost, nextPost }: BottomNavProps) {
       />
 
       <div className='w-96'>
-        {next && (
+        {prev && (
           <Link
-            href={`/detail/${next._id}`}
-            className='text-right w-96 flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity'
+            href={`/detail/${prev._id}`}
+            className='text-right w-96 flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity'
           >
             <div className='flex-1'>
-              <p className='text-sm mb-1'>다음 글</p>
-              <p>{next.title}</p>
+              <p className='text-xs mb-1'>이전 글</p>
+              <p className='text-lg'>{prev.title}</p>
             </div>
-
-            <ArrowSvg className='w-10 h-10 ml-2 rotate-180' />
+            <ArrowSvg className='w-7 h-7 ml-2 rotate-180' />
           </Link>
         )}
       </div>
-    </div>
+    </nav>
   )
 }

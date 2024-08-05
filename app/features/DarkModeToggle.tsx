@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { LightSvg } from '../shared/components/svg/LightSvg'
 
 export default function DarkModeToggle() {

@@ -1,30 +1,24 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { MdEditor } from 'md-editor-rt'
 
 import 'md-editor-rt/lib/style.css'
-import { listItemType } from '@/app/types/types'
 import useCallSnackbar from '@/app/hooks/useCallSnackbar'
 import Snackbar from '@/app/shared/components/Snackbar'
+import { listItemType } from '@/app/types/types'
 
 export default function MarkDownEditor({
   formData,
-  handleContentChange,
   handleSaveDraft,
   setContent
 }: {
   formData: listItemType
-  handleContentChange: (content: string) => void
   handleSaveDraft: (formData: listItemType) => void
   setContent: (content: string) => void
 }) {
   const { showSnackbar, setShowSnackbar } = useCallSnackbar()
-
-  useEffect(() => {
-    handleContentChange(formData.content)
-  }, [formData.content])
 
   return (
     <>

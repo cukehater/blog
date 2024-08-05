@@ -14,7 +14,6 @@ export default function Page({ params }: { params: { id: string } }) {
     fetchDraft,
     handleTitleChange,
     handleDescriptionChange,
-    handleContentChange,
     setHashes,
     setContent,
     handleSaveDraft,
@@ -32,7 +31,6 @@ export default function Page({ params }: { params: { id: string } }) {
       formData={formData}
       handleTitleChange={handleTitleChange}
       handleDescriptionChange={handleDescriptionChange}
-      handleContentChange={handleContentChange}
       setHashes={setHashes}
       setContent={setContent}
       handleSaveDraft={handleSaveDraft}

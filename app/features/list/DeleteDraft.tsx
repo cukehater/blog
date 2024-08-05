@@ -1,7 +1,8 @@
 'use client'
 
-import ModalConfirm from '@/app/shared/components/ModalConfirm'
 import { useState } from 'react'
+
+import ModalConfirm from '@/app/shared/components/ModalConfirm'
 
 export default function DeleteDraft() {
   const [isModalOpen, setIsModalOpen] = useState(false)

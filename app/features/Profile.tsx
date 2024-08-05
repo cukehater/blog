@@ -1,6 +1,8 @@
 import Image from 'next/image'
-import avatarImage from '@/public/assets/images/avatar.svg'
 import Link from 'next/link'
+
+import avatarImage from '@/public/assets/images/avatar.svg'
+
 import EmailSvg from '../shared/components/svg/EmailSvg'
 import GithubSvg from '../shared/components/svg/GithubSvg'
 import PortfolioSvg from '../shared/components/svg/PortfolioSvg'

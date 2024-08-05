@@ -1,18 +1,22 @@
+import { Metadata } from 'next'
+
 import { ObjectId } from 'mongodb'
 import Link from 'next/link'
 
-import Button from '@/app/shared/components/Button'
+import BottomNav from '@/app/features/detail/BottomNav'
+import MarkDownPreview from '@/app/features/detail/MarkDownPreview'
 import Hash from '@/app/shared/components/Hash'
 import InnerCol from '@/app/shared/components/InnerCol'
-import { ArrowSvg } from '@/app/shared/components/svg/ArrowSvg'
+import NoItems from '@/app/shared/components/NoItems'
 import { ShareSvg } from '@/app/shared/components/svg/ShareSvg'
 import { connectDB } from '@/app/shared/utils/connectDB'
 import { dateFormat } from '@/app/shared/utils/dateFormat'
 import { listItemType } from '@/app/types/types'
-import { Metadata } from 'next'
-import NoItems from '@/app/shared/components/NoItems'
-import MarkDownPreview from '@/app/features/detail/MarkDownPreview'
-import BottomNav from '@/app/features/detail/BottomNav'
+
+export const metadata: Metadata = {
+  title: 'Cukehater',
+  description: 'Cukehater'
+}
 
 export default async function Page({
   params: { id }
@@ -37,11 +41,6 @@ export default async function Page({
 
   if (!result) {
     return <NoItems />
-  }
-
-  const metadata: Metadata = {
-    title: result.title,
-    description: result.description
   }
 
   return (
@@ -69,18 +68,20 @@ export default async function Page({
           </div>
         </hgroup>
 
-        <div className='flex gap-2 mt-6'>
-          {result.hashes.map(hash => (
-            <Hash key={hash} hash={hash} />
-          ))}
-        </div>
-
-        <div className='mt-10'>
-          <MarkDownPreview contents={result.content} />
-        </div>
-
+        <Hashes hashes={result.hashes} />
+        <MarkDownPreview contents={result.content} />
         <BottomNav previousPost={previousPost} nextPost={nextPost} />
       </InnerCol>
     </main>
+  )
+}
+
+const Hashes = ({ hashes }: { hashes: string[] }) => {
+  return (
+    <div className='flex gap-2 mt-6'>
+      {hashes.map(hash => (
+        <Hash key={hash} hash={hash} />
+      ))}
+    </div>
   )
 }

@@ -1,16 +1,15 @@
 import { listItemType } from '@/app/types/types'
 
+import Description from './Description'
 import Hashes from './Hashes'
+import MarkDownEditor from './MarkDownEditor'
 import Title from './Title'
 import TopNav from './TopNav'
-import MarkDownEditor from './MarkDownEditor'
-import Description from './Description'
 
 interface WriteProps {
   formData: listItemType
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  handleContentChange: (content: string) => void
   setHashes: (hashes: string[]) => void
   setContent: (content: string) => void
   handleSaveDraft: () => void
@@ -20,7 +19,6 @@ interface WriteProps {
 export default function Write({
   formData,
   handleTitleChange,
-  handleContentChange,
   setHashes,
   setContent,
   handleDescriptionChange,
@@ -41,7 +39,6 @@ export default function Write({
       </section>
 
       <MarkDownEditor
-        handleContentChange={handleContentChange}
         formData={formData}
         setContent={setContent}
         handleSaveDraft={handleSaveDraft}

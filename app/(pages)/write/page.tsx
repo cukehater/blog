@@ -8,7 +8,6 @@ export default function Page() {
     formData,
     handleTitleChange,
     handleDescriptionChange,
-    handleContentChange,
     setHashes,
     setContent,
     handleSaveDraft,
@@ -19,7 +18,6 @@ export default function Page() {
     <Write
       formData={formData}
       handleTitleChange={handleTitleChange}
-      handleContentChange={handleContentChange}
       handleDescriptionChange={handleDescriptionChange}
       setHashes={setHashes}
       setContent={setContent}

@@ -1,9 +1,9 @@
 import { useCallback, useReducer, useState } from 'react'
 
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 import { listItemType } from '../types/types'
-import { useRouter } from 'next/navigation'
 
 const initialFormData = {
   title: '',
@@ -36,10 +36,6 @@ export default function useWritePost() {
     setFormData({ ...formData, description })
   }
 
-  const handleContentChange = (content: string) => {
-    setFormData({ ...formData, content })
-  }
-
   const setHashes = (hashes: string[]) => {
     setFormData({ ...formData, hashes })
   }
@@ -68,7 +64,6 @@ export default function useWritePost() {
     fetchDraft,
     handleTitleChange,
     handleDescriptionChange,
-    handleContentChange,
     setHashes,
     setContent,
     handleSaveDraft,
