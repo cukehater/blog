@@ -14,7 +14,6 @@ import { ArrowSvg } from '../shared/components/svg/ArrowSvg'
 import { listItemType } from '../types/types'
 
 export default function Page() {
-  const router = useRouter()
   const [formData, setFormData] = useState<listItemType>({
     title: '',
     description: '',
@@ -37,12 +36,7 @@ export default function Page() {
   }
 
   const handleSaveDraft = () => {
-    try {
-      axios.post('/api/draft/create', formData)
-      router.push('/draft')
-    } catch (error) {
-      console.error(error)
-    }
+    axios.post('/api/draft/create', formData)
   }
 
   return (
@@ -54,12 +48,18 @@ export default function Page() {
         <HashMaker getHashes={getHashes} />
       </section>
 
-      <Editor handleContentChange={handleContentChange} />
+      <Editor
+        handleContentChange={handleContentChange}
+        formData={formData}
+        handleSaveDraft={handleSaveDraft}
+      />
     </main>
   )
 }
 
 const Nav = ({ handleSaveDraft }: { handleSaveDraft: () => void }) => {
+  const router = useRouter()
+
   return (
     <nav className='h-20 bg-[var(--border-color)]  flex items-center px-4'>
       <Link href='/'>
@@ -73,7 +73,14 @@ const Nav = ({ handleSaveDraft }: { handleSaveDraft: () => void }) => {
         />
       </Link>
       <div className='flex ml-auto gap-2'>
-        <Button text='임시저장' type='secondary' onClick={handleSaveDraft} />
+        <Button
+          text='임시저장'
+          type='secondary'
+          onClick={() => {
+            handleSaveDraft()
+            router.push('/draft')
+          }}
+        />
         <Button text='발행하기' type='tertiary' />
       </div>
     </nav>
