@@ -1,7 +1,6 @@
 import { ObjectId } from 'mongodb'
 import Link from 'next/link'
 
-import MarkDownPreview from '@/app/features/MarkDownPreview'
 import Button from '@/app/shared/components/Button'
 import Hash from '@/app/shared/components/Hash'
 import InnerCol from '@/app/shared/components/InnerCol'
@@ -12,6 +11,8 @@ import { dateFormat } from '@/app/shared/utils/dateFormat'
 import { listItemType } from '@/app/types/types'
 import { Metadata } from 'next'
 import NoItems from '@/app/shared/components/NoItems'
+import MarkDownPreview from '@/app/features/detail/MarkDownPreview'
+import BottomNav from '@/app/features/detail/BottomNav'
 
 export default async function Page({
   params: { id }
@@ -19,9 +20,20 @@ export default async function Page({
   params: { id: string }
 }) {
   const db = (await connectDB).db('blog')
-  const result = await db
-    .collection<listItemType>('posts')
-    .findOne({ _id: new ObjectId(id) })
+  const collection = db.collection<listItemType>('posts')
+  const result = await collection.findOne({ _id: new ObjectId(id) })
+
+  const previousPost = await collection
+    .find({ _id: { $lt: new ObjectId(id) } })
+    .sort({ _id: -1 })
+    .limit(1)
+    .toArray()
+
+  const nextPost = await collection
+    .find({ _id: { $gt: new ObjectId(id) } })
+    .sort({ _id: 1 })
+    .limit(1)
+    .toArray()
 
   if (!result) {
     return <NoItems />
@@ -67,32 +79,7 @@ export default async function Page({
           <MarkDownPreview contents={result.content} />
         </div>
 
-        <div className='flex justify-between my-20'>
-          <Link
-            href='/'
-            className='w-96 flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity'
-          >
-            <ArrowSvg className='w-10 h-10 mr-2' />
-            <div className='flex-1'>
-              <p className='text-sm mb-1'>이전 글</p>
-              <p>Lorem, ipsum dolor. Lorem</p>
-            </div>
-          </Link>
-
-          <Button text='목록' type='tertiary' className='font-bold px-8' />
-
-          <Link
-            href='/'
-            className='text-right w-96 flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity'
-          >
-            <div className='flex-1'>
-              <p className='text-sm mb-1'>다음 글</p>
-              <p>Lorem, ipsum dolor.</p>
-            </div>
-
-            <ArrowSvg className='w-10 h-10 ml-2 rotate-180' />
-          </Link>
-        </div>
+        <BottomNav previousPost={previousPost} nextPost={nextPost} />
       </InnerCol>
     </main>
   )

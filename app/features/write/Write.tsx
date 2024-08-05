@@ -3,7 +3,7 @@ import { listItemType } from '@/app/types/types'
 import Hashes from './Hashes'
 import Title from './Title'
 import TopNav from './TopNav'
-import MarkDownEditor from '../MarkDownEditor'
+import MarkDownEditor from './MarkDownEditor'
 import Description from './Description'
 
 interface WriteProps {

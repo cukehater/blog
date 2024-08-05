@@ -5,9 +5,9 @@ import React, { useEffect, useState } from 'react'
 import { MdEditor } from 'md-editor-rt'
 
 import 'md-editor-rt/lib/style.css'
-import useCallSnackbar from '../hooks/useCallSnackbar'
-import Snackbar from '../shared/components/Snackbar'
-import { listItemType } from '../types/types'
+import { listItemType } from '@/app/types/types'
+import useCallSnackbar from '@/app/hooks/useCallSnackbar'
+import Snackbar from '@/app/shared/components/Snackbar'
 
 export default function MarkDownEditor({
   formData,
