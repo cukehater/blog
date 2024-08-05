@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/uuid": "^10.0.0",
+    "axios": "^1.7.3",
     "date-fns": "^3.6.0",
     "lottie-react": "^2.4.0",
     "md-editor-rt": "^4.17.4",

@@ -1,8 +1,10 @@
 import Link from 'next/link'
-import { listItemType } from '../../types/types'
+
 import Hash from '@/app/shared/components/Hash'
 import { dateFormat } from '@/app/shared/utils/dateFormat'
+
 import DeleteDraft from './DeleteDraft'
+import { listItemType } from '../../types/types'
 
 export default function ListItem({
   listItem,
@@ -11,12 +13,12 @@ export default function ListItem({
   listItem: listItemType
   isTemp?: boolean
 }) {
-  const { title, description, hashes, date } = listItem
+  const { title, description, hashes, registerDate } = listItem
   const redirectUrl = isTemp ? '/edit/1' : '/detail/1'
 
   return (
     <>
-      <div className='last:border-b-0 border-b border-[var(--border-color)] py-8'>
+      <div className='last:border-b-0 border-b border-[var(--border-color)] py-8 w-full'>
         <Link href={redirectUrl} className='flex flex-col '>
           <h4 className='text-2xl font-bold mb-4 line-clamp-1'>{title}</h4>
           <p className='text-gray-500 line-clamp-2 mb-8'>{description}</p>
@@ -29,7 +31,7 @@ export default function ListItem({
           )}
         </Link>
         <div className='flex justify-between items-center'>
-          <p className='text-sm text-gray-500'>{dateFormat(date)}</p>
+          <p className='text-sm text-gray-500'>{dateFormat(registerDate)}</p>
           {isTemp && <DeleteDraft />}
         </div>
       </div>

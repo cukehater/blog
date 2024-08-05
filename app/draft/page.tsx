@@ -1,9 +1,15 @@
-import InnerCol from '@/app/shared/components/InnerCol'
 import List from '@/app/features/list/List'
-import { listData } from '@/app/data'
-import ModalConfirm from '../shared/components/ModalConfirm'
+import InnerCol from '@/app/shared/components/InnerCol'
 
-export default function Page() {
+import { connectDB } from '../shared/utils/connectDB'
+import listSortByDate from '../shared/utils/listSortByDate'
+import { listItemType } from '../types/types'
+
+export default async function Page() {
+  const db = (await connectDB).db('blog')
+  const result = await db.collection<listItemType>('drafts').find().toArray()
+  const listData = listSortByDate(result)
+
   return (
     <>
       <main>

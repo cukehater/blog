@@ -1,14 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { v4 as uuid } from 'uuid'
 
 import Hash from './Hash'
 
-export default function HashMaker() {
+export default function HashMaker({
+  getHashes
+}: {
+  getHashes: (hashes: string[]) => void
+}) {
   const [value, setValue] = useState('')
   const [hashes, setHashes] = useState<string[]>([])
+
+  useEffect(() => {
+    getHashes(hashes)
+  }, [hashes])
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && checkValid(value)) {
@@ -29,6 +37,7 @@ export default function HashMaker() {
     if (value.trim() === '') {
       return false
     }
+
     return true
   }
 

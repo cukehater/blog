@@ -1,9 +1,10 @@
 import { ObjectId } from 'mongodb'
 
 export interface listItemType {
-  _id: ObjectId
+  _id?: ObjectId
   title: string
   description: string
-  date: string
+  content: string
+  registerDate: string
   hashes: string[]
 }

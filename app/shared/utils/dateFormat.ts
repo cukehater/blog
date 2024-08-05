@@ -1,6 +1,6 @@
-import koLocale from 'timeago.js/lib/lang/ko'
-import { format, register } from 'timeago.js'
 import { differenceInMonths, parseISO, format as format_fns } from 'date-fns'
+import { format, register } from 'timeago.js'
+import koLocale from 'timeago.js/lib/lang/ko'
 
 register('ko', koLocale)
 

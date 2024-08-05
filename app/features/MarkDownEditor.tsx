@@ -1,16 +1,25 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import { MdEditor } from 'md-editor-rt'
 import 'md-editor-rt/lib/style.css'
 
-export default function MarkDownEditor() {
-  const [text, setText] = useState<any>()
+export default function MarkDownEditor({
+  handleContentChange
+}: {
+  handleContentChange: (content: string) => void
+}) {
+  const [value, setValue] = useState<string>('')
+
+  useEffect(() => {
+    handleContentChange(value)
+  }, [value])
 
   return (
     <MdEditor
-      modelValue={text}
-      onChange={setText}
+      modelValue={value}
+      onChange={setValue}
       language='en-US'
       className='flex-1 custom-preview'
       theme='dark'
