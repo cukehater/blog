@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
 
 import { v4 as uuid } from 'uuid'
 
 import Hash from '@/app/shared/components/Hash'
+import ModalAlert from '@/app/shared/components/ModalAlert'
 
 interface HashesProps {
   setHashes: (hashes: string[]) => void
@@ -12,49 +13,66 @@ interface HashesProps {
 }
 
 export default function Hashes({ setHashes, hashes }: HashesProps) {
+  const [isModalOpen, modalToggle] = useReducer(prev => !prev, false)
   const [value, setValue] = useState('')
+
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && checkValid(value)) {
       setHashes([...hashes, value])
-      setValue('')
     }
   }
 
-  const handleRemove = (hash: string) => {
-    setHashes(hashes.filter(h => h !== hash))
+  const handleBlur = () => {
+    setValue('')
   }
 
   const checkValid = (value: string) => {
-    if (hashes.includes(value)) {
-      setValue('')
+    setValue('')
+
+    if (hashes.length >= 5) {
+      modalToggle()
       return false
     }
-    if (value.trim() === '') {
-      return false
-    }
+    if (hashes.includes(value)) return false
+    if (value.trim() === '') return false
 
     return true
   }
 
-  return (
-    <div className='flex gap-2 mt-4 flex-wrap'>
-      {hashes.map(hash => (
-        <Hash
-          key={uuid()}
-          hash={hash}
-          onRemove={() => handleRemove(hash)}
-          isPointer={true}
-        />
-      ))}
+  const removeHash = (hash: string) => {
+    setHashes(hashes.filter(h => h !== hash))
+  }
 
-      <input
-        type='text'
-        className='bg-transparent w-40 block'
-        placeholder='태그를 입력해 주세요'
-        onKeyUp={handleKeyUp}
-        onChange={e => setValue(e.target.value)}
-        value={value}
-      />
-    </div>
+  return (
+    <>
+      <div className='flex gap-2 mt-4 flex-wrap'>
+        {hashes.map(hash => (
+          <Hash
+            key={uuid()}
+            hash={hash}
+            onRemove={() => removeHash(hash)}
+            isPointer={true}
+          />
+        ))}
+
+        <input
+          type='text'
+          className='bg-transparent w-40 block'
+          placeholder='태그를 입력해 주세요'
+          onKeyUp={handleKeyUp}
+          onBlur={handleBlur}
+          onChange={e => setValue(e.target.value)}
+          value={value}
+        />
+      </div>
+
+      {isModalOpen && (
+        <ModalAlert
+          description='태그는 최대 5개까지 추가할 수 있습니다.'
+          buttonText='확인'
+          onClick={modalToggle}
+        />
+      )}
+    </>
   )
 }
