@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import Link from 'next/link'
 
 import MarkDownPreview from '@/app/features/MarkDownPreview'
@@ -6,9 +7,21 @@ import Hash from '@/app/shared/components/Hash'
 import InnerCol from '@/app/shared/components/InnerCol'
 import { ArrowSvg } from '@/app/shared/components/svg/ArrowSvg'
 import { ShareSvg } from '@/app/shared/components/svg/ShareSvg'
+import { connectDB } from '@/app/shared/utils/connectDB'
 import { dateFormat } from '@/app/shared/utils/dateFormat'
+import { listItemType } from '@/app/types/types'
 
-export default function Page() {
+export default async function Page({
+  params: { id }
+}: {
+  params: { id: string }
+}) {
+  // const db = (await connectDB).db('blog')
+  // const data = await db
+  //   .collection<listItemType>('posts')
+  //   .find({ _id: new ObjectId(id) })
+  //   .toArray()
+
   return (
     <main>
       <InnerCol>

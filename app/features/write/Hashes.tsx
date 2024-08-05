@@ -1,32 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { v4 as uuid } from 'uuid'
 
-import Hash from './Hash'
+import Hash from '@/app/shared/components/Hash'
 
-export default function HashMaker({
-  getHashes
-}: {
-  getHashes: (hashes: string[]) => void
-}) {
+interface HashesProps {
+  setHashes: (hashes: string[]) => void
+  hashes: string[]
+}
+
+export default function Hashes({ setHashes, hashes }: HashesProps) {
   const [value, setValue] = useState('')
-  const [hashes, setHashes] = useState<string[]>([])
-
-  useEffect(() => {
-    getHashes(hashes)
-  }, [hashes])
-
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && checkValid(value)) {
-      setHashes(prev => [...prev, value])
+      setHashes([...hashes, value])
       setValue('')
     }
   }
 
   const handleRemove = (hash: string) => {
-    setHashes(prev => prev.filter(h => h !== hash))
+    setHashes(hashes.filter(h => h !== hash))
   }
 
   const checkValid = (value: string) => {

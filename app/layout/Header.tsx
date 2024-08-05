@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+import DarkModeToggle from '../features/DarkModeToggle'
 import InnerCol from '../shared/components/InnerCol'
 import NavItem from '../shared/components/NavItem'
-import DarkModeToggle from '../features/DarkModeToggle'
-import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const pathname = usePathname()

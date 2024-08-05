@@ -13,8 +13,10 @@ export default function ListItem({
   listItem: listItemType
   isTemp?: boolean
 }) {
-  const { title, description, hashes, registerDate } = listItem
-  const redirectUrl = isTemp ? '/edit/1' : '/detail/1'
+  const { _id, title, description, hashes, registerDate } = listItem
+  const redirectUrl = isTemp
+    ? `/write/${_id?.toString()}`
+    : `/detail/${_id?.toString()}`
 
   return (
     <>
@@ -22,7 +24,7 @@ export default function ListItem({
         <Link href={redirectUrl} className='flex flex-col '>
           <h4 className='text-2xl font-bold mb-4 line-clamp-1'>{title}</h4>
           <p className='text-gray-500 line-clamp-2 mb-8'>{description}</p>
-          {hashes.length > 1 && (
+          {hashes.length > 0 && (
             <div className='flex gap-2 mb-8 flex-wrap'>
               {hashes.map((hash, index) => (
                 <Hash key={index} hash={hash} />

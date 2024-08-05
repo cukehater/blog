@@ -3,11 +3,13 @@ import Intro from './features/Profile'
 import Search from './features/Search'
 import InnerCol from './shared/components/InnerCol'
 import { connectDB } from './shared/utils/connectDB'
+import listSortByDate from './shared/utils/listSortByDate'
 import { listItemType } from './types/types'
 
 export default async function Main() {
   const db = (await connectDB).db('blog')
-  const listData = await db.collection<listItemType>('posts').find().toArray()
+  const result = await db.collection<listItemType>('posts').find().toArray()
+  const listData = listSortByDate(result)
 
   return (
     <main>

@@ -12,26 +12,27 @@ import { listItemType } from '../types/types'
 export default function MarkDownEditor({
   formData,
   handleContentChange,
-  handleSaveDraft
+  handleSaveDraft,
+  setContent
 }: {
   formData: listItemType
   handleContentChange: (content: string) => void
   handleSaveDraft: (formData: listItemType) => void
+  setContent: (content: string) => void
 }) {
-  const [value, setValue] = useState<string>('')
   const { showSnackbar, setShowSnackbar } = useCallSnackbar()
 
   useEffect(() => {
-    handleContentChange(value)
-  }, [value])
+    handleContentChange(formData.content)
+  }, [formData.content])
 
   return (
     <>
       <MdEditor
         language='en-US'
         className='flex-1 custom-preview'
-        modelValue={value}
-        onChange={setValue}
+        modelValue={formData.content}
+        onChange={setContent}
         onSave={() => {
           handleSaveDraft(formData)
           setShowSnackbar(true)
