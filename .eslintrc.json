@@ -65,7 +65,8 @@
       {
         "vars": "all",
         "args": "after-used",
-        "ignoreRestSiblings": false
+        "ignoreRestSiblings": false,
+        "@typescript-eslint/no-empty-function": "off"
       }
     ]
   }
