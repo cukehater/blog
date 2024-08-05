@@ -9,9 +9,9 @@ import { useRouter } from 'next/navigation'
 import Editor from '@/app/features/MarkDownEditor'
 import Button from '@/app/shared/components/Button'
 
-import HashMaker from '../shared/components/HashMaker'
-import { ArrowSvg } from '../shared/components/svg/ArrowSvg'
-import { listItemType } from '../types/types'
+import HashMaker from '../../shared/components/HashMaker'
+import { ArrowSvg } from '../../shared/components/svg/ArrowSvg'
+import { listItemType } from '../../types/types'
 
 export default function Page() {
   const [formData, setFormData] = useState<listItemType>({

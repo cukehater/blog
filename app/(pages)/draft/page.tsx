@@ -1,9 +1,9 @@
 import List from '@/app/features/list/List'
 import InnerCol from '@/app/shared/components/InnerCol'
 
-import { connectDB } from '../shared/utils/connectDB'
-import listSortByDate from '../shared/utils/listSortByDate'
-import { listItemType } from '../types/types'
+import { connectDB } from '../../shared/utils/connectDB'
+import listSortByDate from '../../shared/utils/listSortByDate'
+import { listItemType } from '../../types/types'
 
 export default async function Page() {
   const db = (await connectDB).db('blog')

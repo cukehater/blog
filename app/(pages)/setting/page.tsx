@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import InnerCol from '../shared/components/InnerCol'
-import Button from '../shared/components/Button'
-import { id } from 'date-fns/locale'
-import Input from '../shared/components/Input'
-import Textarea from '../shared/components/Textarea'
+
+import Button from '@/app/shared/components/Button'
+import InnerCol from '@/app/shared/components/InnerCol'
+import Input from '@/app/shared/components/Input'
+import Textarea from '@/app/shared/components/Textarea'
 
 export default function Page() {
   return (
