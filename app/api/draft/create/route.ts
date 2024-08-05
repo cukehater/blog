@@ -8,8 +8,13 @@ export async function POST(req: Request) {
 
   const registerDate = registerDateFormat(new Date())
 
-  const db = (await connectDB).db('blog')
-  await db.collection('drafts').insertOne({ ...body, registerDate })
+  const formData = { ...body, registerDate }
 
-  return NextResponse.json({ message: 'Create success' })
+  const db = (await connectDB).db('blog')
+  const { insertedId } = await db.collection('drafts').insertOne(formData)
+
+  return NextResponse.json({
+    message: 'Create success',
+    formData: { ...formData, _id: insertedId }
+  })
 }

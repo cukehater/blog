@@ -35,8 +35,15 @@ export default function Page() {
     setFormData({ ...formData, hashes })
   }
 
-  const handleSaveDraft = () => {
-    axios.post('/api/draft/create', formData)
+  const handleSaveDraft = async () => {
+    if (formData?._id) {
+      console.log('update')
+      axios.post('/api/draft/update', formData)
+    } else {
+      console.log('create')
+      const res = await axios.post('/api/draft/create', formData)
+      setFormData({ ...res.data.formData })
+    }
   }
 
   return (
@@ -98,7 +105,7 @@ const Title = ({
     <div>
       <input
         type='text'
-        className='w-full text-3xl bg-transparent mb-4'
+        className='w-full text-3xl bg-transparent mb-4 font-semibold'
         placeholder='제목을 입력해 주세요'
         onChange={handleTitleChange}
         value={value}
