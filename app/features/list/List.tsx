@@ -11,7 +11,7 @@ export default function List({
   isTemp?: boolean
 }) {
   if (listData.length === 0) {
-    return <NoItems text={isTemp ? '임시 글이' : '게시글이'} />
+    return <NoItems />
   }
   return (
     <article className='w-full'>

@@ -4,7 +4,7 @@ import { connectDB } from '@/app/shared/utils/connectDB'
 import registerDateFormat from '@/app/shared/utils/registerDateFormat'
 
 export async function POST(req: Request) {
-  const body = await req.json()
+  const { _id, ...body } = await req.json()
 
   const registerDate = registerDateFormat(new Date())
 
