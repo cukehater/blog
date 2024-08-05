@@ -4,11 +4,13 @@ import Hashes from './Hashes'
 import Title from './Title'
 import TopNav from './TopNav'
 import MarkDownEditor from '../MarkDownEditor'
+import Description from './Description'
 
 interface WriteProps {
   formData: listItemType
   handleSaveDraft: () => void
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   handleContentChange: (content: string) => void
   setHashes: (hashes: string[]) => void
   setContent: (content: string) => void
@@ -20,7 +22,8 @@ export default function Write({
   handleTitleChange,
   handleContentChange,
   setHashes,
-  setContent
+  setContent,
+  handleDescriptionChange
 }: WriteProps) {
   return (
     <main className='flex flex-col min-h-screen mt-0'>
@@ -28,6 +31,10 @@ export default function Write({
 
       <section className='py-8 px-4'>
         <Title value={formData.title} handleTitleChange={handleTitleChange} />
+        <Description
+          value={formData.description}
+          handleDescriptionChange={handleDescriptionChange}
+        />
         <Hashes setHashes={setHashes} hashes={formData.hashes} />
       </section>
 

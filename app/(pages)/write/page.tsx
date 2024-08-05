@@ -10,7 +10,8 @@ export default function Page() {
     handleContentChange,
     setHashes,
     setContent,
-    handleSaveDraft
+    handleSaveDraft,
+    handleDescriptionChange
   } = useWritePost()
 
   return (
@@ -18,6 +19,7 @@ export default function Page() {
       formData={formData}
       handleTitleChange={handleTitleChange}
       handleContentChange={handleContentChange}
+      handleDescriptionChange={handleDescriptionChange}
       setHashes={setHashes}
       setContent={setContent}
       handleSaveDraft={handleSaveDraft}

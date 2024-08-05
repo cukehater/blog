@@ -5,7 +5,7 @@ interface TitleProps {
 
 export default function Title({ value, handleTitleChange }: TitleProps) {
   return (
-    <div>
+    <section>
       <input
         type='text'
         className='w-full text-3xl bg-transparent mb-4 font-semibold'
@@ -13,6 +13,6 @@ export default function Title({ value, handleTitleChange }: TitleProps) {
         onChange={handleTitleChange}
         value={value}
       />
-    </div>
+    </section>
   )
 }

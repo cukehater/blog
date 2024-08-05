@@ -13,7 +13,6 @@ interface HashesProps {
 }
 
 export default function Hashes({ setHashes, hashes }: HashesProps) {
-  const [isModalOpen, modalToggle] = useReducer(prev => !prev, false)
   const [value, setValue] = useState('')
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -23,16 +22,15 @@ export default function Hashes({ setHashes, hashes }: HashesProps) {
   }
 
   const handleBlur = () => {
-    setValue('')
+    if (checkValid(value)) {
+      setHashes([...hashes, value])
+    }
   }
 
   const checkValid = (value: string) => {
     setValue('')
 
-    if (hashes.length >= 5) {
-      modalToggle()
-      return false
-    }
+    if (hashes.length >= 5) return false
     if (hashes.includes(value)) return false
     if (value.trim() === '') return false
 
@@ -58,21 +56,13 @@ export default function Hashes({ setHashes, hashes }: HashesProps) {
         <input
           type='text'
           className='bg-transparent w-40 block'
-          placeholder='태그를 입력해 주세요'
+          placeholder='Enter로 추가합니다'
           onKeyUp={handleKeyUp}
           onBlur={handleBlur}
           onChange={e => setValue(e.target.value)}
           value={value}
         />
       </div>
-
-      {isModalOpen && (
-        <ModalAlert
-          description='태그는 최대 5개까지 추가할 수 있습니다.'
-          buttonText='확인'
-          onClick={modalToggle}
-        />
-      )}
     </>
   )
 }

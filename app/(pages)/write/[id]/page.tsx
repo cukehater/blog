@@ -13,6 +13,7 @@ export default function Page({ params }: { params: { id: string } }) {
     isLoading,
     fetchDraft,
     handleTitleChange,
+    handleDescriptionChange,
     handleContentChange,
     setHashes,
     setContent,
@@ -29,6 +30,7 @@ export default function Page({ params }: { params: { id: string } }) {
     <Write
       formData={formData}
       handleTitleChange={handleTitleChange}
+      handleDescriptionChange={handleDescriptionChange}
       handleContentChange={handleContentChange}
       setHashes={setHashes}
       setContent={setContent}

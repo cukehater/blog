@@ -27,6 +27,13 @@ export default function useWritePost() {
     setFormData({ ...formData, title })
   }
 
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    const description = e.target.value
+    setFormData({ ...formData, description })
+  }
+
   const handleContentChange = (content: string) => {
     setFormData({ ...formData, content })
   }
@@ -52,6 +59,7 @@ export default function useWritePost() {
     isLoading,
     fetchDraft,
     handleTitleChange,
+    handleDescriptionChange,
     handleContentChange,
     setHashes,
     setContent,
