@@ -4,9 +4,11 @@ import Button from '@/app/shared/components/Button'
 import { ArrowSvg } from '@/app/shared/components/svg/ArrowSvg'
 
 export default function TopNav({
-  handleSaveDraft
+  handleSaveDraft,
+  handlePublish
 }: {
   handleSaveDraft: () => void
+  handlePublish: () => void
 }) {
   const router = useRouter()
 
@@ -30,7 +32,7 @@ export default function TopNav({
             router.push('/draft')
           }}
         />
-        <Button text='발행하기' type='tertiary' />
+        <Button text='발행하기' type='tertiary' onClick={handlePublish} />
       </div>
     </nav>
   )

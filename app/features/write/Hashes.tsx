@@ -56,7 +56,7 @@ export default function Hashes({ setHashes, hashes }: HashesProps) {
         <input
           type='text'
           className='bg-transparent w-40 block'
-          placeholder='Enter로 추가합니다'
+          placeholder='태그를 입력해 주세요'
           onKeyUp={handleKeyUp}
           onBlur={handleBlur}
           onChange={e => setValue(e.target.value)}

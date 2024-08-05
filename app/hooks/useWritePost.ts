@@ -3,6 +3,7 @@ import { useCallback, useReducer, useState } from 'react'
 import axios from 'axios'
 
 import { listItemType } from '../types/types'
+import { useRouter } from 'next/navigation'
 
 const initialFormData = {
   title: '',
@@ -13,6 +14,7 @@ const initialFormData = {
 }
 
 export default function useWritePost() {
+  const router = useRouter()
   const [formData, setFormData] = useState<listItemType>(initialFormData)
   const [isLoading, endLoading] = useReducer(() => false, true)
 
@@ -54,6 +56,12 @@ export default function useWritePost() {
       setFormData({ ...res.data.formData })
     }
   }
+
+  const handlePublish = async () => {
+    await axios.post('/api/post/create', formData)
+    router.push('/')
+  }
+
   return {
     formData,
     isLoading,
@@ -63,6 +71,7 @@ export default function useWritePost() {
     handleContentChange,
     setHashes,
     setContent,
-    handleSaveDraft
+    handleSaveDraft,
+    handlePublish
   }
 }

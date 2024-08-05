@@ -8,26 +8,28 @@ import Description from './Description'
 
 interface WriteProps {
   formData: listItemType
-  handleSaveDraft: () => void
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   handleContentChange: (content: string) => void
   setHashes: (hashes: string[]) => void
   setContent: (content: string) => void
+  handleSaveDraft: () => void
+  handlePublish: () => void
 }
 
 export default function Write({
   formData,
-  handleSaveDraft,
   handleTitleChange,
   handleContentChange,
   setHashes,
   setContent,
-  handleDescriptionChange
+  handleDescriptionChange,
+  handleSaveDraft,
+  handlePublish
 }: WriteProps) {
   return (
     <main className='flex flex-col min-h-screen mt-0'>
-      <TopNav handleSaveDraft={handleSaveDraft} />
+      <TopNav handleSaveDraft={handleSaveDraft} handlePublish={handlePublish} />
 
       <section className='py-8 px-4'>
         <Title value={formData.title} handleTitleChange={handleTitleChange} />

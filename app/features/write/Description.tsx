@@ -11,7 +11,7 @@ export default function Description({
     <section>
       <textarea
         className='w-full h-20 py-4 bg-transparent resize-none border-t-4 border-[var(--border-color)]'
-        placeholder='내용을 입력해 주세요'
+        placeholder='게시글에 대한 간략한 내용을 입력해 주세요'
         onChange={handleDescriptionChange}
         value={value}
       />

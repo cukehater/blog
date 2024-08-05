@@ -17,7 +17,8 @@ export default function Page({ params }: { params: { id: string } }) {
     handleContentChange,
     setHashes,
     setContent,
-    handleSaveDraft
+    handleSaveDraft,
+    handlePublish
   } = useWritePost()
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function Page({ params }: { params: { id: string } }) {
       setHashes={setHashes}
       setContent={setContent}
       handleSaveDraft={handleSaveDraft}
+      handlePublish={handlePublish}
     />
   )
 }

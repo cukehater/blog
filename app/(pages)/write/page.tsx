@@ -7,11 +7,12 @@ export default function Page() {
   const {
     formData,
     handleTitleChange,
+    handleDescriptionChange,
     handleContentChange,
     setHashes,
     setContent,
     handleSaveDraft,
-    handleDescriptionChange
+    handlePublish
   } = useWritePost()
 
   return (
@@ -23,6 +24,7 @@ export default function Page() {
       setHashes={setHashes}
       setContent={setContent}
       handleSaveDraft={handleSaveDraft}
+      handlePublish={handlePublish}
     />
   )
 }
