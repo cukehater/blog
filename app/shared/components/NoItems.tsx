@@ -2,7 +2,7 @@
 
 import Lottie from 'lottie-react'
 
-import loadingLottie from '@/public/assets/lottie/loading.json'
+import loadingLottie from '@/public/assets/lottie/gradient.json'
 
 export default function NoItems() {
   return (
