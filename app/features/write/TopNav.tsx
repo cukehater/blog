@@ -8,10 +8,14 @@ import { ArrowSvg } from '@/app/shared/components/svg/ArrowSvg'
 
 export default function TopNav({
   handleSaveDraft,
-  handlePublish
+  handlePublish,
+  handleEdit,
+  isEdit
 }: {
   handleSaveDraft: () => void
   handlePublish: () => void
+  handleEdit: () => void
+  isEdit?: boolean
 }) {
   const router = useRouter()
   const [isModalOpen, modalToggle] = useReducer(prev => !prev, false)
@@ -29,26 +33,33 @@ export default function TopNav({
           onClick={() => router.back()}
         />
         <div className='flex ml-auto gap-2'>
-          <Button
-            text='임시저장'
-            type='secondary'
-            onClick={() => {
-              handleSaveDraft()
-              router.push('/draft')
-            }}
-          />
-          <Button text='발행하기' type='tertiary' onClick={modalToggle} />
+          {isEdit ? (
+            <Button text='수정하기' type='tertiary' onClick={modalToggle} />
+          ) : (
+            <>
+              <Button
+                text='임시 저장하기'
+                type='secondary'
+                onClick={() => {
+                  handleSaveDraft()
+                  router.push('/draft')
+                }}
+              />
+              <Button text='발행하기' type='tertiary' onClick={modalToggle} />
+            </>
+          )}
         </div>
       </nav>
 
       {isModalOpen && (
         <ModalConfirm
-          title='게시물을 발행하시겠습니까?'
-          confirmText='발행'
+          title={`${isEdit ? '수정' : '발행'}하시겠습니까?`}
+          confirmText={isEdit ? '수정' : '발행'}
           cancelText='취소'
           onConfirm={() => {
-            handlePublish()
+            isEdit ? handleEdit() : handlePublish()
             modalToggle()
+            router.push('/')
           }}
           onCancel={modalToggle}
         />

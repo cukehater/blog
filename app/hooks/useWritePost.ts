@@ -18,8 +18,9 @@ export default function useWritePost() {
   const [formData, setFormData] = useState<listItemType>(initialFormData)
   const [isLoading, endLoading] = useReducer(() => false, true)
 
-  const fetchDraft = useCallback(async (id: string) => {
-    const { data } = await axios.get(`/api/draft/get?id=${id}`)
+  const fetchData = useCallback(async (isEdit: boolean, id: string) => {
+    const endpoint = isEdit ? '/api/post/get' : '/api/draft/get'
+    const { data } = await axios.get(`${endpoint}?id=${id}`)
     setFormData(data.formData)
     endLoading()
   }, [])
@@ -59,18 +60,22 @@ export default function useWritePost() {
     }
 
     await axios.post('/api/post/create', formData)
-    router.push('/')
+  }
+
+  const handleEdit = async () => {
+    await axios.put('/api/post/update', formData)
   }
 
   return {
     formData,
     isLoading,
-    fetchDraft,
+    fetchData,
     handleTitleChange,
     handleDescriptionChange,
     setHashes,
     setContent,
     handleSaveDraft,
-    handlePublish
+    handlePublish,
+    handleEdit
   }
 }

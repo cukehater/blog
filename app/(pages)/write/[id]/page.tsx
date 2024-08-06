@@ -5,25 +5,30 @@ import { useEffect } from 'react'
 import Write from '@/app/features/write/Write'
 import useWritePost from '@/app/hooks/useWritePost'
 import Loading from '@/app/loading'
+import { useSearchParams } from 'next/navigation'
 
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params
 
+  const searchParams = useSearchParams()
+  const isEdit = Boolean(searchParams.get('edit'))
+
   const {
     formData,
     isLoading,
-    fetchDraft,
+    fetchData,
     handleTitleChange,
     handleDescriptionChange,
     setHashes,
     setContent,
     handleSaveDraft,
-    handlePublish
+    handlePublish,
+    handleEdit
   } = useWritePost()
 
   useEffect(() => {
-    fetchDraft(id)
-  }, [fetchDraft, id])
+    fetchData(isEdit, id)
+  }, [fetchData, id])
 
   if (isLoading) return <Loading />
 
@@ -36,6 +41,8 @@ export default function Page({ params }: { params: { id: string } }) {
       setContent={setContent}
       handleSaveDraft={handleSaveDraft}
       handlePublish={handlePublish}
+      handleEdit={handleEdit}
+      isEdit={isEdit}
     />
   )
 }

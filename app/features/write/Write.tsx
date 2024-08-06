@@ -18,6 +18,8 @@ interface WriteProps {
   setContent: (content: string) => void
   handleSaveDraft: (formData?: listItemType) => void
   handlePublish: () => void
+  handleEdit: () => void
+  isEdit: boolean
 }
 
 export default function Write({
@@ -27,13 +29,25 @@ export default function Write({
   setContent,
   handleDescriptionChange,
   handleSaveDraft,
-  handlePublish
+  handlePublish,
+  handleEdit,
+  isEdit
 }: WriteProps) {
-  const { showSnackbar } = useSaveCommand(handleSaveDraft, formData)
+  const { showSnackbar } = useSaveCommand(
+    handleSaveDraft,
+    handleEdit,
+    formData,
+    isEdit
+  )
 
   return (
     <main className='flex flex-col min-h-screen mt-0'>
-      <TopNav handleSaveDraft={handleSaveDraft} handlePublish={handlePublish} />
+      <TopNav
+        handleSaveDraft={handleSaveDraft}
+        handlePublish={handlePublish}
+        handleEdit={handleEdit}
+        isEdit={isEdit}
+      />
 
       <section className='py-8 px-4'>
         <Title value={formData.title} handleTitleChange={handleTitleChange} />

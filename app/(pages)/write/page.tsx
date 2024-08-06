@@ -11,7 +11,8 @@ export default function Page() {
     setHashes,
     setContent,
     handleSaveDraft,
-    handlePublish
+    handlePublish,
+    handleEdit
   } = useWritePost()
 
   return (
@@ -23,6 +24,8 @@ export default function Page() {
       setContent={setContent}
       handleSaveDraft={handleSaveDraft}
       handlePublish={handlePublish}
+      handleEdit={handleEdit}
+      isEdit={false}
     />
   )
 }

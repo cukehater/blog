@@ -57,7 +57,10 @@ export default async function Page({
             </div>
 
             <div className='flex items-center gap-4'>
-              <Link href='/' className='opacity-70 hover:opacity-100'>
+              <Link
+                href={`/write/${id}?edit=true`}
+                className='opacity-70 hover:opacity-100'
+              >
                 수정
               </Link>
               <button className='opacity-70 hover:opacity-100'>삭제</button>

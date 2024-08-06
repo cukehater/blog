@@ -7,14 +7,16 @@ import { listItemType } from '../types/types'
 
 export default function useSaveCommand(
   handleSaveDraft: (formData?: listItemType) => void,
-  formData: listItemType
+  handleEdit: () => void,
+  formData: listItemType,
+  isEdit: boolean
 ) {
   const { showSnackbar, setShowSnackbar } = useCallSnackbar()
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 's' && (event.metaKey || event.ctrlKey)) {
       event.preventDefault()
-      handleSaveDraft(formData)
+      isEdit ? handleEdit() : handleSaveDraft(formData)
       setShowSnackbar(true)
     }
   }
