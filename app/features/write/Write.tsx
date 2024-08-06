@@ -1,3 +1,7 @@
+'use client'
+
+import useSaveCommand from '@/app/hooks/useSaveCommand'
+import Snackbar from '@/app/shared/components/Snackbar'
 import { listItemType } from '@/app/types/types'
 
 import Description from './Description'
@@ -12,7 +16,7 @@ interface WriteProps {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   setHashes: (hashes: string[]) => void
   setContent: (content: string) => void
-  handleSaveDraft: () => void
+  handleSaveDraft: (formData?: listItemType) => void
   handlePublish: () => void
 }
 
@@ -25,6 +29,8 @@ export default function Write({
   handleSaveDraft,
   handlePublish
 }: WriteProps) {
+  const { showSnackbar } = useSaveCommand(handleSaveDraft, formData)
+
   return (
     <main className='flex flex-col min-h-screen mt-0'>
       <TopNav handleSaveDraft={handleSaveDraft} handlePublish={handlePublish} />
@@ -38,11 +44,11 @@ export default function Write({
         <Hashes setHashes={setHashes} hashes={formData.hashes} />
       </section>
 
-      <MarkDownEditor
-        formData={formData}
-        setContent={setContent}
-        handleSaveDraft={handleSaveDraft}
-      />
+      <MarkDownEditor formData={formData} setContent={setContent} />
+
+      {showSnackbar && (
+        <Snackbar message='저장이 완료되었습니다' type='success' />
+      )}
     </main>
   )
 }

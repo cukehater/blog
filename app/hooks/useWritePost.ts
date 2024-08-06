@@ -54,6 +54,10 @@ export default function useWritePost() {
   }
 
   const handlePublish = async () => {
+    if (formData?._id) {
+      await axios.delete(`/api/draft/delete?id=${formData._id}`)
+    }
+
     await axios.post('/api/post/create', formData)
     router.push('/')
   }

@@ -8,8 +8,8 @@ export default function ModalConfirm({
   onConfirm,
   onCancel
 }: {
-  title: string
-  description: string
+  title?: string
+  description?: string
   confirmText: string
   cancelText: string
   onConfirm: () => void
@@ -23,16 +23,16 @@ export default function ModalConfirm({
 
         <div className='flex justify-end gap-2 mt-10'>
           <Button
-            text={cancelText}
+            text={confirmText}
             type='tertiary'
             className='text-sm'
-            onClick={onCancel}
+            onClick={onConfirm}
           />
           <Button
-            text={confirmText}
+            text={cancelText}
             type='secondary'
             className='text-sm'
-            onClick={onConfirm}
+            onClick={onCancel}
           />
         </div>
       </div>
