@@ -8,3 +8,14 @@ export interface listItemType {
   registerDate: string
   hashes: string[]
 }
+
+export interface ProfileData {
+  profileImage: string
+  blogTitle: string
+  nickname: string
+  introduction: string
+  email: string
+  portfolioUrl: string
+  githubUrl: string
+  resumeUrl: string
+}

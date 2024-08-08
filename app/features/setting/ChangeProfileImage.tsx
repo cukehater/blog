@@ -7,7 +7,13 @@ import { uploadToS3 } from '@/app/shared/utils/uploadToS3'
 import axios from 'axios'
 import { useState } from 'react'
 
-export default function ChangeProfileImage() {
+export default function ChangeProfileImage({
+  onProfileChange,
+  imgSrc
+}: {
+  onProfileChange: (imgSrc: string) => void
+  imgSrc: string
+}) {
   const [selectedFile, setSelectedFile] = useState<string>()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -23,12 +29,13 @@ export default function ChangeProfileImage() {
     const fileSrc = await uploadToS3(data, fileName, file, 'profile/')
 
     setSelectedFile(fileSrc)
+    onProfileChange(fileSrc)
     setIsLoading(false)
   }
 
   return (
     <div className='flex flex-col items-center gap-4'>
-      <ProfileImage src={selectedFile} />
+      <ProfileImage src={selectedFile || imgSrc} />
       <input
         type='file'
         accept='image/*'

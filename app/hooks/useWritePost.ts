@@ -1,7 +1,6 @@
 import { useCallback, useReducer, useState } from 'react'
 
 import axios from 'axios'
-import { useRouter } from 'next/navigation'
 
 import { listItemType } from '../types/types'
 
@@ -14,7 +13,6 @@ const initialFormData = {
 }
 
 export default function useWritePost() {
-  const router = useRouter()
   const [formData, setFormData] = useState<listItemType>(initialFormData)
   const [isLoading, endLoading] = useReducer(() => false, true)
 

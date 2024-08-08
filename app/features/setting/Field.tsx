@@ -1,4 +1,3 @@
-import Button from '@/app/shared/components/Button'
 import Input from './Input'
 import Textarea from './Textarea'
 
@@ -6,12 +5,16 @@ export default function Field({
   id,
   title,
   value,
-  isTextarea
+  isTextarea,
+  onChange
 }: {
   id: string
   title: string
   value: string
   isTextarea?: boolean
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
 }) {
   return (
     <li className='flex flex-col py-6 border-b last:border-none border-[var(--border-color)]'>
@@ -20,9 +23,9 @@ export default function Field({
       </label>
 
       {isTextarea ? (
-        <Textarea id={id} value={value} />
+        <Textarea id={id} value={value} onChange={onChange} />
       ) : (
-        <Input id={id} value={value} />
+        <Input id={id} value={value} onChange={onChange} />
       )}
     </li>
   )
