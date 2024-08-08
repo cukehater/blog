@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 
-export interface listItemType {
+export interface ListItemType {
   _id?: ObjectId | string
   title: string
   description: string

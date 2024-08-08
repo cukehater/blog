@@ -2,7 +2,7 @@ import { useCallback, useReducer, useState } from 'react'
 
 import axios from 'axios'
 
-import { listItemType } from '../types/types'
+import { ListItemType } from '../types/types'
 
 const initialFormData = {
   title: '',
@@ -13,7 +13,7 @@ const initialFormData = {
 }
 
 export default function useWritePost() {
-  const [formData, setFormData] = useState<listItemType>(initialFormData)
+  const [formData, setFormData] = useState<ListItemType>(initialFormData)
   const [isLoading, endLoading] = useReducer(() => false, true)
 
   const fetchData = useCallback(async (isEdit: boolean, id: string) => {

@@ -3,12 +3,12 @@
 import { useEffect } from 'react'
 
 import useCallSnackbar from './useCallSnackbar'
-import { listItemType } from '../types/types'
+import { ListItemType } from '../types/types'
 
 export default function useSaveCommand(
-  handleSaveDraft: (formData?: listItemType) => void,
+  handleSaveDraft: (formData?: ListItemType) => void,
   handleEdit: () => void,
-  formData: listItemType,
+  formData: ListItemType,
   isEdit: boolean
 ) {
   const { showSnackbar, setShowSnackbar } = useCallSnackbar()

@@ -1,13 +1,13 @@
 import NoItems from '@/app/shared/components/NoItems'
 
 import ListItem from './ListItem'
-import { listItemType } from '../../types/types'
+import { ListItemType } from '../../types/types'
 
 export default function List({
   listData,
   isDraft
 }: {
-  listData: listItemType[]
+  listData: ListItemType[]
   isDraft?: boolean
 }) {
   if (listData.length === 0) {

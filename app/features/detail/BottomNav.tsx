@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation'
 
 import Button from '@/app/shared/components/Button'
 import { ArrowSvg } from '@/app/shared/components/svg/ArrowSvg'
-import { listItemType } from '@/app/types/types'
+import { ListItemType } from '@/app/types/types'
 
 interface BottomNavProps {
-  previousPost: listItemType[]
-  nextPost: listItemType[]
+  previousPost: ListItemType[]
+  nextPost: ListItemType[]
 }
 
 export default function BottomNav({ previousPost, nextPost }: BottomNavProps) {

@@ -11,7 +11,7 @@ import NoItems from '@/app/shared/components/NoItems'
 import { ShareSvg } from '@/app/shared/components/svg/ShareSvg'
 import { connectDB } from '@/app/shared/utils/connectDB'
 import { dateFormat } from '@/app/shared/utils/dateFormat'
-import { listItemType } from '@/app/types/types'
+import { ListItemType } from '@/app/types/types'
 
 export const metadata: Metadata = {
   title: 'Cukehater',
@@ -24,7 +24,7 @@ export default async function Page({
   params: { id: string }
 }) {
   const db = (await connectDB).db('blog')
-  const collection = db.collection<listItemType>('posts')
+  const collection = db.collection<ListItemType>('posts')
   const result = await collection.findOne({ _id: new ObjectId(id) })
 
   const previousPost = await collection

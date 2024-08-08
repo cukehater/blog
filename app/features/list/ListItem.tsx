@@ -4,13 +4,13 @@ import Hash from '@/app/shared/components/Hash'
 import { dateFormat } from '@/app/shared/utils/dateFormat'
 
 import DeleteDraft from './DeleteDraft'
-import { listItemType } from '../../types/types'
+import { ListItemType } from '../../types/types'
 
 export default function ListItem({
   listItem,
   isDraft
 }: {
-  listItem: listItemType
+  listItem: ListItemType
   isDraft?: boolean
 }) {
   const { _id, title, description, hashes, registerDate } = listItem

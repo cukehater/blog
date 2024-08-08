@@ -2,7 +2,7 @@
 
 import useSaveCommand from '@/app/hooks/useSaveCommand'
 import Snackbar from '@/app/shared/components/Snackbar'
-import { listItemType } from '@/app/types/types'
+import { ListItemType } from '@/app/types/types'
 
 import Description from './Description'
 import Hashes from './Hashes'
@@ -11,12 +11,12 @@ import Title from './Title'
 import TopNav from './TopNav'
 
 interface WriteProps {
-  formData: listItemType
+  formData: ListItemType
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   setHashes: (hashes: string[]) => void
   setContent: (content: string) => void
-  handleSaveDraft: (formData?: listItemType) => void
+  handleSaveDraft: (formData?: ListItemType) => void
   handlePublish: () => void
   handleEdit: () => void
   isEdit: boolean

@@ -1,6 +1,6 @@
-import { listItemType } from '@/app/types/types'
+import { ListItemType } from '@/app/types/types'
 
-export default function listSortByDate(listData: listItemType[]) {
+export default function listSortByDate(listData: ListItemType[]) {
   return listData.sort((a, b) => {
     return (
       parseInt(b.registerDate.replace(/-/g, '')) -

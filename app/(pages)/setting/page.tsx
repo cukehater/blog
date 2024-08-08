@@ -56,7 +56,7 @@ export default function Page() {
 
   return (
     <main className='mb-20'>
-      <InnerCol className='w-[540px]'>
+      <section className='w-[540px] mx-auto relative'>
         <ChangeProfileImage
           onProfileChange={handleProfileChange}
           imgSrc={formData.profileImage}
@@ -113,7 +113,7 @@ export default function Page() {
           type='tertiary'
           onClick={handleSubmit}
         />
-      </InnerCol>
+      </section>
 
       {showSnackbar && (
         <Snackbar message='설정이 저장되었습니다.' type='success' />

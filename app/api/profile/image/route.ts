@@ -5,8 +5,8 @@ export async function GET(req: NextRequest) {
   const fileName = req.nextUrl.searchParams.get('file')
 
   aws.config.update({
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_KEY,
+    accessKeyId: process.env.NEXT_S3_ACCESS_KEY,
+    secretAccessKey: process.env.NEXT_S3_SECRET_KEY,
     region: 'ap-northeast-2',
     signatureVersion: 'v4'
   })
@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
   const key = `${folderName}${fileName}` // 폴더와 파일 이름 결합
 
   const url = await s3.createPresignedPost({
-    Bucket: process.env.S3_BUCKET_NAME,
+    Bucket: process.env.NEXT_S3_BUCKET_NAME,
     Fields: { key }, // 수정된 key 사용
     Expires: 60, // 초 단위
     Conditions: [
