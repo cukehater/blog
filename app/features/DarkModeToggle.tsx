@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { LightSvg } from '../shared/components/svg/LightSvg'
 import { DarkSvg } from '../shared/components/svg/DarkSvg'
 import { useRouter } from 'next/navigation'
@@ -38,7 +38,12 @@ export default function DarkModeToggle() {
       }}
     >
       <div className='w-7 h-7 hover:rotate-45 transition-transform duration-300 flex items-center justify-center'>
-        {document.cookie.includes('mode=light') ? <DarkSvg /> : <LightSvg />}
+        {typeof window !== 'undefined' &&
+        document.cookie.includes('mode=light') ? (
+          <DarkSvg />
+        ) : (
+          <LightSvg />
+        )}
       </div>
     </button>
   )
