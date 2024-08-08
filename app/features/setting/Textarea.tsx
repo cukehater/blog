@@ -1,7 +1,8 @@
-export default function Textarea({ value }: { value: string }) {
+export default function Textarea({ id, value }: { id: string; value: string }) {
   return (
     <textarea
-      className='flex-1 p-4 text-lg bg-[var(--button-background-color)] rounded-md'
+      id={id}
+      className='flex-1 py-2 px-4 bg-[var(--button-background-color)] rounded-md'
       defaultValue={value}
     />
   )

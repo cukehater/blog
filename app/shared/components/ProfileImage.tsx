@@ -3,7 +3,9 @@ import Avatar from './svg/Avatar'
 
 export default function ProfileImage({ src }: { src: string | undefined }) {
   return (
-    <div className='w-32 h-32 bg-zinc-300 rounded-full flex items-center justify-center overflow-hidden'>
+    <div
+      className={`w-32 h-32 bg-zinc-300 rounded-full flex items-center justify-center overflow-hidden`}
+    >
       {src ? (
         <Image
           src={src}

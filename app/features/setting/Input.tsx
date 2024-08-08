@@ -1,8 +1,9 @@
-export default function Input({ value }: { value: string }) {
+export default function Input({ id, value }: { id: string; value: string }) {
   return (
     <input
+      id={id}
       type='text'
-      className='flex-1 h-12 pl-4 text-lg bg-[var(--button-background-color)] rounded-md'
+      className='h-12 pl-4 bg-[var(--button-background-color)] rounded-md'
       defaultValue={value}
     />
   )
