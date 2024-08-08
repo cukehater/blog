@@ -20,7 +20,7 @@ export default function BottomNav({ previousPost, nextPost }: BottomNavProps) {
 
   return (
     <nav className='flex justify-between my-20'>
-      <div className='w-96'>
+      <div className='w-56'>
         {next && (
           <Link
             href={`/detail/${next._id}`}
@@ -42,11 +42,11 @@ export default function BottomNav({ previousPost, nextPost }: BottomNavProps) {
         onClick={() => router.push('/')}
       />
 
-      <div className='w-96'>
+      <div className='w-56'>
         {prev && (
           <Link
             href={`/detail/${prev._id}`}
-            className='text-right w-96 flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity'
+            className='text-right flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity'
           >
             <div className='flex-1'>
               <p className='text-xs mb-1'>이전 글</p>

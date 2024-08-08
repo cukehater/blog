@@ -6,7 +6,7 @@ export default function Page() {
       <h1 className='text-7xl font-bold text-[var(--border-color)] mb-4'>
         404
       </h1>
-      <p className='text-xl text-gray-600 mb-10'>페이지를 찾을 수 없습니다</p>
+      <p className='text-lg text-gray-600 mb-10'>페이지를 찾을 수 없습니다</p>
       <Link
         href='/'
         className='px-6 py-3 bg-[var(--accent-color)] text-[--background-color] font-semibold rounded-lg'
