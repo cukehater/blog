@@ -1,31 +1,12 @@
-'use client'
-
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import DarkModeToggle from '../features/DarkModeToggle'
 import InnerCol from '../shared/components/InnerCol'
 import NavItem from '../shared/components/NavItem'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { ProfileData } from '../types/types'
+import { getProfile } from '../shared/utils/db'
 
-export default function Header() {
-  const pathname = usePathname()
-  const hideArray = ['/write', '/edit']
-  const shouldHideHeader = hideArray.some(path => pathname.includes(path))
-
-  if (shouldHideHeader) return null
-
-  const [profile, setProfile] = useState<ProfileData>()
-  const fetchProfile = async () => {
-    const { data } = await axios('/api/profile/get')
-    setProfile(data.data)
-  }
-
-  useEffect(() => {
-    fetchProfile()
-  }, [])
+export default async function Header() {
+  const profile = await getProfile()
 
   return (
     <>
