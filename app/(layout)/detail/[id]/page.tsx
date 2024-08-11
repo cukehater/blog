@@ -12,6 +12,7 @@ import { ShareSvg } from '@/app/shared/components/svg/ShareSvg'
 import { connectDB } from '@/app/shared/utils/connectDB'
 import { dateFormat } from '@/app/shared/utils/dateFormat'
 import { ListItemType } from '@/app/types/types'
+import { getProfile } from '@/app/shared/utils/db'
 
 export const metadata: Metadata = {
   title: 'Cukehater',
@@ -26,6 +27,7 @@ export default async function Page({
   const db = (await connectDB).db('blog')
   const collection = db.collection<ListItemType>('posts')
   const result = await collection.findOne({ _id: new ObjectId(id) })
+  const profile = await getProfile()
 
   const previousPost = await collection
     .find({ _id: { $lt: new ObjectId(id) } })
@@ -50,7 +52,7 @@ export default async function Page({
           <h2 className='text-[48px] font-bold'>{result.title}</h2>
           <div className='flex items-center gap-2 mt-10 justify-between'>
             <div className='flex items-center gap-2'>
-              <span>Cukehater</span> &middot;
+              <span>{profile?.nickname}</span> &middot;
               <span className='text-gray-500'>
                 {dateFormat(result.registerDate)}
               </span>
