@@ -11,7 +11,8 @@ import { ListItemType } from './types/types'
 export default async function Main() {
   const db = (await connectDB).db('blog')
   const result = await db.collection<ListItemType>('posts').find().toArray()
-  const listData = listSortByDate(result)
+  const arr = result.map(item => ({ ...item, _id: item._id.toString() }))
+  const listData = listSortByDate(arr)
 
   return (
     <>

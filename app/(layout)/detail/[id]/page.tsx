@@ -75,7 +75,7 @@ export default async function Page({
 
         <Hashes hashes={result.hashes} />
         <MarkDownPreview contents={result.content} />
-        <BottomNav previousPost={previousPost} nextPost={nextPost} />
+        {/* <BottomNav previousPost={previousPost} nextPost={nextPost} /> */}
       </InnerCol>
     </main>
   )

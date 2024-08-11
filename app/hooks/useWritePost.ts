@@ -45,7 +45,6 @@ export default function useWritePost() {
 
   const checkValidation = () => {
     const { description, registerDate, hashes, ...rest } = formData
-    console.log('rest', rest)
     return Object.values(rest).every(value => value !== '')
   }
 

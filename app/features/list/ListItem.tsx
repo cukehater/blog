@@ -14,9 +14,7 @@ export default function ListItem({
   isDraft?: boolean
 }) {
   const { _id, title, description, hashes, registerDate } = listItem
-  const redirectUrl = isDraft
-    ? `/write/${_id?.toString()}`
-    : `/detail/${_id?.toString()}`
+  const redirectUrl = isDraft ? `/write/${_id}` : `/detail/${_id}`
 
   return (
     <>

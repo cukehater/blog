@@ -23,7 +23,7 @@ export default function BottomNav({ previousPost, nextPost }: BottomNavProps) {
       <div className='w-56'>
         {next && (
           <Link
-            href={`/detail/${next._id}`}
+            href={`/detail/${next._id?.toString()}`}
             className='flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity'
           >
             <ArrowSvg className='w-7 h-7 mr-2' />
@@ -45,7 +45,7 @@ export default function BottomNav({ previousPost, nextPost }: BottomNavProps) {
       <div className='w-56'>
         {prev && (
           <Link
-            href={`/detail/${prev._id}`}
+            href={`/detail/${prev._id?.toString()}`}
             className='text-right flex items-center gap-1 opacity-70 hover:opacity-100 transition-opacity'
           >
             <div className='flex-1'>
