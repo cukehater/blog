@@ -4,12 +4,14 @@ import Button from '@/app/shared/components/Button'
 import InnerCol from '@/app/shared/components/InnerCol'
 import ChangeProfileImage from '@/app/features/setting/ChangeProfileImage'
 import Field from '@/app/features/setting/Field'
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import axios from 'axios'
 import Loading from '@/app/loading'
 import { ProfileData } from '@/app/types/types'
 import Snackbar from '@/app/shared/components/Snackbar'
 import useCallSnackbar from '@/app/hooks/useCallSnackbar'
+import ModalAlert from '@/app/shared/components/ModalAlert'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
   const [formData, setFormData] = useState<ProfileData>({
@@ -22,7 +24,11 @@ export default function Page() {
     githubUrl: '',
     resumeUrl: ''
   })
-  const { showSnackbar, setShowSnackbar } = useCallSnackbar()
+  const router = useRouter()
+  const [isModalOpen, toggleModal] = useReducer(prev => !prev, false)
+  const { showSnackbar, setShowSnackbar } = useCallSnackbar(() => {
+    router.refresh()
+  })
   const [isLoading, setIsLoading] = useState(true)
 
   const handleChange = (
@@ -36,8 +42,18 @@ export default function Page() {
   }
 
   const handleSubmit = async () => {
+    if (!checkValidation()) {
+      toggleModal()
+      return
+    }
+
     await axios.put('/api/profile/update', formData)
     setShowSnackbar(true)
+  }
+
+  const checkValidation = () => {
+    const { profileImage, ...rest } = formData
+    return Object.values(rest).every(value => value !== '')
   }
 
   const fetchData = async () => {
@@ -117,6 +133,15 @@ export default function Page() {
 
       {showSnackbar && (
         <Snackbar message='설정이 저장되었습니다.' type='success' />
+      )}
+
+      {isModalOpen && (
+        <ModalAlert
+          title='⚠️ 알림'
+          description='모든 항목을 작성해주세요.'
+          buttonText='확인'
+          onClick={toggleModal}
+        />
       )}
     </main>
   )
