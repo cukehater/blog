@@ -36,7 +36,12 @@ export default function MarkDownEditor({
         }
         callback(uploadedUrls)
       }}
-      theme='dark'
+      theme={
+        typeof window !== 'undefined' && document.cookie.includes('dark')
+          ? 'dark'
+          : 'light'
+      }
+      footers={['markdownTotal']}
     />
   )
 }

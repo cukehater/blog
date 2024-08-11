@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --accent-color: #062359;
+  --accent-color: #14b4ac;
 
   --color: #333333;
-  --background-color: #e0e0e0;
+  --background-color: #f1f1f1;
 
-  --border-color: #cccccc;
-  --button-background-color: #d9d9d9;
+  --border-color: #ddd;
+  --button-background-color: #eee;
 
   &.dark-mode {
     --accent-color: #09ece1;
@@ -41,7 +41,7 @@ main {
   color: var(--color);
   outline: none;
 }
-
+.ͼ15,
 .ͼo,
 .md-editor-resize-operate,
 .custom-preview {
@@ -49,6 +49,7 @@ main {
 }
 
 .cm-scroller {
+  background-color: transparent !important;
   padding-right: 0 !important;
 }
 
