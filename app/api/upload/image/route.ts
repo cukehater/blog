@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
   const fileName = req.nextUrl.searchParams.get('file')
+  const dir = req.nextUrl.searchParams.get('dir')
 
   aws.config.update({
     accessKeyId: process.env.NEXT_S3_ACCESS_KEY,
@@ -12,7 +13,7 @@ export async function GET(req: NextRequest) {
   })
 
   const s3 = new aws.S3()
-  const folderName = 'profile/' // 특정 폴더 이름 지정
+  const folderName = dir ? `${dir}/` : '' // 특정 폴더 이름 지정
   const key = `${folderName}${fileName}` // 폴더와 파일 이름 결합
 
   const url = await s3.createPresignedPost({
@@ -20,7 +21,7 @@ export async function GET(req: NextRequest) {
     Fields: { key }, // 수정된 key 사용
     Expires: 60, // 초 단위
     Conditions: [
-      ['content-length-range', 0, 1048576] // 파일 크기 1MB로 제한
+      ['content-length-range', 0, 2097152] // 파일 크기 2MB로 제한
     ]
   })
 

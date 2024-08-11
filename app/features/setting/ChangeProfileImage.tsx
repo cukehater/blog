@@ -25,7 +25,9 @@ export default function ChangeProfileImage({
     setIsLoading(true)
 
     const fileName = addTimeToFileName(file.name)
-    const { data } = await axios.get(`/api/profile/image?file=${fileName}`)
+    const { data } = await axios.get(
+      `/api/upload/image?file=${fileName}&dir=profile`
+    )
     const fileSrc = await uploadToS3(data, fileName, file, 'profile/')
 
     setSelectedFile(fileSrc)

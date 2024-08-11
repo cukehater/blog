@@ -18,6 +18,5 @@ export const uploadToS3 = async (
     formData
   )
 
-  console.log('result', result)
   return `${result.config.url}/${directory}${fileName}`
 }
