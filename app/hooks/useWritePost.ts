@@ -43,6 +43,12 @@ export default function useWritePost() {
     setFormData({ ...formData, content })
   }
 
+  const checkValidation = () => {
+    const { description, registerDate, hashes, ...rest } = formData
+    console.log('rest', rest)
+    return Object.values(rest).every(value => value !== '')
+  }
+
   const handleSaveDraft = async () => {
     if (formData?._id) {
       axios.put('/api/draft/update', formData)
@@ -74,6 +80,7 @@ export default function useWritePost() {
     setContent,
     handleSaveDraft,
     handlePublish,
-    handleEdit
+    handleEdit,
+    checkValidation
   }
 }
