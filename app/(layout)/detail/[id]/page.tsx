@@ -24,25 +24,36 @@ export default async function Page({
   params: { id: string }
 }) {
   const db = (await connectDB).db('blog')
-  const collection = db.collection<ListItemType>('posts')
-  const result = await collection.findOne({ _id: new ObjectId(id) })
-  const profile = await db.collection<ProfileData>('profile').findOne({})
+  const postsCollection = db.collection<ListItemType>('posts')
+  const profileCollection = db.collection<ProfileData>('profile')
+
+  const [post, profile, previousPost, nextPost] = await Promise.all([
+    postsCollection.findOne({ _id: new ObjectId(id) }),
+    profileCollection.findOne({}),
+    postsCollection
+      .find({ _id: { $lt: new ObjectId(id) } })
+      .sort({ _id: -1 })
+      .limit(1)
+      .toArray(),
+    postsCollection
+      .find({ _id: { $gt: new ObjectId(id) } })
+      .sort({ _id: 1 })
+      .limit(1)
+      .toArray()
+  ])
 
   await closeDB
 
-  const previousPost = await collection
-    .find({ _id: { $lt: new ObjectId(id) } })
-    .sort({ _id: -1 })
-    .limit(1)
-    .toArray()
+  const remake = (obj: any) => {
+    if (!obj) return
 
-  const nextPost = await collection
-    .find({ _id: { $gt: new ObjectId(id) } })
-    .sort({ _id: 1 })
-    .limit(1)
-    .toArray()
+    return {
+      ...obj,
+      _id: obj._id.toString()
+    }
+  }
 
-  if (!result) {
+  if (!post) {
     return <NoItems />
   }
 
@@ -50,12 +61,12 @@ export default async function Page({
     <main>
       <InnerCol>
         <hgroup>
-          <h2 className='text-[48px] font-bold'>{result.title}</h2>
+          <h2 className='text-[48px] font-bold'>{post.title}</h2>
           <div className='flex items-center gap-2 mt-10 justify-between'>
             <div className='flex items-center gap-2'>
               <span>{profile?.nickname}</span> &middot;
               <span className='text-gray-500'>
-                {dateFormat(result.registerDate)}
+                {dateFormat(post.registerDate)}
               </span>
             </div>
 
@@ -74,9 +85,12 @@ export default async function Page({
           </div>
         </hgroup>
 
-        <Hashes hashes={result.hashes} />
-        <MarkDownPreview contents={result.content} />
-        <BottomNav previousPost={previousPost} nextPost={nextPost} />
+        <Hashes hashes={post.hashes} />
+        <MarkDownPreview contents={post.content} />
+        <BottomNav
+          prevPost={remake(previousPost[0])}
+          nextPost={remake(nextPost[0])}
+        />
       </InnerCol>
     </main>
   )
