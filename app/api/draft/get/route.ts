@@ -1,7 +1,6 @@
+import { closeDB, connectDB } from '@/app/shared/utils/db'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
-
-import { connectDB } from '@/app/shared/utils/connectDB'
 
 export async function GET(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')
@@ -13,6 +12,8 @@ export async function GET(req: NextRequest) {
   const db = (await connectDB).db('blog')
   const collection = db.collection('drafts')
   const formData = await collection.findOne({ _id: new ObjectId(id) })
+
+  await closeDB
 
   return NextResponse.json({ message: 'success', formData }, { status: 200 })
 }

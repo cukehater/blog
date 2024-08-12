@@ -5,27 +5,29 @@ import GithubSvg from '../shared/components/svg/GithubSvg'
 import PortfolioSvg from '../shared/components/svg/PortfolioSvg'
 import ResumeSvg from '../shared/components/svg/ResumeSvg'
 import ProfileImage from '../shared/components/ProfileImage'
-import { getProfile } from '../shared/utils/db'
 import Error from '../error'
+import { ProfileData } from '../types/types'
+import { connectDB } from '../shared/utils/db'
 
 export const revalidate = 0
 
 export default async function Intro() {
-  const result = await getProfile()
-  if (!result) return <Error />
+  const db = (await connectDB).db('blog')
+  const profile = await db.collection<ProfileData>('profile').findOne({})
+  if (!profile) return <Error />
 
   return (
     <section className='pb-12 border-b border-[var(--border-color)] mb-20 w-full'>
       <div className='flex items-center gap-8'>
-        <ProfileImage src={result.profileImage} />
+        <ProfileImage src={profile.profileImage} />
 
         <div className='flex flex-col gap-2'>
-          <p className='text-3xl font-bold mb-2'>{result.nickname}</p>
-          <p className=''>{result.introduction}</p>
+          <p className='text-3xl font-bold mb-2'>{profile.nickname}</p>
+          <p className=''>{profile.introduction}</p>
 
           <nav className='flex gap-3 mt-4'>
             <Nav
-              href={`mailto:${result.email}`}
+              href={`mailto:${profile.email}`}
               text={
                 <>
                   <span className='w-4 h-4'>
@@ -36,7 +38,7 @@ export default async function Intro() {
               }
             />
             <Nav
-              href={result.githubUrl}
+              href={profile.githubUrl}
               text={
                 <>
                   <span className='w-4 h-4'>
@@ -47,7 +49,7 @@ export default async function Intro() {
               }
             />
             <Nav
-              href={result.portfolioUrl}
+              href={profile.portfolioUrl}
               text={
                 <>
                   <span className='w-4 h-4'>
@@ -58,7 +60,7 @@ export default async function Intro() {
               }
             />
             <Nav
-              href={result.resumeUrl}
+              href={profile.resumeUrl}
               text={
                 <>
                   <span className='w-4 h-4'>

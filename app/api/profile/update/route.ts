@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
-import { connectDB } from '@/app/shared/utils/connectDB'
 import { ObjectId } from 'mongodb'
+import { closeDB, connectDB } from '@/app/shared/utils/db'
 
 export async function PUT(req: Request) {
   const { _id, ...body } = await req.json()
@@ -10,6 +10,8 @@ export async function PUT(req: Request) {
   await db
     .collection('profile')
     .updateOne({ _id: new ObjectId(_id) }, { $set: body })
+
+  await closeDB
 
   return NextResponse.json({ message: 'Update success' })
 }

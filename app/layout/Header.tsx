@@ -3,10 +3,12 @@ import Link from 'next/link'
 import DarkModeToggle from '../features/DarkModeToggle'
 import InnerCol from '../shared/components/InnerCol'
 import NavItem from '../shared/components/NavItem'
-import { getProfile } from '../shared/utils/db'
+import { connectDB } from '../shared/utils/db'
+import { ProfileData } from '../types/types'
 
 export default async function Header() {
-  const profile = await getProfile()
+  const db = (await connectDB).db('blog')
+  const profile = await db.collection<ProfileData>('profile').findOne({})
 
   return (
     <>

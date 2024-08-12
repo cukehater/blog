@@ -1,8 +1,8 @@
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { connectDB } from '@/app/shared/utils/connectDB'
 import { ListItemType } from '@/app/types/types'
+import { closeDB, connectDB } from '@/app/shared/utils/db'
 
 export async function DELETE(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')
@@ -15,6 +15,8 @@ export async function DELETE(req: NextRequest) {
   await db
     .collection<ListItemType>('drafts')
     .deleteOne({ _id: new ObjectId(id) })
+
+  await closeDB
 
   return NextResponse.json({ message: 'success' })
 }

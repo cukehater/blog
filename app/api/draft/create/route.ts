@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
-import { connectDB } from '@/app/shared/utils/connectDB'
 import registerDateFormat from '@/app/shared/utils/registerDateFormat'
+import { closeDB, connectDB } from '@/app/shared/utils/db'
 
 export async function POST(req: Request) {
   const body = await req.json()
@@ -12,6 +12,8 @@ export async function POST(req: Request) {
 
   const db = (await connectDB).db('blog')
   const { insertedId } = await db.collection('drafts').insertOne(formData)
+
+  await closeDB
 
   return NextResponse.json({
     message: 'Create success',

@@ -9,10 +9,9 @@ import Hash from '@/app/shared/components/Hash'
 import InnerCol from '@/app/shared/components/InnerCol'
 import NoItems from '@/app/shared/components/NoItems'
 import { ShareSvg } from '@/app/shared/components/svg/ShareSvg'
-import { connectDB } from '@/app/shared/utils/connectDB'
 import { dateFormat } from '@/app/shared/utils/dateFormat'
-import { ListItemType } from '@/app/types/types'
-import { getProfile } from '@/app/shared/utils/db'
+import { ListItemType, ProfileData } from '@/app/types/types'
+import { closeDB, connectDB } from '@/app/shared/utils/db'
 
 export const metadata: Metadata = {
   title: 'Cukehater',
@@ -27,7 +26,9 @@ export default async function Page({
   const db = (await connectDB).db('blog')
   const collection = db.collection<ListItemType>('posts')
   const result = await collection.findOne({ _id: new ObjectId(id) })
-  const profile = await getProfile()
+  const profile = await db.collection<ProfileData>('profile').findOne({})
+
+  await closeDB
 
   const previousPost = await collection
     .find({ _id: { $lt: new ObjectId(id) } })
@@ -75,7 +76,7 @@ export default async function Page({
 
         <Hashes hashes={result.hashes} />
         <MarkDownPreview contents={result.content} />
-        {/* <BottomNav previousPost={previousPost} nextPost={nextPost} /> */}
+        <BottomNav previousPost={previousPost} nextPost={nextPost} />
       </InnerCol>
     </main>
   )
