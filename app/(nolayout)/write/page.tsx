@@ -1,7 +1,7 @@
 'use client'
 
-import Write from '@/app/features/write/Write'
-import useWritePost from '@/app/hooks/useWritePost'
+import Write from '@/app/features/write/Write.tsx'
+import useWritePost from '@/app/hooks/useWritePost.ts'
 
 export default function Page() {
   const {

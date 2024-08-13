@@ -1,17 +1,18 @@
 'use client'
 
-import Button from '@/app/shared/components/Button'
-import InnerCol from '@/app/shared/components/InnerCol'
-import ChangeProfileImage from '@/app/features/setting/ChangeProfileImage'
-import Field from '@/app/features/setting/Field'
 import { useEffect, useReducer, useState } from 'react'
+
 import axios from 'axios'
-import Loading from '@/app/loading'
-import { ProfileData } from '@/app/types/types'
-import Snackbar from '@/app/shared/components/Snackbar'
-import useCallSnackbar from '@/app/hooks/useCallSnackbar'
-import ModalAlert from '@/app/shared/components/ModalAlert'
 import { useRouter } from 'next/navigation'
+
+import ChangeProfileImage from '@/app/features/setting/ChangeProfileImage.tsx'
+import Field from '@/app/features/setting/Field.tsx'
+import useCallSnackbar from '@/app/hooks/useCallSnackbar.ts'
+import Loading from '@/app/loading.tsx'
+import Button from '@/app/shared/components/Button.tsx'
+import ModalAlert from '@/app/shared/components/ModalAlert.tsx'
+import Snackbar from '@/app/shared/components/Snackbar.tsx'
+import { ProfileData } from '@/app/types/types.ts'
 
 export default function Page() {
   const [formData, setFormData] = useState<ProfileData>({
@@ -25,7 +26,7 @@ export default function Page() {
     resumeUrl: ''
   })
   const router = useRouter()
-  const [isModalOpen, toggleModal] = useReducer(prev => !prev, false)
+  const [isModalOpen, toggleModal] = useReducer((prev) => !prev, false)
   const { showSnackbar, setShowSnackbar } = useCallSnackbar(() => {
     router.refresh()
   })
@@ -41,6 +42,11 @@ export default function Page() {
     setFormData({ ...formData, profileImage: imgSrc })
   }
 
+  const checkValidation = () => {
+    const { profileImage, ...rest } = formData
+    return Object.values(rest).every((value) => value !== '')
+  }
+
   const handleSubmit = async () => {
     if (!checkValidation()) {
       toggleModal()
@@ -49,11 +55,6 @@ export default function Page() {
 
     await axios.put('/api/profile/update', formData)
     setShowSnackbar(true)
-  }
-
-  const checkValidation = () => {
-    const { profileImage, ...rest } = formData
-    return Object.values(rest).every(value => value !== '')
   }
 
   const fetchData = async () => {
@@ -71,75 +72,75 @@ export default function Page() {
   if (isLoading) return <Loading />
 
   return (
-    <main className='mb-20'>
-      <section className='w-[540px] mx-auto relative'>
+    <main className="mb-20">
+      <section className="w-[540px] mx-auto relative">
         <ChangeProfileImage
           onProfileChange={handleProfileChange}
           imgSrc={formData.profileImage}
         />
-        <ul className='mt-10'>
+        <ul className="mt-10">
           <Field
-            id='blogTitle'
-            title='블로그 제목'
+            id="blogTitle"
+            title="블로그 제목"
             value={formData.blogTitle}
             onChange={handleChange}
           />
           <Field
-            id='nickname'
-            title='닉네임'
+            id="nickname"
+            title="닉네임"
             value={formData.nickname}
             onChange={handleChange}
           />
           <Field
-            id='introduction'
-            title='간략 소개'
+            id="introduction"
+            title="간략 소개"
             value={formData.introduction}
             isTextarea
             onChange={handleChange}
           />
           <Field
-            id='email'
-            title='이메일 주소'
+            id="email"
+            title="이메일 주소"
             value={formData.email}
             onChange={handleChange}
           />
           <Field
-            id='portfolioUrl'
-            title='포트폴리오 URL'
+            id="portfolioUrl"
+            title="포트폴리오 URL"
             value={formData.portfolioUrl}
             onChange={handleChange}
           />
           <Field
-            id='githubUrl'
-            title='깃 URL'
+            id="githubUrl"
+            title="깃 URL"
             value={formData.githubUrl}
             onChange={handleChange}
           />
           <Field
-            id='resumeUrl'
-            title='이력서 URL'
+            id="resumeUrl"
+            title="이력서 URL"
             value={formData.resumeUrl}
             onChange={handleChange}
           />
         </ul>
 
         <Button
-          text='저장하기'
-          className='mt-6 mx-auto px-6'
-          type='tertiary'
+          text="저장하기"
+          className="mt-6 mx-auto px-6"
+          type="tertiary"
           onClick={handleSubmit}
         />
       </section>
 
       {showSnackbar && (
-        <Snackbar message='설정이 저장되었습니다.' type='success' />
+        <Snackbar message="설정이 저장되었습니다." type="success" />
       )}
 
       {isModalOpen && (
         <ModalAlert
-          title='⚠️ 알림'
-          description='모든 항목을 작성해주세요.'
-          buttonText='확인'
+          title="⚠️ 알림"
+          description="모든 항목을 작성해주세요."
+          buttonText="확인"
           onClick={toggleModal}
         />
       )}

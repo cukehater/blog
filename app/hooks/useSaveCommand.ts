@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
-import useCallSnackbar from './useCallSnackbar'
-import { ListItemType } from '../types/types'
+import useCallSnackbar from './useCallSnackbar.ts'
+import { ListItemType } from '../types/types.ts'
 
 export default function useSaveCommand(
   handleSaveDraft: (formData?: ListItemType) => void,
@@ -13,13 +13,18 @@ export default function useSaveCommand(
 ) {
   const { showSnackbar, setShowSnackbar } = useCallSnackbar()
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 's' && (event.metaKey || event.ctrlKey)) {
-      event.preventDefault()
-      isEdit ? handleEdit() : handleSaveDraft(formData)
-      setShowSnackbar(true)
-    }
-  }
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 's' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault()
+        const func = isEdit ? handleEdit : handleSaveDraft
+
+        func(formData)
+        setShowSnackbar(true)
+      }
+    },
+    [handleSaveDraft, formData, setShowSnackbar, handleEdit, isEdit]
+  )
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
@@ -27,7 +32,7 @@ export default function useSaveCommand(
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [handleSaveDraft, formData, setShowSnackbar])
+  }, [handleKeyDown])
 
   return { showSnackbar }
 }

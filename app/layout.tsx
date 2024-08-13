@@ -1,8 +1,6 @@
-import type { Metadata } from 'next'
-
-import { Inter } from 'next/font/google'
-
 import './globals.scss'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import { cookies } from 'next/headers'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,7 +18,7 @@ export default function RootLayout({
   const mode = cookies().get('mode')
 
   return (
-    <html lang='ko' className={mode?.value === 'light' ? '' : 'dark-mode'}>
+    <html lang="ko" className={mode?.value === 'light' ? '' : 'dark-mode'}>
       <body className={inter.className}>{children}</body>
     </html>
   )

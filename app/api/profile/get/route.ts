@@ -1,7 +1,8 @@
-import { closeDB, connectDB } from '@/app/shared/utils/db'
 import { NextResponse } from 'next/server'
 
-export async function GET() {
+import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
+
+export default async function GET() {
   const db = (await connectDB).db('blog')
   const data = await db.collection('profile').findOne({})
 

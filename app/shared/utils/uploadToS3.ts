@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const uploadToS3 = async (
+const uploadToS3 = async (
   res: {
     url: { url: string; fields: { [key: string]: string } }
   },
@@ -20,3 +20,5 @@ export const uploadToS3 = async (
 
   return `${result.config.url}/${directory}${fileName}`
 }
+
+export default uploadToS3

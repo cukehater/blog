@@ -1,8 +1,9 @@
-import { closeDB, connectDB } from '@/app/shared/utils/db'
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(req: NextRequest) {
+import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
+
+export default async function GET(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')
 
   if (!id) {

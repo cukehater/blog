@@ -1,7 +1,9 @@
-import NoItems from '@/app/shared/components/NoItems'
+import { v4 as uuid } from 'uuid'
 
-import ListItem from './ListItem'
-import { ListItemType } from '../../types/types'
+import NoItems from '@/app/shared/components/NoItems.tsx'
+
+import ListItem from './ListItem.tsx'
+import { ListItemType } from '../../types/types.ts'
 
 export default function List({
   listData,
@@ -14,9 +16,9 @@ export default function List({
     return <NoItems />
   }
   return (
-    <article className='w-full'>
-      {listData.map((listItem, index) => (
-        <ListItem key={index} listItem={listItem} isDraft={isDraft} />
+    <article className="w-full">
+      {listData.map((listItem) => (
+        <ListItem key={uuid()} listItem={listItem} isDraft={isDraft} />
       ))}
     </article>
   )

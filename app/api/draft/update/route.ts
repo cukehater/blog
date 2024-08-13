@@ -1,8 +1,9 @@
-import { closeDB, connectDB } from '@/app/shared/utils/db'
 import { ObjectId } from 'mongodb'
 import { NextResponse } from 'next/server'
 
-export async function PUT(req: Request) {
+import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
+
+export default async function PUT(req: Request) {
   const { _id, ...body } = await req.json()
 
   const db = (await connectDB).db('blog')

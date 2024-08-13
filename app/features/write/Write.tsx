@@ -1,14 +1,14 @@
 'use client'
 
-import useSaveCommand from '@/app/hooks/useSaveCommand'
-import Snackbar from '@/app/shared/components/Snackbar'
-import { ListItemType } from '@/app/types/types'
+import useSaveCommand from '@/app/hooks/useSaveCommand.ts'
+import Snackbar from '@/app/shared/components/Snackbar.tsx'
+import { ListItemType } from '@/app/types/types.ts'
 
-import Description from './Description'
-import Hashes from './Hashes'
-import MarkDownEditor from './MarkDownEditor'
-import Title from './Title'
-import TopNav from './TopNav'
+import Description from './Description.tsx'
+import Hashes from './Hashes.tsx'
+import MarkDownEditor from './MarkDownEditor.tsx'
+import Title from './Title.tsx'
+import TopNav from './TopNav.tsx'
 
 interface WriteProps {
   formData: ListItemType
@@ -43,7 +43,7 @@ export default function Write({
   )
 
   return (
-    <main className='flex flex-col min-h-screen mt-0'>
+    <main className="flex flex-col min-h-screen mt-0">
       <TopNav
         handleSaveDraft={handleSaveDraft}
         handlePublish={handlePublish}
@@ -52,7 +52,7 @@ export default function Write({
         checkValidation={checkValidation}
       />
 
-      <section className='py-8 px-4'>
+      <section className="py-8 px-4">
         <Title value={formData.title} handleTitleChange={handleTitleChange} />
         <Description
           value={formData.description}
@@ -64,7 +64,7 @@ export default function Write({
       <MarkDownEditor formData={formData} setContent={setContent} />
 
       {showSnackbar && (
-        <Snackbar message='저장이 완료되었습니다' type='success' />
+        <Snackbar message="저장이 완료되었습니다" type="success" />
       )}
     </main>
   )

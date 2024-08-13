@@ -1,5 +1,5 @@
-import Input from './Input'
-import Textarea from './Textarea'
+import Input from './Input.tsx'
+import Textarea from './Textarea.tsx'
 
 export default function Field({
   id,
@@ -11,14 +11,14 @@ export default function Field({
   id: string
   title: string
   value: string
-  isTextarea?: boolean
+  isTextarea: boolean
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void
 }) {
   return (
-    <li className='flex flex-col py-6 border-b last:border-none border-[var(--border-color)]'>
-      <label htmlFor={id} className='cursor-pointer mb-2'>
+    <li className="flex flex-col py-6 border-b last:border-none border-[var(--border-color)]">
+      <label htmlFor={id} className="cursor-pointer mb-2">
         {title}
       </label>
 

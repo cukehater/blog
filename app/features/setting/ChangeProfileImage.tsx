@@ -1,11 +1,13 @@
 'use client'
 
-import Button from '@/app/shared/components/Button'
-import ProfileImage from '@/app/shared/components/ProfileImage'
-import { addTimeToFileName } from '@/app/shared/utils/addTimeToFileName'
-import { uploadToS3 } from '@/app/shared/utils/uploadToS3'
-import axios from 'axios'
 import { useState } from 'react'
+
+import axios from 'axios'
+
+import Button from '@/app/shared/components/Button.tsx'
+import ProfileImage from '@/app/shared/components/ProfileImage.tsx'
+import addTimeToFileName from '@/app/shared/utils/addTimeToFileName.ts'
+import uploadToS3 from '@/app/shared/utils/uploadToS3.ts'
 
 export default function ChangeProfileImage({
   onProfileChange,
@@ -36,19 +38,19 @@ export default function ChangeProfileImage({
   }
 
   return (
-    <div className='flex flex-col items-center gap-4'>
+    <div className="flex flex-col items-center gap-4">
       <ProfileImage src={selectedFile || imgSrc} />
       <input
-        type='file'
-        accept='image/*'
+        type="file"
+        accept="image/*"
         onChange={handleFileChange}
-        className='hidden'
-        id='profileImageInput'
+        className="hidden"
+        id="profileImageInput"
       />
 
       <Button
         text={isLoading ? '업로드중...' : '프로필 이미지 변경'}
-        type='tertiary'
+        type="tertiary"
         className={`text-sm bg-[var(--border-color)] text-[var(--color)] ${
           isLoading ? 'bg-green-500' : ''
         }`}

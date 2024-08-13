@@ -1,10 +1,10 @@
 import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { ListItemType } from '@/app/types/types'
-import { closeDB, connectDB } from '@/app/shared/utils/db'
+import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
+import { ListItemType } from '@/app/types/types.ts'
 
-export async function DELETE(req: NextRequest) {
+export default async function DELETE(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')
 
   if (!id) {

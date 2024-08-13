@@ -2,7 +2,7 @@ import { useCallback, useReducer, useState } from 'react'
 
 import axios from 'axios'
 
-import { ListItemType } from '../types/types'
+import { ListItemType } from '../types/types.ts'
 
 const initialFormData = {
   title: '',
@@ -45,7 +45,7 @@ export default function useWritePost() {
 
   const checkValidation = () => {
     const { description, registerDate, hashes, ...rest } = formData
-    return Object.values(rest).every(value => value !== '')
+    return Object.values(rest).every((value) => value !== '')
   }
 
   const handleSaveDraft = async () => {

@@ -10,7 +10,7 @@ export default function useCallSnackbar(afterLoad?: () => void) {
       setShowSnackbar(false)
       afterLoad?.()
     }, 2000)
-  }, [showSnackbar])
+  }, [showSnackbar, afterLoad])
 
   return { showSnackbar, setShowSnackbar }
 }

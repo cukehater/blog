@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react'
 
-import Write from '@/app/features/write/Write'
-import useWritePost from '@/app/hooks/useWritePost'
-import Loading from '@/app/loading'
 import { useSearchParams } from 'next/navigation'
+
+import Write from '@/app/features/write/Write.tsx'
+import useWritePost from '@/app/hooks/useWritePost.ts'
+import Loading from '@/app/loading.tsx'
 
 export default function Page({ params }: { params: { id: string } }) {
   const { id } = params
@@ -29,7 +30,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetchData(isEdit, id)
-  }, [fetchData, id])
+  }, [fetchData, id, isEdit])
 
   if (isLoading) return <Loading />
 

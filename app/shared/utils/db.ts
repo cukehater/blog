@@ -1,5 +1,3 @@
-import { ProfileData } from '@/app/types/types'
-
 import { MongoClient, MongoClientOptions } from 'mongodb'
 
 const URI: string = String(process.env.NEXT_MONGO_URI)

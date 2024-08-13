@@ -1,5 +1,5 @@
-import Header from '../layout/Header'
-import Footer from '../layout/Footer'
+import Footer from '../layout/Footer.tsx'
+import Header from '../layout/Header.tsx'
 
 export default function RootLayout({
   children
