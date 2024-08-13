@@ -53,8 +53,8 @@ export default async function Page({
 
   await closeDB
 
-  const remake = (obj: any) => {
-    if (!obj._id) return false
+  const convertIdToString = (obj: ListItemType) => {
+    if (!obj?._id) return false
 
     return {
       ...obj,
@@ -100,8 +100,8 @@ export default async function Page({
         <Hashes hashes={post.hashes} />
         <MarkDownPreview contents={post.content} />
         <BottomNav
-          prevPost={remake(previousPost[0])}
-          nextPost={remake(nextPost[0])}
+          prevPost={convertIdToString(previousPost[0] as ListItemType) || false}
+          nextPost={convertIdToString(nextPost[0] as ListItemType) || false}
         />
       </InnerCol>
     </main>

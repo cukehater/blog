@@ -8,8 +8,8 @@ import ArrowSvg from '@/app/shared/components/svg/ArrowSvg.tsx'
 import { ListItemType } from '@/app/types/types.ts'
 
 interface BottomNavProps {
-  prevPost: ListItemType
-  nextPost: ListItemType
+  prevPost: ListItemType | false
+  nextPost: ListItemType | false
 }
 
 export default function BottomNav({ prevPost, nextPost }: BottomNavProps) {

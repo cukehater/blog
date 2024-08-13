@@ -1,12 +1,9 @@
 import { NextResponse } from 'next/server'
 
-import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
+import { findAll } from '@/app/shared/utils/db.ts'
 
 export default async function GET() {
-  const db = (await connectDB).db('blog')
-  const data = await db.collection('profile').findOne({})
+  const result = await findAll('profile')
 
-  await closeDB
-
-  return NextResponse.json({ message: 'Update success', data })
+  return NextResponse.json({ message: 'Update success', data: result[0] })
 }

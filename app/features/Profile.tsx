@@ -6,7 +6,7 @@ import EmailSvg from '../shared/components/svg/EmailSvg.tsx'
 import GithubSvg from '../shared/components/svg/GithubSvg.tsx'
 import PortfolioSvg from '../shared/components/svg/PortfolioSvg.tsx'
 import ResumeSvg from '../shared/components/svg/ResumeSvg.tsx'
-import { connectDB } from '../shared/utils/db.ts'
+import { findAll } from '../shared/utils/db.ts'
 import { ProfileData } from '../types/types.ts'
 
 export const revalidate = 0
@@ -25,8 +25,8 @@ function Nav({ href, text }: { href: string; text: string | React.ReactNode }) {
 }
 
 export default async function Intro() {
-  const db = (await connectDB).db('blog')
-  const profile = await db.collection<ProfileData>('profile').findOne({})
+  const profile = (await findAll('profile'))[0] as unknown as ProfileData
+
   if (!profile) return <Error />
 
   return (
