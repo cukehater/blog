@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { findOne } from '@/app/shared/utils/db.ts'
+import { findOne } from '@/app/utils/db.ts'
 
 export async function GET(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')

@@ -3,7 +3,8 @@
 import { useCallback, useEffect } from 'react'
 
 import useCallSnackbar from './useCallSnackbar.ts'
-import { ListItemType } from '../types/types.ts'
+
+import type { ListItemType } from '../types/types.ts'
 
 export default function useSaveCommand(
   handleSaveDraft: (formData?: ListItemType) => void,

@@ -1,6 +1,7 @@
 'use client'
 
-import Write from '@/app/(nolayout)/write/components/Write'
+import WriteContainer from './components/WriteContainer.tsx'
+
 import useWritePost from '@/app/hooks/useWritePost.ts'
 
 export default function Page() {
@@ -17,7 +18,7 @@ export default function Page() {
   } = useWritePost()
 
   return (
-    <Write
+    <WriteContainer
       formData={formData}
       handleTitleChange={handleTitleChange}
       handleDescriptionChange={handleDescriptionChange}

@@ -2,7 +2,7 @@ import { useCallback, useReducer, useState } from 'react'
 
 import axios from 'axios'
 
-import { ListItemType } from '../types/types.ts'
+import type { ListItemType } from '../types/types.ts'
 
 const initialFormData = {
   title: '',

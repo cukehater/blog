@@ -6,8 +6,9 @@ import axios from 'axios'
 
 import Button from '@/app/shared/components/Button.tsx'
 import ProfileImage from '@/app/shared/components/ProfileImage.tsx'
-import addTimeToFileName from '@/app/shared/utils/addTimeToFileName.ts'
-import uploadToS3 from '@/app/shared/utils/uploadToS3.ts'
+
+import addTimeToFileName from '@/app/utils/addTimeToFileName.ts'
+import uploadToS3 from '@/app/utils/uploadToS3.ts'
 
 export default function ChangeProfileImage({
   onProfileChange,

@@ -32,3 +32,7 @@ export default function Field({
     </li>
   )
 }
+
+Field.defaultProps = {
+  isTextarea: false
+}

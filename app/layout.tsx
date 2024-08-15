@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import { cookies } from 'next/headers'
 
 import type { Metadata } from 'next'
+
 import '@/app/styles/globals.scss'
 
 const inter = Inter({ subsets: ['latin'] })

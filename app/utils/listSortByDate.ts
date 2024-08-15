@@ -1,4 +1,4 @@
-import { ListItemType } from '@/app/types/types.ts'
+import type { ListItemType } from '@/app/types/types.ts'
 
 export default function listSortByDate(listData: ListItemType[]) {
   return listData.sort((a, b) => {

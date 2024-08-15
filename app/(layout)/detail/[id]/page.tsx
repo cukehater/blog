@@ -1,20 +1,17 @@
-import { Metadata } from 'next'
 import Link from 'next/link'
 
-import BottomNav from '@/app/features/detail/BottomNav.tsx'
-import MarkDownPreview from '@/app/features/detail/MarkDownPreview.tsx'
+import BottomNav from './components/BottomNav.tsx'
+import MarkDownPreview from './components/MarkDownPreview.tsx'
+
 import Hash from '@/app/shared/components/Hash.tsx'
 import InnerCol from '@/app/shared/components/InnerCol.tsx'
 import NoItems from '@/app/shared/components/NoItems.tsx'
 import ShareSvg from '@/app/shared/components/svg/ShareSvg.tsx'
-import dateFormat from '@/app/shared/utils/dateFormat.ts'
-import { findAll, findOne, findPrevOrNext } from '@/app/shared/utils/db.ts'
-import { ListItemType } from '@/app/types/types.ts'
 
-export const metadata: Metadata = {
-  title: 'Cukehater',
-  description: 'Cukehater'
-}
+import dateFormat from '@/app/utils/dateFormat.ts'
+import { findAll, findOne, findPrevOrNext } from '@/app/utils/db.ts'
+
+import type { ListItemType } from '@/app/types/types'
 
 function Hashes({ hashes }: { hashes: string[] }) {
   return (
@@ -53,7 +50,7 @@ export default async function Page({
 
   return (
     <main>
-      <InnerCol className="">
+      <InnerCol>
         <hgroup>
           <h2 className="text-[48px] font-bold">{post.title}</h2>
           <div className="flex items-center gap-2 mt-10 justify-between">

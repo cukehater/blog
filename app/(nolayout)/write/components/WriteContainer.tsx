@@ -1,8 +1,6 @@
 'use client'
 
 import useSaveCommand from '@/app/hooks/useSaveCommand.ts'
-import Snackbar from '@/app/shared/components/Snackbar.tsx'
-import { ListItemType } from '@/app/types/types.ts'
 
 import Description from './Description.tsx'
 import Hashes from './Hashes.tsx'
@@ -10,7 +8,11 @@ import MarkDownEditor from './MarkDownEditor.tsx'
 import Title from './Title.tsx'
 import TopNav from './TopNav.tsx'
 
-interface WriteProps {
+import Snackbar from '@/app/shared/components/Snackbar.tsx'
+
+import type { ListItemType } from '@/app/types/types.ts'
+
+interface Props {
   formData: ListItemType
   handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
@@ -23,7 +25,7 @@ interface WriteProps {
   isEdit: boolean
 }
 
-export default function Write({
+export default function WriteContainer({
   formData,
   handleTitleChange,
   setHashes,
@@ -34,7 +36,7 @@ export default function Write({
   handleEdit,
   isEdit,
   checkValidation
-}: WriteProps) {
+}: Props) {
   const { showSnackbar } = useSaveCommand(
     handleSaveDraft,
     handleEdit,

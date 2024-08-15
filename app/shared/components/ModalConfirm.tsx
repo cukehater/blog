@@ -9,7 +9,7 @@ export default function ModalConfirm({
   onCancel
 }: {
   title: string
-  description: string
+  description?: string
   confirmText: string
   cancelText: string
   onConfirm: () => void
@@ -38,4 +38,8 @@ export default function ModalConfirm({
       </div>
     </div>
   )
+}
+
+ModalConfirm.defaultProps = {
+  description: ''
 }

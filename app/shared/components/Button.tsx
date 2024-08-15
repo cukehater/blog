@@ -1,8 +1,8 @@
 interface Props {
   text: string | React.ReactNode
-  type: keyof typeof styleData
-  className: string
-  onClick: () => void
+  type?: keyof typeof styleData
+  className?: string
+  onClick?: () => void
 }
 
 const styleData = {
@@ -16,7 +16,7 @@ const styleData = {
 export default function Button({
   text,
   type = 'primary',
-  className = '',
+  className,
   onClick
 }: Props) {
   return (
@@ -28,4 +28,10 @@ export default function Button({
       {text}
     </button>
   )
+}
+
+Button.defaultProps = {
+  onClick: () => {},
+  className: '',
+  type: 'primary'
 }

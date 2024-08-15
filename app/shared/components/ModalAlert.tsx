@@ -29,3 +29,7 @@ export default function ModalAlert({
     </div>
   )
 }
+
+ModalAlert.defaultProps = {
+  title: ''
+}

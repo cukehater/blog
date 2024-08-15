@@ -1,9 +1,10 @@
 import { v4 as uuid } from 'uuid'
 
+import ListItem from './ListItem.tsx'
+
 import NoItems from '@/app/shared/components/NoItems.tsx'
 
-import ListItem from './ListItem.tsx'
-import { ListItemType } from '../../types/types.ts'
+import type { ListItemType } from '../../types/types.ts'
 
 export default function List({
   listData,

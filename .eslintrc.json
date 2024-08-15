@@ -115,27 +115,27 @@
           },
           {
             "pattern": "@/app/*.tsx",
-            "group": "unknown",
+            "group": "index",
             "position": "before"
           },
           {
             "pattern": "@/app/layout/**",
-            "group": "unknown",
+            "group": "index",
             "position": "before"
           },
           {
             "pattern": "@/app/shared/**",
-            "group": "unknown",
+            "group": "index",
             "position": "before"
           },
           {
             "pattern": "@/app/utils/**",
-            "group": "unknown",
+            "group": "index",
             "position": "before"
           },
           {
             "pattern": "@/app/types/**",
-            "group": "unknown",
+            "group": "index",
             "position": "after"
           }
         ],

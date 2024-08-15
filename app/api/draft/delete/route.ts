@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { deleteOne } from '@/app/shared/utils/db.ts'
+import { deleteOne } from '@/app/utils/db.ts'
 
 export async function DELETE(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')

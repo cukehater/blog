@@ -78,7 +78,11 @@ export default function TopNav({
           confirmText={isEdit ? '수정' : '발행'}
           cancelText="취소"
           onConfirm={() => {
-            isEdit ? handleEdit() : handlePublish()
+            if (isEdit) {
+              handleEdit()
+            } else {
+              handlePublish()
+            }
             modalToggle()
             router.push('/')
           }}

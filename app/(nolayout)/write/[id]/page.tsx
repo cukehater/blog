@@ -4,8 +4,10 @@ import { useEffect } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
-import Write from '@/app/(nolayout)/write/components/Write'
+import WriteContainer from '../components/WriteContainer.tsx'
+
 import useWritePost from '@/app/hooks/useWritePost.ts'
+
 import Loading from '@/app/loading.tsx'
 
 export default function Page({ params }: { params: { id: string } }) {
@@ -35,7 +37,7 @@ export default function Page({ params }: { params: { id: string } }) {
   if (isLoading) return <Loading />
 
   return (
-    <Write
+    <WriteContainer
       formData={formData}
       handleTitleChange={handleTitleChange}
       handleDescriptionChange={handleDescriptionChange}

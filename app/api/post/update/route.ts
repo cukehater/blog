@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { updateOne } from '@/app/shared/utils/db.ts'
+import { updateOne } from '@/app/utils/db.ts'
 
 export async function PUT(req: Request) {
   const { _id: id, ...body } = await req.json()

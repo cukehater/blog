@@ -3,8 +3,9 @@
 import axios from 'axios'
 import { MdEditor } from 'md-editor-rt'
 
-import uploadToS3 from '@/app/shared/utils/uploadToS3.ts'
-import { ListItemType } from '@/app/types/types.ts'
+import uploadToS3 from '@/app/utils/uploadToS3.ts'
+
+import type { ListItemType } from '@/app/types/types.ts'
 
 import 'md-editor-rt/lib/style.css'
 
@@ -25,14 +26,13 @@ export default function MarkDownEditor({
         files: File[],
         callback: (urls: string[]) => void
       ) => {
-        const uploadedUrls = []
-        for (const file of files) {
+        const uploadPromises = files.map(async (file) => {
           const { data } = await axios.get(
             `/api/upload/image?file=${file.name}&dir=posts`
           )
-          const fileSrc = await uploadToS3(data, file.name, file, 'posts/')
-          uploadedUrls.push(fileSrc)
-        }
+          return uploadToS3(data, file.name, file, 'posts/')
+        })
+        const uploadedUrls = await Promise.all(uploadPromises)
         callback(uploadedUrls)
       }}
       theme={

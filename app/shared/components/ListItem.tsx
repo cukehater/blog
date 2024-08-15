@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { v4 as uuid } from 'uuid'
 
-import DeleteDraft from '@/app/(layout)/draft/components/DeleteDraft'
-import dateFormat from '@/app/utils/dateFormat'
+import DeleteDraft from '@/app/(layout)/draft/components/DeleteDraft.tsx'
 
-import Hash from './Hash'
+import Hash from './Hash.tsx'
+
+import dateFormat from '@/app/utils/dateFormat.ts'
 
 import type { ListItemType } from '@/app/types/types'
 
