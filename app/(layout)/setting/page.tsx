@@ -66,10 +66,10 @@ export default function Page() {
   }
 
   useEffect(() => {
-    // fetchData()
+    fetchData()
   }, [])
 
-  // if (isLoading) return <Loading />
+  if (isLoading) return <Loading />
 
   return (
     <main className="mb-20">

@@ -1,21 +1,23 @@
 import Input from './Input.tsx'
 import Textarea from './Textarea.tsx'
 
+interface Props {
+  id: string
+  title: string
+  value: string
+  isTextarea?: boolean
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void
+}
+
 export default function Field({
   id,
   title,
   value,
   isTextarea,
   onChange
-}: {
-  id: string
-  title: string
-  value: string
-  isTextarea: boolean
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void
-}) {
+}: Props) {
   return (
     <li className="flex flex-col py-6 border-b last:border-none border-[var(--border-color)]">
       <label htmlFor={id} className="cursor-pointer mb-2">

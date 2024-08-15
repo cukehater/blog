@@ -1,7 +1,7 @@
 import aws from 'aws-sdk'
 import { NextRequest, NextResponse } from 'next/server'
 
-export default async function GET(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const fileName = req.nextUrl.searchParams.get('file')
   const dir = req.nextUrl.searchParams.get('dir')
 
@@ -27,3 +27,5 @@ export default async function GET(req: NextRequest) {
 
   return NextResponse.json({ message: '성공', url }, { status: 200 })
 }
+
+export default GET

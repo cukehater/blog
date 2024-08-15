@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { insertOne } from '@/app/shared/utils/db.ts'
 import registerDateFormat from '@/app/shared/utils/registerDateFormat.ts'
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   const body = await req.json()
 
   const registerDate = registerDateFormat(new Date())
@@ -17,3 +17,5 @@ export default async function POST(req: Request) {
     formData: { ...formData, _id: insertedId }
   })
 }
+
+export default POST

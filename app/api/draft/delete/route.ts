@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { deleteOne } from '@/app/shared/utils/db.ts'
 
-export default async function DELETE(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')
 
   if (!id) {
@@ -13,3 +13,5 @@ export default async function DELETE(req: NextRequest) {
 
   return NextResponse.json({ message: 'success' })
 }
+
+export default DELETE
