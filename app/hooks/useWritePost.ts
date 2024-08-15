@@ -19,6 +19,7 @@ export default function useWritePost() {
   const fetchData = useCallback(async (isEdit: boolean, id: string) => {
     const endpoint = isEdit ? '/api/post/get' : '/api/draft/get'
     const { data } = await axios.get(`${endpoint}?id=${id}`)
+
     setFormData(data.formData)
     endLoading()
   }, [])

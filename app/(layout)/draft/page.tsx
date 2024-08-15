@@ -1,16 +1,13 @@
 import List from '@/app/features/list/List.tsx'
 import InnerCol from '@/app/shared/components/InnerCol.tsx'
-import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
+import { findAll } from '@/app/shared/utils/db.ts'
 
 import listSortByDate from '../../shared/utils/listSortByDate.ts'
 import { ListItemType } from '../../types/types.ts'
 
 export default async function Page() {
-  const db = (await connectDB).db('blog')
-  const result = await db.collection<ListItemType>('drafts').find().toArray()
-  const listData = listSortByDate(result)
-
-  await closeDB
+  const result = await findAll('drafts')
+  const listData = listSortByDate(result as ListItemType[])
 
   return (
     <main>

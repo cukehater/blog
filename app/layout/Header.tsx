@@ -3,7 +3,7 @@ import Link from 'next/link'
 import DarkModeToggle from '../features/DarkModeToggle.tsx'
 import InnerCol from '../shared/components/InnerCol.tsx'
 import NavItem from '../shared/components/NavItem.tsx'
-import { connectDB } from '../shared/utils/db.ts'
+import { findAll } from '../shared/utils/db.ts'
 import { ProfileData } from '../types/types.ts'
 
 function Nav() {
@@ -28,8 +28,7 @@ function Nav() {
 }
 
 export default async function Header() {
-  const db = (await connectDB).db('blog')
-  const profile = await db.collection<ProfileData>('profile').findOne({})
+  const profile = (await findAll('profile'))[0] as unknown as ProfileData
 
   return (
     <header className="sticky top-0 left-0 w-full z-50 py-5 bg-[var(--background-color)]">

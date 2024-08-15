@@ -1,8 +1,6 @@
-import { ObjectId } from 'mongodb'
 import { NextRequest, NextResponse } from 'next/server'
 
-import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
-import { ListItemType } from '@/app/types/types.ts'
+import { deleteOne } from '@/app/shared/utils/db.ts'
 
 export default async function DELETE(req: NextRequest) {
   const id: string | null = req.nextUrl.searchParams.get('id')
@@ -11,12 +9,7 @@ export default async function DELETE(req: NextRequest) {
     return NextResponse.json({ message: 'No id' }, { status: 400 })
   }
 
-  const db = (await connectDB).db('blog')
-  await db
-    .collection<ListItemType>('drafts')
-    .deleteOne({ _id: new ObjectId(id) })
-
-  await closeDB
+  await deleteOne('drafts', id)
 
   return NextResponse.json({ message: 'success' })
 }

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
+import { insertOne } from '@/app/shared/utils/db.ts'
 import registerDateFormat from '@/app/shared/utils/registerDateFormat.ts'
 
 export default async function POST(req: Request) {
@@ -10,10 +10,7 @@ export default async function POST(req: Request) {
 
   const formData = { ...body, registerDate }
 
-  const db = (await connectDB).db('blog')
-  const { insertedId } = await db.collection('drafts').insertOne(formData)
-
-  await closeDB
+  const { insertedId } = await insertOne('drafts', formData)
 
   return NextResponse.json({
     message: 'Create success',

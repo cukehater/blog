@@ -1,34 +1,104 @@
-import { MongoClient, MongoClientOptions, ObjectId } from 'mongodb'
+import { MongoClient, ObjectId, OptionalId } from 'mongodb'
 
 const URI: string = String(process.env.NEXT_MONGO_URI)
-const options: MongoClientOptions = {
-  // maxPoolSize: 10,
-  // connectTimeoutMS: 30000,
-  // serverSelectionTimeoutMS: 30000,
-  // socketTimeoutMS: 30000
-}
 
 if (!URI) {
   throw new Error('Please set your MongoDB URI')
 }
 
-const client: MongoClient = new MongoClient(URI, options)
-
-export const connectDB = client.connect()
-export const closeDB = client.close()
-
 export const findAll = async (collection: string) => {
-  const db = client.db('blog')
-  const result = await db.collection(collection).find().toArray()
-  await closeDB
-  return result
+  const client: MongoClient = new MongoClient(URI)
+
+  try {
+    const db = (await client.connect()).db('blog')
+    const result = await db.collection(collection).find().toArray()
+    return result
+  } finally {
+    await client.close()
+  }
+}
+export const findOne = async (collection: string, id: string) => {
+  const client: MongoClient = new MongoClient(URI)
+
+  try {
+    const db = (await client.connect()).db('blog')
+    const result = await db.collection(collection).findOne({
+      _id: new ObjectId(id)
+    })
+    return result
+  } finally {
+    await client.close()
+  }
 }
 
-export const findOne = async (collection: string, id: string) => {
-  const db = client.db('blog')
-  const result = await db
-    .collection(collection)
-    .findOne({ _id: new ObjectId(id) })
-  await closeDB
-  return result
+export const findPrevOrNext = async (
+  collection: string,
+  id: string,
+  direction: string
+) => {
+  const client: MongoClient = new MongoClient(URI)
+  try {
+    const db = (await client.connect()).db('blog')
+    const result = await db
+      .collection(collection)
+      .find({
+        _id:
+          direction === 'prev'
+            ? { $lt: new ObjectId(id) }
+            : { $gt: new ObjectId(id) }
+      })
+      .sort({ _id: direction === 'prev' ? -1 : 1 })
+      .limit(1)
+      .toArray()
+    return result
+  } finally {
+    await client.close()
+  }
+}
+
+export const insertOne = async (
+  collection: string,
+  formData: OptionalId<Document>
+) => {
+  const client: MongoClient = new MongoClient(URI)
+  try {
+    const db = (await client.connect()).db('blog')
+    const result = await db.collection(collection).insertOne(formData)
+    return result
+  } finally {
+    await client.close()
+  }
+}
+
+export const deleteOne = async (collection: string, id: string) => {
+  const client: MongoClient = new MongoClient(URI)
+  try {
+    const db = (await client.connect()).db('blog')
+    const result = await db.collection(collection).deleteOne({
+      _id: new ObjectId(id)
+    })
+    return result
+  } finally {
+    await client.close()
+  }
+}
+
+export const updateOne = async (
+  collection: string,
+  id: string,
+  $set: Record<string, unknown>
+) => {
+  const client: MongoClient = new MongoClient(URI)
+  try {
+    const db = (await client.connect()).db('blog')
+    const result = await db.collection(collection).updateOne(
+      {
+        _id: new ObjectId(id)
+      },
+      { $set }
+    )
+    return result
+  } finally {
+    await client.close()
+  }
 }

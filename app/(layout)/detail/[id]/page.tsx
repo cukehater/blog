@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongodb'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
@@ -9,8 +8,8 @@ import InnerCol from '@/app/shared/components/InnerCol.tsx'
 import NoItems from '@/app/shared/components/NoItems.tsx'
 import ShareSvg from '@/app/shared/components/svg/ShareSvg.tsx'
 import dateFormat from '@/app/shared/utils/dateFormat.ts'
-import { closeDB, connectDB } from '@/app/shared/utils/db.ts'
-import { ListItemType, ProfileData } from '@/app/types/types.ts'
+import { findAll, findOne, findPrevOrNext } from '@/app/shared/utils/db.ts'
+import { ListItemType } from '@/app/types/types.ts'
 
 export const metadata: Metadata = {
   title: 'Cukehater',
@@ -32,26 +31,12 @@ export default async function Page({
 }: {
   params: { id: string }
 }) {
-  const db = (await connectDB).db('blog')
-  const postsCollection = db.collection<ListItemType>('posts')
-  const profileCollection = db.collection<ProfileData>('profile')
-
   const [post, profile, previousPost, nextPost] = await Promise.all([
-    postsCollection.findOne({ _id: new ObjectId(id) }),
-    profileCollection.findOne({}),
-    postsCollection
-      .find({ _id: { $lt: new ObjectId(id) } })
-      .sort({ _id: -1 })
-      .limit(1)
-      .toArray(),
-    postsCollection
-      .find({ _id: { $gt: new ObjectId(id) } })
-      .sort({ _id: 1 })
-      .limit(1)
-      .toArray()
+    findOne('posts', id),
+    findAll('profile').then((data) => data[0]),
+    findPrevOrNext('posts', id, 'prev'),
+    findPrevOrNext('posts', id, 'next')
   ])
-
-  await closeDB
 
   const convertIdToString = (obj: ListItemType) => {
     if (!obj?._id) return false
