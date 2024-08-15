@@ -6,8 +6,8 @@ export default function Hash({
   isPointer = false
 }: {
   hash: string
-  onRemove: () => void
-  isPointer: boolean
+  onRemove?: () => void
+  isPointer?: boolean
 }) {
   return (
     <div
@@ -18,10 +18,15 @@ export default function Hash({
       }`}
       onClick={onRemove}
       onKeyPress={(e) => {
-        if (e.key === 'Enter') onRemove()
+        if (e.key === 'Enter' && onRemove) onRemove()
       }}
     >
       {hash}
     </div>
   )
+}
+
+Hash.defaultProps = {
+  onRemove: undefined,
+  isPointer: false
 }

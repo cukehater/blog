@@ -1,9 +1,9 @@
-import List from '@/app/features/list/List.tsx'
 import InnerCol from '@/app/shared/components/InnerCol.tsx'
-import { findAll } from '@/app/shared/utils/db.ts'
+import { findAll } from '@/app/utils/db.ts'
+import listSortByDate from '@/app/utils/listSortByDate.ts'
 
-import listSortByDate from '../../shared/utils/listSortByDate.ts'
-import { ListItemType } from '../../types/types.ts'
+import type { ListItemType } from '../../types/types.ts'
+import List from '@/app/shared/components/List.tsx'
 
 export default async function Page() {
   const result = await findAll('drafts')

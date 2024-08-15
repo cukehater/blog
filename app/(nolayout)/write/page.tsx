@@ -1,6 +1,6 @@
 'use client'
 
-import Write from '@/app/features/write/Write.tsx'
+import Write from '@/app/(nolayout)/write/components/Write'
 import useWritePost from '@/app/hooks/useWritePost.ts'
 
 export default function Page() {

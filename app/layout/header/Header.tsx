@@ -1,10 +1,19 @@
 import Link from 'next/link'
 
-import DarkModeToggle from '../features/DarkModeToggle.tsx'
-import InnerCol from '../shared/components/InnerCol.tsx'
-import NavItem from '../shared/components/NavItem.tsx'
-import { findAll } from '../shared/utils/db.ts'
-import { ProfileData } from '../types/types.ts'
+import InnerCol from '@/app/shared/components/InnerCol'
+import NavItem from '@/app/shared/components/NavItem'
+import { findAll } from '@/app/utils/db'
+
+import DarkModeToggle from './components/DarkModeToggle'
+
+import type { ProfileData } from '@/app/types/types'
+
+// import DarkModeToggle from '../features/DarkModeToggle.tsx'
+// import InnerCol from '../shared/components/InnerCol.tsx'
+// import NavItem from '../shared/components/NavItem.tsx'
+
+// import type { findAll } from '../shared/utils/db.ts'
+// import type { ProfileData } from '../types/types.ts'
 
 function Nav() {
   return (

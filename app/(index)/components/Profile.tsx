@@ -1,15 +1,16 @@
 import Link from 'next/link'
 
-import Error from '../error.tsx'
-import ProfileImage from '../shared/components/ProfileImage.tsx'
-import EmailSvg from '../shared/components/svg/EmailSvg.tsx'
-import GithubSvg from '../shared/components/svg/GithubSvg.tsx'
-import PortfolioSvg from '../shared/components/svg/PortfolioSvg.tsx'
-import ResumeSvg from '../shared/components/svg/ResumeSvg.tsx'
-import { findAll } from '../shared/utils/db.ts'
-import { ProfileData } from '../types/types.ts'
+import Error from '@/app/error.tsx'
 
-export const revalidate = 0
+import ProfileImage from '@/app/shared/components/ProfileImage.tsx'
+import EmailSvg from '@/app/shared/components/svg/EmailSvg.tsx'
+import GithubSvg from '@/app/shared/components/svg/GithubSvg.tsx'
+import PortfolioSvg from '@/app/shared/components/svg/PortfolioSvg.tsx'
+import ResumeSvg from '@/app/shared/components/svg/ResumeSvg.tsx'
+
+import { findAll } from '@/app/utils/db.ts'
+
+import type { ProfileData } from '@/app/types/types'
 
 function Nav({ href, text }: { href: string; text: string | React.ReactNode }) {
   return (

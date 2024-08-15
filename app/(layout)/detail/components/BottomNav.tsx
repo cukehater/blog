@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation'
 
 import Button from '@/app/shared/components/Button.tsx'
 import ArrowSvg from '@/app/shared/components/svg/ArrowSvg.tsx'
-import { ListItemType } from '@/app/types/types.ts'
+
+import type { ListItemType } from '@/app/types/types.ts'
 
 interface BottomNavProps {
   prevPost: ListItemType | false

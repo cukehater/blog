@@ -7,7 +7,7 @@ import { ListItemType } from '../../types/types.ts'
 
 export default function List({
   listData,
-  isDraft
+  isDraft = false
 }: {
   listData: ListItemType[]
   isDraft?: boolean
@@ -22,4 +22,8 @@ export default function List({
       ))}
     </article>
   )
+}
+
+List.defaultProps = {
+  isDraft: false
 }

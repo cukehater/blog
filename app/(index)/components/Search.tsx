@@ -1,6 +1,6 @@
 'use client'
 
-import SearchSvg from '../shared/components/svg/SearchSvg.tsx'
+import SearchSvg from '../../shared/components/svg/SearchSvg.tsx'
 
 export default function Search() {
   return (

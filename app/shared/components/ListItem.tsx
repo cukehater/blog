@@ -1,21 +1,22 @@
 import Link from 'next/link'
 import { v4 as uuid } from 'uuid'
 
-import Hash from '@/app/shared/components/Hash.tsx'
-import dateFormat from '@/app/shared/utils/dateFormat.ts'
+import DeleteDraft from '@/app/(layout)/draft/components/DeleteDraft'
+import dateFormat from '@/app/utils/dateFormat'
 
-import DeleteDraft from './DeleteDraft.tsx'
-import { ListItemType } from '../../types/types.ts'
+import Hash from './Hash'
+
+import type { ListItemType } from '@/app/types/types'
 
 export default function ListItem({
   listItem,
-  isDraft
+  isDraft = false
 }: {
   listItem: ListItemType
   isDraft?: boolean
 }) {
-  const { _id, title, description, hashes, registerDate } = listItem
-  const redirectUrl = isDraft ? `/write/${_id}` : `/detail/${_id}`
+  const { _id: id, title, description, hashes, registerDate } = listItem
+  const redirectUrl = isDraft ? `/write/${id}` : `/detail/${id}`
 
   return (
     <div className="last:border-b-0 border-b border-[var(--border-color)] py-8 w-full">
@@ -30,12 +31,16 @@ export default function ListItem({
           </div>
         )}
       </Link>
-      {_id && (
+      {id && (
         <div className="flex justify-between items-center">
           <p className="text-sm text-gray-500">{dateFormat(registerDate)}</p>
-          {isDraft && <DeleteDraft id={_id.toString()} />}
+          {isDraft && <DeleteDraft id={id.toString()} />}
         </div>
       )}
     </div>
   )
+}
+
+ListItem.defaultProps = {
+  isDraft: false
 }

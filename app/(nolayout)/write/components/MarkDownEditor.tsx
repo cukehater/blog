@@ -1,13 +1,12 @@
 'use client'
 
-import React from 'react'
-
 import axios from 'axios'
 import { MdEditor } from 'md-editor-rt'
 
-import 'md-editor-rt/lib/style.css'
-import uploadToS3 from '@/app/shared/utils/uploadToS3'
+import uploadToS3 from '@/app/shared/utils/uploadToS3.ts'
 import { ListItemType } from '@/app/types/types.ts'
+
+import 'md-editor-rt/lib/style.css'
 
 export default function MarkDownEditor({
   formData,

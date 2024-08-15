@@ -5,14 +5,18 @@ import { useEffect, useReducer, useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
-import ChangeProfileImage from '@/app/features/setting/ChangeProfileImage.tsx'
-import Field from '@/app/features/setting/Field.tsx'
 import useCallSnackbar from '@/app/hooks/useCallSnackbar.ts'
 import Loading from '@/app/loading.tsx'
 import Button from '@/app/shared/components/Button.tsx'
 import ModalAlert from '@/app/shared/components/ModalAlert.tsx'
 import Snackbar from '@/app/shared/components/Snackbar.tsx'
 import { ProfileData } from '@/app/types/types.ts'
+
+import ChangeProfileImage from './components/ChangeProfileImage'
+import Field from './components/Field'
+
+// import ChangeProfileImage from '@/app/features/setting/ChangeProfileImage.tsx'
+// import Field from '@/app/features/setting/Field.tsx'
 
 export default function Page() {
   const [formData, setFormData] = useState<ProfileData>({

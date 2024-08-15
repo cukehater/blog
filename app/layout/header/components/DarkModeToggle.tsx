@@ -4,8 +4,11 @@ import { useEffect } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import DarkSvg from '../shared/components/svg/DarkSvg.tsx'
-import LightSvg from '../shared/components/svg/LightSvg.tsx'
+import DarkSvg from '@/app/shared/components/svg/DarkSvg'
+import LightSvg from '@/app/shared/components/svg/LightSvg'
+
+// import DarkSvg from '../shared/components/svg/DarkSvg.tsx'
+// import LightSvg from '../shared/components/svg/LightSvg.tsx'
 
 export default function DarkModeToggle() {
   const router = useRouter()
