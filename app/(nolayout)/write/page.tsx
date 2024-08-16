@@ -13,8 +13,7 @@ export default function Page() {
     setContent,
     handleSaveDraft,
     handlePublish,
-    handleEdit,
-    checkValidation
+    handleEdit
   } = useWritePost()
 
   return (
@@ -27,7 +26,6 @@ export default function Page() {
       handleSaveDraft={handleSaveDraft}
       handlePublish={handlePublish}
       handleEdit={handleEdit}
-      checkValidation={checkValidation}
       isEdit={false}
     />
   )

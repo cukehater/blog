@@ -26,8 +26,7 @@ export default function Page({ params }: { params: { id: string } }) {
     setContent,
     handleSaveDraft,
     handlePublish,
-    handleEdit,
-    checkValidation
+    handleEdit
   } = useWritePost()
 
   useEffect(() => {
@@ -47,7 +46,6 @@ export default function Page({ params }: { params: { id: string } }) {
       handlePublish={handlePublish}
       handleEdit={handleEdit}
       isEdit={isEdit}
-      checkValidation={checkValidation}
     />
   )
 }

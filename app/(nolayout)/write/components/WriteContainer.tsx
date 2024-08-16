@@ -21,7 +21,6 @@ interface Props {
   handleSaveDraft: (formData?: ListItemType) => void
   handlePublish: () => void
   handleEdit: () => void
-  checkValidation: () => boolean
   isEdit: boolean
 }
 
@@ -34,8 +33,7 @@ export default function WriteContainer({
   handleSaveDraft,
   handlePublish,
   handleEdit,
-  isEdit,
-  checkValidation
+  isEdit
 }: Props) {
   const { showSnackbar } = useSaveCommand(
     handleSaveDraft,
@@ -51,7 +49,6 @@ export default function WriteContainer({
         handlePublish={handlePublish}
         handleEdit={handleEdit}
         isEdit={isEdit}
-        checkValidation={checkValidation}
       />
 
       <section className="py-8 px-4">
