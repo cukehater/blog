@@ -9,7 +9,3 @@ export default function InnerCol({
     <div className={`w-[850px] mx-auto relative ${className}`}>{children}</div>
   )
 }
-
-InnerCol.defaultProps = {
-  className: ''
-}

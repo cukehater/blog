@@ -15,7 +15,7 @@ export default function Field({
   id,
   title,
   value,
-  isTextarea,
+  isTextarea = false,
   onChange
 }: Props) {
   return (
@@ -31,8 +31,4 @@ export default function Field({
       )}
     </li>
   )
-}
-
-Field.defaultProps = {
-  isTextarea: false
 }

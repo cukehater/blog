@@ -25,8 +25,3 @@ export default function Hash({
     </div>
   )
 }
-
-Hash.defaultProps = {
-  onRemove: undefined,
-  isPointer: false
-}

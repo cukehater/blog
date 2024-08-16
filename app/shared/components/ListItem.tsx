@@ -41,7 +41,3 @@ export default function ListItem({
     </div>
   )
 }
-
-ListItem.defaultProps = {
-  isDraft: false
-}

@@ -24,7 +24,3 @@ export default function List({
     </article>
   )
 }
-
-List.defaultProps = {
-  isDraft: false
-}

@@ -1,7 +1,7 @@
 import Button from './Button.tsx'
 
 export default function ModalAlert({
-  title,
+  title = '',
   description,
   buttonText,
   onClick
@@ -28,8 +28,4 @@ export default function ModalAlert({
       </div>
     </div>
   )
-}
-
-ModalAlert.defaultProps = {
-  title: ''
 }

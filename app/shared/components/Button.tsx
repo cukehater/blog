@@ -16,8 +16,8 @@ const styleData = {
 export default function Button({
   text,
   type = 'primary',
-  className,
-  onClick
+  className = '',
+  onClick = () => {}
 }: Props) {
   return (
     <button
@@ -28,10 +28,4 @@ export default function Button({
       {text}
     </button>
   )
-}
-
-Button.defaultProps = {
-  onClick: () => {},
-  className: '',
-  type: 'primary'
 }

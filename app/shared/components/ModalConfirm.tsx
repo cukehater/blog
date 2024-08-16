@@ -2,7 +2,7 @@ import Button from './Button.tsx'
 
 export default function ModalConfirm({
   title,
-  description,
+  description = '',
   confirmText,
   cancelText,
   onConfirm,
@@ -38,8 +38,4 @@ export default function ModalConfirm({
       </div>
     </div>
   )
-}
-
-ModalConfirm.defaultProps = {
-  description: ''
 }
