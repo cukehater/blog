@@ -1,16 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function useCallSnackbar(afterLoad?: () => void) {
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false)
 
-  useEffect(() => {
+  const displaySnackbar = () => {
+    setShowSnackbar(true)
     setTimeout(() => {
       setShowSnackbar(false)
       afterLoad?.()
     }, 2000)
-  }, [showSnackbar, afterLoad])
+  }
 
-  return { showSnackbar, setShowSnackbar }
+  return { showSnackbar, displaySnackbar }
 }

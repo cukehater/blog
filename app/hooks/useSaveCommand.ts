@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect } from 'react'
 
-import useCallSnackbar from './useCallSnackbar.ts'
+import useCallSnackbar from '@/app/hooks/useCallSnackbar.ts'
 
 import type { ListItemType } from '../types/types.ts'
 
@@ -12,7 +12,7 @@ export default function useSaveCommand(
   formData: ListItemType,
   isEdit: boolean
 ) {
-  const { showSnackbar, setShowSnackbar } = useCallSnackbar()
+  const { showSnackbar, displaySnackbar } = useCallSnackbar()
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -21,10 +21,10 @@ export default function useSaveCommand(
         const func = isEdit ? handleEdit : handleSaveDraft
 
         func(formData)
-        setShowSnackbar(true)
+        displaySnackbar()
       }
     },
-    [handleSaveDraft, formData, setShowSnackbar, handleEdit, isEdit]
+    [handleSaveDraft, formData, displaySnackbar, handleEdit, isEdit]
   )
 
   useEffect(() => {

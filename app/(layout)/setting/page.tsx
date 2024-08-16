@@ -31,7 +31,7 @@ export default function Page() {
   })
   const router = useRouter()
   const [isModalOpen, toggleModal] = useReducer((prev) => !prev, false)
-  const { showSnackbar, setShowSnackbar } = useCallSnackbar(() => {
+  const { showSnackbar, displaySnackbar } = useCallSnackbar(() => {
     router.refresh()
   })
   const [isLoading, setIsLoading] = useState(true)
@@ -58,14 +58,15 @@ export default function Page() {
     }
 
     await axios.put('/api/profile', formData)
-    setShowSnackbar(true)
+    displaySnackbar()
   }
 
   const fetchData = useCallback(async () => {
-    const { data } = await axios.get('/api/profile')
-    const profileData = data.data
+    const {
+      data: { data }
+    } = await axios.get('/api/profile')
 
-    setFormData({ ...profileData })
+    setFormData({ ...data })
     setIsLoading(false)
   }, [])
 
