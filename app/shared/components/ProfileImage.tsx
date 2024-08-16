@@ -12,6 +12,7 @@ export default function ProfileImage({ src }: { src: string | undefined }) {
           height={128}
           alt="프로필 이미지"
           className="h-full w-full object-cover object-center"
+          priority
         />
       ) : (
         <Avatar />

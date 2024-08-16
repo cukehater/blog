@@ -28,7 +28,7 @@ export default function MarkDownEditor({
       ) => {
         const uploadPromises = files.map(async (file) => {
           const { data } = await axios.get(
-            `/api/upload/image?file=${file.name}&dir=posts`
+            `/api/upload?file=${file.name}&dir=posts`
           )
           return uploadToS3(data, file.name, file, 'posts/')
         })

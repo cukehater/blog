@@ -63,6 +63,10 @@ main {
   padding: 0 !important;
 }
 
+.md-editor-toolbar-wrapper {
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
 .md-editor-preview {
   color: var(--color) !important;
   line-height: 1.8 !important;

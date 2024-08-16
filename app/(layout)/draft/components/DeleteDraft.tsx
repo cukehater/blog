@@ -20,7 +20,7 @@ export default function DeleteDraft({ id }: { id: string }) {
   }
 
   const handleDelete = async () => {
-    await axios.delete(`/api/draft/delete?id=${id}`)
+    await axios.delete(`/api/article?id=${id}&type=drafts`)
     handleModalClose()
   }
 

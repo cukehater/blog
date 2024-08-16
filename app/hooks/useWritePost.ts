@@ -17,8 +17,9 @@ export default function useWritePost() {
   const [isLoading, endLoading] = useReducer(() => false, true)
 
   const fetchData = useCallback(async (isEdit: boolean, id: string) => {
-    const endpoint = isEdit ? '/api/post/get' : '/api/draft/get'
-    const { data } = await axios.get(`${endpoint}?id=${id}`)
+    const { data } = await axios.get(
+      `/api/article?id=${id}&type=${isEdit ? 'posts' : 'drafts'}`
+    )
 
     setFormData(data.formData)
     endLoading()
@@ -51,23 +52,23 @@ export default function useWritePost() {
 
   const handleSaveDraft = async () => {
     if (formData?._id) {
-      axios.put('/api/draft/update', formData)
+      axios.put('/api/article?type=drafts', formData)
     } else {
-      const res = await axios.post('/api/draft/create', formData)
+      const res = await axios.post('/api/article?type=drafts', formData)
       setFormData({ ...res.data.formData })
     }
   }
 
   const handlePublish = async () => {
     if (formData?._id) {
-      await axios.delete(`/api/draft/delete?id=${formData._id}`)
+      await axios.delete(`/api/article?id=${formData._id}&type=drafts`)
     }
 
-    await axios.post('/api/post/create', formData)
+    await axios.post('/api/article?type=posts', formData)
   }
 
   const handleEdit = async () => {
-    await axios.put('/api/post/update', formData)
+    await axios.put('/api/article?type=posts', formData)
   }
 
   return {

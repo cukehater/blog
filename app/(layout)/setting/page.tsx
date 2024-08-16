@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useReducer, useState } from 'react'
+import { useCallback, useEffect, useReducer, useState } from 'react'
 
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
@@ -57,21 +57,21 @@ export default function Page() {
       return
     }
 
-    await axios.put('/api/profile/update', formData)
+    await axios.put('/api/profile', formData)
     setShowSnackbar(true)
   }
 
-  const fetchData = async () => {
-    const { data } = await axios.get('/api/profile/get')
+  const fetchData = useCallback(async () => {
+    const { data } = await axios.get('/api/profile')
     const profileData = data.data
 
     setFormData({ ...profileData })
     setIsLoading(false)
-  }
+  }, [])
 
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [fetchData])
 
   if (isLoading) return <Loading />
 
