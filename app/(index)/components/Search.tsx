@@ -14,7 +14,7 @@ export default function Search() {
         type="submit"
         className="h-10 w-10 flex items-center justify-center mr-1"
       >
-        검색
+        <p className="absolute left-0 top-0 w-0 h-0 overflow-hidden">검색</p>
         <SearchSvg />
       </button>
     </form>

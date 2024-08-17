@@ -72,8 +72,12 @@ export default async function Page({
                 삭제
               </button>
               <button type="button">
-                공유하기
-                <ShareSvg className="w-5 h-5" />
+                <p className="absolute left-0 top-0 w-0 h-0 overflow-hidden">
+                  공유하기
+                </p>
+                <div className="opacity-70 hover:opacity-100">
+                  <ShareSvg className="w-5 h-5" />
+                </div>
               </button>
             </div>
           </div>
