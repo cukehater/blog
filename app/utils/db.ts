@@ -63,6 +63,39 @@ export const findPosts = async (
   }
 }
 
+const processArray = (arr: string[]) => {
+  const map = new Map()
+
+  arr.forEach((item) => {
+    const lowerCaseItem = item.toLowerCase()
+    if (map.has(lowerCaseItem)) {
+      map.set(lowerCaseItem, map.get(lowerCaseItem) + 1)
+    } else {
+      map.set(lowerCaseItem, 1)
+    }
+  })
+
+  return Array.from(map, ([name, count]) => ({ name, count }))
+}
+
+export const findPostHashes = async (collection: string) => {
+  const client: MongoClient = new MongoClient(URI)
+
+  try {
+    const db = (await client.connect()).db('blog')
+    const result = await db
+      .collection(collection)
+      .find({}, { projection: { hashes: 1 } })
+      .toArray()
+
+    const a = result.map((item) => [...item.hashes]).flat()
+
+    return processArray(a)
+  } finally {
+    await client.close()
+  }
+}
+
 export const findOne = async (collection: string, id: string) => {
   const client: MongoClient = new MongoClient(URI)
 

@@ -8,6 +8,7 @@ import List from '../shared/components/List.tsx'
 
 import Intro from './components/Profile.tsx'
 import Search from './components/Search.tsx'
+import SideNav from './components/SideNav.tsx'
 
 import { findPosts } from '../utils/db.ts'
 import listSortByDate from '../utils/listSortByDate.ts'
@@ -29,7 +30,14 @@ export default async function Main() {
         <InnerCol className="flex-1 flex flex-col items-center justify-center">
           <Intro />
           {listData.length > 0 && <Search />}
-          <List listData={listData} />
+          <p className="text-gray-500 text-left w-full">
+            총 <strong>{listData.length}</strong>개의 글이 있습니다.
+          </p>
+
+          <div className="relative">
+            <SideNav />
+            <List listData={listData} />
+          </div>
         </InnerCol>
       </main>
       <Footer />
