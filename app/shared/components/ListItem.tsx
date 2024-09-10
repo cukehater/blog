@@ -17,7 +17,7 @@ export default function ListItem({
   isDraft?: boolean
 }) {
   const { _id: id, title, description, hashes, registerDate } = listItem
-  const redirectUrl = isDraft ? `/write/${id}` : `/detail/${id}`
+  const redirectUrl = isDraft ? `/write?id=${id}&draft=true` : `/detail/${id}`
 
   return (
     <div className="last:border-b-0 border-b border-[var(--border-color)] py-8 w-full">

@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { getProfile } from '@/app/services/profileService.ts'
+
 import Error from '@/app/error.tsx'
 
 import ProfileImage from '@/app/shared/components/ProfileImage.tsx'
@@ -7,8 +9,6 @@ import EmailSvg from '@/app/shared/components/svg/EmailSvg.tsx'
 import GithubSvg from '@/app/shared/components/svg/GithubSvg.tsx'
 import PortfolioSvg from '@/app/shared/components/svg/PortfolioSvg.tsx'
 import ResumeSvg from '@/app/shared/components/svg/ResumeSvg.tsx'
-
-import { findAll } from '@/app/utils/db.ts'
 
 import type { ProfileData } from '@/app/types/types'
 
@@ -26,7 +26,7 @@ function Nav({ href, text }: { href: string; text: string | React.ReactNode }) {
 }
 
 export default async function Intro() {
-  const profile = (await findAll('profile'))[0] as unknown as ProfileData
+  const profile = (await getProfile()) as unknown as ProfileData
 
   if (!profile) return <Error />
 

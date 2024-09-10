@@ -11,17 +11,17 @@ import 'md-editor-rt/lib/style.css'
 
 export default function MarkDownEditor({
   formData,
-  setContent
+  handleContentChange
 }: {
   formData: ListItemType
-  setContent: (content: string) => void
+  handleContentChange: (content: string) => void
 }) {
   return (
     <MdEditor
       language="en-US"
       className="flex-1 custom-preview"
       modelValue={formData.content}
-      onChange={setContent}
+      onChange={handleContentChange}
       onUploadImg={async (
         files: File[],
         callback: (urls: string[]) => void

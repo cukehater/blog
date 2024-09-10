@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 import DarkModeToggle from './components/DarkModeToggle.tsx'
 
+import { getProfile } from '@/app/services/profileService.ts'
+
 import InnerCol from '@/app/shared/components/InnerCol.tsx'
 import NavItem from '@/app/shared/components/NavItem.tsx'
-
-import { findAll } from '@/app/utils/db.ts'
 
 import type { ProfileData } from '@/app/types/types.ts'
 
@@ -31,7 +31,7 @@ function Nav() {
 }
 
 export default async function Header() {
-  const profile = (await findAll('profile'))[0] as unknown as ProfileData
+  const profile = (await getProfile()) as unknown as ProfileData
 
   return (
     <header className="sticky top-0 left-0 w-full z-50 py-5 bg-[var(--background-color)]">

@@ -6,8 +6,8 @@ import useCallSnackbar from '@/app/hooks/useCallSnackbar.ts'
 
 import type { ListItemType } from '../types/types.ts'
 
-export default function useSaveCommand(
-  handleSaveDraft: (formData?: ListItemType) => void,
+export default function useWriteSave(
+  handleSave: (formData?: ListItemType) => void,
   handleEdit: () => void,
   formData: ListItemType,
   isEdit: boolean
@@ -18,13 +18,14 @@ export default function useSaveCommand(
     (event: KeyboardEvent) => {
       if (event.key === 's' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault()
-        const func = isEdit ? handleEdit : handleSaveDraft
+        // const func = isEdit ? handleEdit : handleSave
 
-        func(formData)
+        // func(formData)
+        handleSave()
         displaySnackbar()
       }
     },
-    [handleSaveDraft, formData, displaySnackbar, handleEdit, isEdit]
+    [handleSave, formData, displaySnackbar, handleEdit, isEdit]
   )
 
   useEffect(() => {

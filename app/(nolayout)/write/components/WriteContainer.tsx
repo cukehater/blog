@@ -1,6 +1,7 @@
 'use client'
 
-import useSaveCommand from '@/app/hooks/useSaveCommand.ts'
+import useWrite from '@/app/hooks/useWrite.ts'
+import useWriteSave from '@/app/hooks/useWriteSave.ts'
 
 import Description from './Description.tsx'
 import Hashes from './Hashes.tsx'
@@ -14,29 +15,22 @@ import type { ListItemType } from '@/app/types/types.ts'
 
 interface Props {
   formData: ListItemType
-  handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  setHashes: (hashes: string[]) => void
-  setContent: (content: string) => void
-  handleSaveDraft: (formData?: ListItemType) => void
-  handlePublish: () => void
-  handleEdit: () => void
   isEdit: boolean
 }
 
-export default function WriteContainer({
-  formData,
-  handleTitleChange,
-  setHashes,
-  setContent,
-  handleDescriptionChange,
-  handleSaveDraft,
-  handlePublish,
-  handleEdit,
-  isEdit
-}: Props) {
-  const { showSnackbar } = useSaveCommand(
-    handleSaveDraft,
+export default function WriteContainer({ formData, isEdit }: Props) {
+  const {
+    handleSave,
+    handlePublish,
+    handleEdit,
+    handleTitleChange,
+    handleDescriptionChange,
+    handleHashesChange,
+    handleContentChange
+  } = useWrite(formData)
+
+  const { showSnackbar } = useWriteSave(
+    handleSave,
     handleEdit,
     formData,
     isEdit
@@ -45,7 +39,7 @@ export default function WriteContainer({
   return (
     <main className="flex flex-col min-h-screen mt-0">
       <TopNav
-        handleSaveDraft={handleSaveDraft}
+        handleSave={handleSave}
         handlePublish={handlePublish}
         handleEdit={handleEdit}
         isEdit={isEdit}
@@ -57,10 +51,16 @@ export default function WriteContainer({
           value={formData.description}
           handleDescriptionChange={handleDescriptionChange}
         />
-        <Hashes setHashes={setHashes} hashes={formData.hashes} />
+        <Hashes
+          handleHashesChange={handleHashesChange}
+          hashes={formData.hashes}
+        />
       </section>
 
-      <MarkDownEditor formData={formData} setContent={setContent} />
+      <MarkDownEditor
+        formData={formData}
+        handleContentChange={handleContentChange}
+      />
 
       {showSnackbar && (
         <Snackbar message="저장이 완료되었습니다" type="success" />

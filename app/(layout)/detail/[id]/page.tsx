@@ -3,13 +3,16 @@ import Link from 'next/link'
 import BottomNav from './components/BottomNav.tsx'
 import MarkDownPreview from './components/MarkDownPreview.tsx'
 
+import { getPostById, getPrevOrNextPost } from '@/app/services/postService.ts'
+import { getNickname } from '@/app/services/profileService.ts'
+
 import Hash from '@/app/shared/components/Hash.tsx'
 import InnerCol from '@/app/shared/components/InnerCol.tsx'
 import NoItems from '@/app/shared/components/NoItems.tsx'
 import ShareSvg from '@/app/shared/components/svg/ShareSvg.tsx'
 
+import convertIdToString from '@/app/utils/convertIdToString.ts'
 import dateFormat from '@/app/utils/dateFormat.ts'
-import { findAll, findOne, findPrevOrNext } from '@/app/utils/db.ts'
 
 import type { ListItemType } from '@/app/types/types'
 
@@ -28,21 +31,12 @@ export default async function Page({
 }: {
   params: { id: string }
 }) {
-  const [post, profile, previousPost, nextPost] = await Promise.all([
-    findOne('posts', id),
-    findAll('profile').then((data) => data[0]),
-    findPrevOrNext('posts', id, 'prev'),
-    findPrevOrNext('posts', id, 'next')
+  const [post, nickname, previousPost, nextPost] = await Promise.all([
+    getPostById(id),
+    getNickname(),
+    getPrevOrNextPost(id, 'prev'),
+    getPrevOrNextPost(id, 'next')
   ])
-
-  const convertIdToString = (obj: ListItemType) => {
-    if (!obj?._id) return false
-
-    return {
-      ...obj,
-      _id: obj._id.toString()
-    }
-  }
 
   if (!post) {
     return <NoItems />
@@ -55,7 +49,7 @@ export default async function Page({
           <h2 className="text-[48px] font-bold">{post.title}</h2>
           <div className="flex items-center gap-2 mt-10 justify-between">
             <div className="flex items-center gap-2">
-              <span>{profile?.nickname}</span> &middot;
+              <span>{nickname}</span> &middot;
               <span className="text-gray-500">
                 {dateFormat(post.registerDate)}
               </span>
@@ -63,7 +57,7 @@ export default async function Page({
 
             <div className="flex items-center gap-4">
               <Link
-                href={`/write/${id}?edit=true`}
+                href={`/write?id=${id}&draft=false`}
                 className="opacity-70 hover:opacity-100"
               >
                 수정
@@ -86,8 +80,8 @@ export default async function Page({
         <Hashes hashes={post.hashes} />
         <MarkDownPreview contents={post.content} />
         <BottomNav
-          prevPost={convertIdToString(previousPost[0] as ListItemType) || false}
-          nextPost={convertIdToString(nextPost[0] as ListItemType) || false}
+          prevPost={convertIdToString(previousPost[0] as ListItemType)}
+          nextPost={convertIdToString(nextPost[0] as ListItemType)}
         />
       </InnerCol>
     </main>

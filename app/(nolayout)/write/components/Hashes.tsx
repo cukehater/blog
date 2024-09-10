@@ -7,11 +7,11 @@ import { v4 as uuid } from 'uuid'
 import Hash from '@/app/shared/components/Hash.tsx'
 
 interface HashesProps {
-  setHashes: (hashes: string[]) => void
+  handleHashesChange: (hashes: string[]) => void
   hashes: string[]
 }
 
-export default function Hashes({ setHashes, hashes }: HashesProps) {
+export default function Hashes({ handleHashesChange, hashes }: HashesProps) {
   const [value, setValue] = useState('')
 
   const checkValid = (inputValue: string) => {
@@ -26,18 +26,18 @@ export default function Hashes({ setHashes, hashes }: HashesProps) {
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && checkValid(value)) {
-      setHashes([...hashes, value])
+      handleHashesChange([...hashes, value])
     }
   }
 
   const handleBlur = () => {
     if (checkValid(value)) {
-      setHashes([...hashes, value])
+      handleHashesChange([...hashes, value])
     }
   }
 
   const removeHash = (hash: string) => {
-    setHashes(hashes.filter((h) => h !== hash))
+    handleHashesChange(hashes.filter((h) => h !== hash))
   }
 
   return (

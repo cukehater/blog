@@ -7,12 +7,12 @@ import ModalConfirm from '@/app/shared/components/ModalConfirm.tsx'
 import ArrowSvg from '@/app/shared/components/svg/ArrowSvg.tsx'
 
 export default function TopNav({
-  handleSaveDraft,
+  handleSave,
   handlePublish,
   handleEdit,
   isEdit
 }: {
-  handleSaveDraft: () => void
+  handleSave: () => void
   handlePublish: () => void
   handleEdit: () => void
   isEdit: boolean
@@ -41,7 +41,7 @@ export default function TopNav({
                 text="임시 저장하기"
                 type="secondary"
                 onClick={() => {
-                  handleSaveDraft()
+                  handleSave()
                   router.push('/draft')
                 }}
               />
