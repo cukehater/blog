@@ -15,35 +15,24 @@ import type { ListItemType } from '@/app/types/types.ts'
 
 interface Props {
   formData: ListItemType
-  isEdit: boolean
 }
 
-export default function WriteContainer({ formData, isEdit }: Props) {
+export default function WriteContainer({ formData: initialFormData }: Props) {
   const {
-    handleSave,
-    handlePublish,
-    handleEdit,
+    formData,
     handleTitleChange,
     handleDescriptionChange,
     handleHashesChange,
-    handleContentChange
-  } = useWrite(formData)
-
-  const { showSnackbar } = useWriteSave(
+    handleContentChange,
     handleSave,
-    handleEdit,
-    formData,
-    isEdit
-  )
+    handlePublish
+  } = useWrite(initialFormData)
+
+  const { showSnackbar } = useWriteSave(handleSave)
 
   return (
     <main className="flex flex-col min-h-screen mt-0">
-      <TopNav
-        handleSave={handleSave}
-        handlePublish={handlePublish}
-        handleEdit={handleEdit}
-        isEdit={isEdit}
-      />
+      <TopNav handleSave={handleSave} handlePublish={handlePublish} />
 
       <section className="py-8 px-4">
         <Title value={formData.title} handleTitleChange={handleTitleChange} />

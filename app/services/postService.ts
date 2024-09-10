@@ -81,35 +81,29 @@ export const getPrevOrNextPost = async (id: string, direction: string) => {
   }
 }
 
-// export const deleteOne = async (collection: string, id: string) => {
-//   const client: MongoClient = dbConnection()
-//   try {
-//     const db = (await client.connect()).db('blog')
-//     const result = await db.collection(collection).deleteOne({
-//       _id: new ObjectId(id)
-//     })
-//     return result
-//   } finally {
-//     await client.close()
-//   }
-// }
+export const updatePost = async (id: string, $set: Record<string, unknown>) => {
+  const client: MongoClient = dbConnection()
+  try {
+    const db = (await client.connect()).db(DB_NAME)
+    return await db.collection(COLLECTION_NAME).updateOne(
+      {
+        _id: new ObjectId(id)
+      },
+      { $set }
+    )
+  } finally {
+    await client.close()
+  }
+}
 
-// export const updateOne = async (
-//   collection: string,
-//   id: string,
-//   $set: Record<string, unknown>
-// ) => {
-//   const client: MongoClient = dbConnection()
-//   try {
-//     const db = (await client.connect()).db('blog')
-//     const result = await db.collection(collection).updateOne(
-//       {
-//         _id: new ObjectId(id)
-//       },
-//       { $set }
-//     )
-//     return result
-//   } finally {
-//     await client.close()
-//   }
-// }
+export const deletePost = async (id: string) => {
+  const client: MongoClient = dbConnection()
+  try {
+    const db = (await client.connect()).db(DB_NAME)
+    await db.collection(COLLECTION_NAME).deleteOne({
+      _id: new ObjectId(id)
+    })
+  } finally {
+    await client.close()
+  }
+}

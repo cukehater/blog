@@ -1,11 +1,15 @@
 import { useState } from 'react'
 
-// import axios from 'axios'
+import axios from 'axios'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import type { ListItemType } from '../types/types.ts'
 
 export default function useWritePost(initialFormData: ListItemType) {
   const [formData, setFormData] = useState<ListItemType>(initialFormData)
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const isDraft = searchParams.get('draft') === 'true'
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value
@@ -28,24 +32,24 @@ export default function useWritePost(initialFormData: ListItemType) {
   }
 
   const handleSave = async () => {
-    console.log(formData?._id)
-    // if (formData?._id) {
-    //   axios.put('/api/article?type=drafts', formData)
-    // } else {
-    //   const res = await axios.post('/api/article?type=drafts', formData)
-    //   setFormData({ ...res.data.formData })
-    // }
+    if (!searchParams.get('id')) {
+      const { data } = await axios.post('/api/article?type=drafts', formData)
+      router.push(`/write?id=${data.insertedId}&draft=true`)
+    } else {
+      await axios.put(
+        `/api/article?type=${isDraft ? `drafts` : 'posts'}`,
+        formData
+      )
+    }
   }
 
   const handlePublish = async () => {
-    // if (formData?._id) {
-    //   await axios.delete(`/api/article?id=${formData._id}&type=drafts`)
-    // }
-    // await axios.post('/api/article?type=posts', formData)
-  }
-
-  const handleEdit = async () => {
-    // await axios.put('/api/article?type=posts', formData)
+    if (isDraft) {
+      await axios.delete(
+        `/api/article?id=${searchParams.get('id')}&type=drafts`
+      )
+    }
+    await axios.post('/api/article?type=posts', formData)
   }
 
   return {
@@ -55,7 +59,6 @@ export default function useWritePost(initialFormData: ListItemType) {
     handleHashesChange,
     handleContentChange,
     handleSave,
-    handlePublish,
-    handleEdit
+    handlePublish
   }
 }

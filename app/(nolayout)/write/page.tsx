@@ -1,5 +1,3 @@
-// 'use client'
-
 import { headers } from 'next/headers'
 
 import WriteContainer from './components/WriteContainer.tsx'
@@ -19,23 +17,19 @@ const initialFormData = {
   hashes: []
 }
 
-const getFormData = async (id: string | boolean, draft: boolean) => {
+const getFormData = async (id: string | boolean, isDraft: boolean) => {
   if (!id) return false
 
-  return draft ? getDraftById(id.toString()) : getPostById(id.toString())
+  return isDraft ? getDraftById(id.toString()) : getPostById(id.toString())
 }
 
 export default async function Page() {
   const headersList = headers().get('x-search-params')
   const id = headersList?.split('=')[1].split('&')[0] ?? false
-  const draft = headersList?.split('=')[2] === 'true'
-
-  const formData = (await getFormData(id, draft)) || initialFormData
+  const isDraft = headersList?.split('=')[2] === 'true'
+  const formData = (await getFormData(id, isDraft)) || initialFormData
 
   return (
-    <WriteContainer
-      formData={convertIdToString(formData as ListItemType)}
-      isEdit={typeof id === 'string'}
-    />
+    <WriteContainer formData={convertIdToString(formData as ListItemType)} />
   )
 }
