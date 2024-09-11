@@ -34,7 +34,7 @@ export const getPostById = async (id: string) => {
 export const insertPost = async (formData: OptionalId<Document>) => {
   const client: MongoClient = dbConnection()
   try {
-    const db = (await client.connect()).db('blog')
+    const db = (await client.connect()).db(DB_NAME)
     return await db.collection(COLLECTION_NAME).insertOne(formData)
   } finally {
     await client.close()

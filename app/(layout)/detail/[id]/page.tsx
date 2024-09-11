@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import BottomNav from './components/BottomNav.tsx'
+import DeletePost from './components/DeletePost.tsx'
 import MarkDownPreview from './components/MarkDownPreview.tsx'
 
 import { getPostById, getPrevOrNextPost } from '@/app/services/postService.ts'
@@ -9,7 +10,6 @@ import { getNickname } from '@/app/services/profileService.ts'
 import Hash from '@/app/components/shared/components/Hash.tsx'
 import InnerCol from '@/app/components/shared/components/InnerCol.tsx'
 import NoItems from '@/app/components/shared/components/NoItems.tsx'
-import ShareSvg from '@/app/components/shared/components/svg/ShareSvg.tsx'
 
 import convertIdToString from '@/app/utils/convertIdToString.ts'
 import dateFormat from '@/app/utils/dateFormat.ts'
@@ -62,17 +62,7 @@ export default async function Page({
               >
                 수정
               </Link>
-              <button type="button" className="opacity-70 hover:opacity-100">
-                삭제
-              </button>
-              <button type="button">
-                <p className="absolute left-0 top-0 w-0 h-0 overflow-hidden">
-                  공유하기
-                </p>
-                <div className="opacity-70 hover:opacity-100">
-                  <ShareSvg className="w-5 h-5" />
-                </div>
-              </button>
+              <DeletePost id={id} />
             </div>
           </div>
         </hgroup>

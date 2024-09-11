@@ -37,7 +37,9 @@ export default async function Header() {
     <header className="sticky top-0 left-0 w-full z-50 py-5 bg-[var(--background-color)]">
       <InnerCol className="flex items-center justify-between">
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Link href="/">{profile?.blogTitle}</Link>
+          <Link href="/" scroll={false}>
+            {profile?.blogTitle}
+          </Link>
         </h1>
         <Nav />
       </InnerCol>

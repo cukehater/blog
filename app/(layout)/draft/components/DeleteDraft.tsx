@@ -37,7 +37,7 @@ export default function DeleteDraft({ id }: { id: string }) {
       {isModalOpen && (
         <ModalConfirm
           title="임시 글 삭제"
-          description="삭제한 내용은 복구할 수 없습니다."
+          description="삭제된 게시글은 복구할 수 없습니다."
           confirmText="삭제"
           cancelText="취소"
           onConfirm={handleDelete}
