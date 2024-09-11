@@ -66,7 +66,7 @@ export default function Page() {
       data: { data }
     } = await axios.get('/api/profile')
 
-    setFormData({ ...data })
+    setFormData(data)
     setIsLoading(false)
   }, [])
 

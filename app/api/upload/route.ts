@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
     ]
   })
 
-  return NextResponse.json({ message: '성공', url }, { status: 200 })
+  return NextResponse.json({ message: 'Success', url }, { status: 200 })
 }
 
 export default GET

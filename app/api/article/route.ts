@@ -67,7 +67,7 @@ export async function handler(req: NextRequest) {
     return NextResponse.json({ message: 'Success' })
   }
 
-  return NextResponse.json({ message: 'Fail' }, { status: 405 })
+  return NextResponse.json({ message: 'Failed' }, { status: 405 })
 }
 
 export const GET = handler

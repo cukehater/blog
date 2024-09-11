@@ -1,22 +1,22 @@
 import { NextResponse } from 'next/server'
 
-import { findAll, updateOne } from '@/app/utils/db.ts'
+import { getProfile, updateProfile } from '@/app/services/profileService.ts'
 
 export async function handler(req: Request) {
   const { method } = req
 
   if (method === 'GET') {
-    const result = await findAll('profile')
-    return NextResponse.json({ message: 'Success', data: result[0] })
+    const profile = await getProfile()
+    return NextResponse.json({ message: 'Success', data: profile })
   }
 
   if (method === 'PUT') {
     const { _id: id, ...body } = await req.json()
-    await updateOne('profile', id, body)
+    await updateProfile(id, body)
     return NextResponse.json({ message: 'Success' })
   }
 
-  return NextResponse.json({ message: 'Method Not Allowed' }, { status: 405 })
+  return NextResponse.json({ message: 'Failed' }, { status: 405 })
 }
 
 export const GET = handler
