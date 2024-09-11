@@ -46,7 +46,7 @@ export default async function Page({
     <main>
       <InnerCol>
         <hgroup>
-          <h2 className="text-[48px] font-bold">{post.title}</h2>
+          <h2 className="text-4xl font-bold leading-snug">{post.title}</h2>
           <div className="flex items-center gap-2 mt-10 justify-between">
             <div className="flex items-center gap-2">
               <span>{nickname}</span> &middot;

@@ -23,9 +23,9 @@ export default function ListItem({
     <div className="last:border-b-0 border-b border-[var(--border-color)] py-8 w-full">
       <Link href={redirectUrl} className="flex flex-col ">
         <h4 className="text-2xl font-bold mb-4 line-clamp-1">{title}</h4>
-        <p className="text-gray-500 line-clamp-2 mb-8">{description}</p>
+        <p className="text-gray-500 line-clamp-2 sm:mb-8 mb-6">{description}</p>
         {hashes.length > 0 && (
-          <div className="flex gap-2 mb-8 flex-wrap">
+          <div className="flex gap-2 sm:mb-8 mb-6 flex-wrap">
             {hashes.map((hash) => (
               <Hash key={uuid()} hash={hash} />
             ))}

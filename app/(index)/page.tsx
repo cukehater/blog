@@ -33,10 +33,9 @@ export default async function Main() {
       <main>
         <InnerCol className="flex-1 flex flex-col items-center justify-center">
           <Intro />
-          <p className="text-gray-500 text-left w-full mb-12">
+          <p className="text-gray-500 w-full mb-4 text-lg sm:text-base">
             총 <strong>{sortedPosts.length}</strong>개의 글이 있습니다.
           </p>
-
           <div className="relative w-full">
             {hashes.length > 0 && <SideNav hashes={hashes} />}
             <List listData={sortedPosts} />

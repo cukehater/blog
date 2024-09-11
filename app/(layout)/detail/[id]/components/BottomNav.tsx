@@ -17,8 +17,8 @@ export default function BottomNav({ prevPost, nextPost }: BottomNavProps) {
   const router = useRouter()
 
   return (
-    <nav className="flex justify-between my-20">
-      <div className="w-56">
+    <nav className="flex justify-between items-center my-20">
+      <div className="w-40 sm:w-56">
         {nextPost && (
           <Link
             href={`/detail/${nextPost._id}`}
@@ -27,7 +27,7 @@ export default function BottomNav({ prevPost, nextPost }: BottomNavProps) {
             <ArrowSvg className="w-7 h-7 mr-2" />
             <div className="flex-1">
               <p className="text-xs mb-1">다음 글</p>
-              <p className="text-lg">{nextPost.title}</p>
+              <p className="text-lg line-clamp-2">{nextPost.title}</p>
             </div>
           </Link>
         )}
@@ -40,7 +40,7 @@ export default function BottomNav({ prevPost, nextPost }: BottomNavProps) {
         onClick={() => router.push('/')}
       />
 
-      <div className="w-56">
+      <div className="w-40 sm:w-56">
         {prevPost && (
           <Link
             href={`/detail/${prevPost._id?.toString()}`}
@@ -48,7 +48,7 @@ export default function BottomNav({ prevPost, nextPost }: BottomNavProps) {
           >
             <div className="flex-1">
               <p className="text-xs mb-1">이전 글</p>
-              <p className="text-lg">{prevPost.title}</p>
+              <p className="text-lg line-clamp-2">{prevPost.title}</p>
             </div>
             <ArrowSvg className="w-7 h-7 ml-2 rotate-180" />
           </Link>

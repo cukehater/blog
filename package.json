@@ -6,7 +6,9 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "clean": "rm -rf node_modules && npm install && npm run dev"
   },
   "dependencies": {
     "@types/uuid": "^10.0.0",

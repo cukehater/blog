@@ -36,28 +36,24 @@ main {
   color: var(--color);
   outline: none;
 }
-.ͼ15,
-.ͼo,
-.md-editor-resize-operate,
-.custom-preview {
-  background-color: transparent !important;
-}
-.cm-scroller {
-  background-color: transparent !important;
-  padding-right: 0 !important;
+.md-editor {
+  --md-scrollbar-bg-color: var(--border-color) !important;
+  --md-color: var(--color) !important;
+  --md-hover-color: var(--color) !important;
+  --md-bk-color: var(--background-color) !important;
+  --md-bk-color-outstand: var(--background-color) !important;
+  --md-bk-hover-color: var(--background-color) !important;
+  --md-border-color: var(--border-color) !important;
+  --md-border-hover-color: var(--border-color) !important;
+  --md-border-active-color: var(--border-color) !important;
+  --md-scrollbar-thumb-color: var(--color) !important;
+  --md-scrollbar-thumb-hover-color: var(--color) !important;
+  --md-scrollbar-thumb-active-color: var(--color) !important;
 }
 .custom-preview.detail .md-editor-preview-wrapper {
   padding: 0 !important;
 }
-.md-editor {
-  border: 1px solid var(--border-color) !important;
-  --md-scrollbar-bg-color: var(--border-color) !important;
-}
-.md-editor-toolbar-wrapper {
-  border-bottom: 1px solid var(--border-color) !important;
-}
 .md-editor-preview {
-  color: var(--color) !important;
   line-height: 1.8 !important;
   h1,
   h2,
@@ -65,30 +61,35 @@ main {
   h4,
   h5,
   h6 {
-    color: var(--color) !important;
     border-bottom: none !important;
     margin-top: 1em !important;
     padding-bottom: 0 !important;
   }
   hr {
-    margin: 20px 0 !important;
+    margin: 1em 0 !important;
   }
   :not(pre) > code {
     font-size: 0.85em !important;
     word-break: keep-all;
     border-radius: 0.2em !important;
     margin-right: 0.15em !important;
-    background-color: var(--code-background-color) !important;
-    color: var(--code-color) !important;
-  }
-  .md-editor-code-lang,
-  .md-editor-copy-button {
-    color: #fff !important;
-  }
-  .md-editor-collapse-tips svg {
-    fill: #fff !important;
   }
 }
-.md-editor-footer {
-  border-top: 1px solid var(--border-color) !important;
+@media all and (max-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media all and (max-width: 768px) {
+  html {
+    font-size: 1.666vw;
+  }
+}
+@media all and (max-width: 480px) {
+  html {
+    font-size: 3vw;
+  }
+  main {
+    margin-top: 10.667vw;
+  }
 }

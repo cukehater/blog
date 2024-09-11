@@ -13,6 +13,7 @@ import useCallSnackbar from '@/app/hooks/useCallSnackbar.ts'
 import Loading from '@/app/loading.tsx'
 
 import Button from '@/app/components/shared/components/Button.tsx'
+import InnerCol from '@/app/components/shared/components/InnerCol.tsx'
 import ModalAlert from '@/app/components/shared/components/ModalAlert.tsx'
 import Snackbar from '@/app/components/shared/components/Snackbar.tsx'
 
@@ -78,65 +79,66 @@ export default function Page() {
 
   return (
     <main className="mb-20">
-      <section className="w-[540px] mx-auto relative">
-        <ChangeProfileImage
-          onProfileChange={handleProfileChange}
-          imgSrc={formData.profileImage}
-        />
-        <ul className="mt-10">
-          <Field
-            id="blogTitle"
-            title="블로그 제목"
-            value={formData.blogTitle}
-            onChange={handleChange}
+      <InnerCol>
+        <section className="w-full sm:w-[540px] mx-auto relative">
+          <ChangeProfileImage
+            onProfileChange={handleProfileChange}
+            imgSrc={formData.profileImage}
           />
-          <Field
-            id="nickname"
-            title="닉네임"
-            value={formData.nickname}
-            onChange={handleChange}
-          />
-          <Field
-            id="introduction"
-            title="간략 소개"
-            value={formData.introduction}
-            isTextarea
-            onChange={handleChange}
-          />
-          <Field
-            id="email"
-            title="이메일 주소"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <Field
-            id="portfolioUrl"
-            title="포트폴리오 URL"
-            value={formData.portfolioUrl}
-            onChange={handleChange}
-          />
-          <Field
-            id="githubUrl"
-            title="깃 URL"
-            value={formData.githubUrl}
-            onChange={handleChange}
-          />
-          <Field
-            id="resumeUrl"
-            title="이력서 URL"
-            value={formData.resumeUrl}
-            onChange={handleChange}
-          />
-        </ul>
+          <ul className="mt-10">
+            <Field
+              id="blogTitle"
+              title="블로그 제목"
+              value={formData.blogTitle}
+              onChange={handleChange}
+            />
+            <Field
+              id="nickname"
+              title="닉네임"
+              value={formData.nickname}
+              onChange={handleChange}
+            />
+            <Field
+              id="introduction"
+              title="간략 소개"
+              value={formData.introduction}
+              isTextarea
+              onChange={handleChange}
+            />
+            <Field
+              id="email"
+              title="이메일 주소"
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <Field
+              id="portfolioUrl"
+              title="포트폴리오 URL"
+              value={formData.portfolioUrl}
+              onChange={handleChange}
+            />
+            <Field
+              id="githubUrl"
+              title="깃 URL"
+              value={formData.githubUrl}
+              onChange={handleChange}
+            />
+            <Field
+              id="resumeUrl"
+              title="이력서 URL"
+              value={formData.resumeUrl}
+              onChange={handleChange}
+            />
+          </ul>
 
-        <Button
-          text="저장하기"
-          className="mt-6 mx-auto px-6"
-          type="tertiary"
-          onClick={handleSubmit}
-        />
-      </section>
-
+          <Button
+            text="저장하기"
+            className="mt-6 mx-auto px-6"
+            type="tertiary"
+            onClick={handleSubmit}
+          />
+        </section>
+      </InnerCol>
       {showSnackbar && (
         <Snackbar message="설정이 저장되었습니다." type="success" />
       )}

@@ -49,6 +49,7 @@ export default function WriteContainer({ formData: initialFormData }: Props) {
       <MarkDownEditor
         formData={formData}
         handleContentChange={handleContentChange}
+        handleSave={handleSave}
       />
 
       {showSnackbar && (

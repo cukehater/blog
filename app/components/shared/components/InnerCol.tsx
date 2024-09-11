@@ -6,6 +6,10 @@ export default function InnerCol({
   className?: string
 }) {
   return (
-    <div className={`w-[780px] mx-auto relative ${className}`}>{children}</div>
+    <div
+      className={`w-full px-6 md:w-[780px] md:px-0 mx-auto relative box-border ${className}`}
+    >
+      {children}
+    </div>
   )
 }
