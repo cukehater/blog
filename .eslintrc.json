@@ -120,12 +120,12 @@
             "position": "before"
           },
           {
-            "pattern": "@/app/layout/**",
+            "pattern": "@/app/components/layout/**",
             "group": "index",
             "position": "before"
           },
           {
-            "pattern": "@/app/shared/**",
+            "pattern": "@/app/components/shared/**",
             "group": "index",
             "position": "before"
           },

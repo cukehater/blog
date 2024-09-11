@@ -4,8 +4,8 @@ import DarkModeToggle from './components/DarkModeToggle.tsx'
 
 import { getProfile } from '@/app/services/profileService.ts'
 
-import InnerCol from '@/app/shared/components/InnerCol.tsx'
-import NavItem from '@/app/shared/components/NavItem.tsx'
+import InnerCol from '@/app/components/shared/components/InnerCol.tsx'
+import NavItem from '@/app/components/shared/components/NavItem.tsx'
 
 import type { ProfileData } from '@/app/types/types.ts'
 

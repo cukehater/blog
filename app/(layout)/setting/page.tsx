@@ -12,9 +12,9 @@ import useCallSnackbar from '@/app/hooks/useCallSnackbar.ts'
 
 import Loading from '@/app/loading.tsx'
 
-import Button from '@/app/shared/components/Button.tsx'
-import ModalAlert from '@/app/shared/components/ModalAlert.tsx'
-import Snackbar from '@/app/shared/components/Snackbar.tsx'
+import Button from '@/app/components/shared/components/Button.tsx'
+import ModalAlert from '@/app/components/shared/components/ModalAlert.tsx'
+import Snackbar from '@/app/components/shared/components/Snackbar.tsx'
 
 import type { ProfileData } from '@/app/types/types.ts'
 

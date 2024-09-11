@@ -2,9 +2,9 @@ import { useReducer } from 'react'
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import Button from '@/app/shared/components/Button.tsx'
-import ModalConfirm from '@/app/shared/components/ModalConfirm.tsx'
-import ArrowSvg from '@/app/shared/components/svg/ArrowSvg.tsx'
+import Button from '@/app/components/shared/components/Button.tsx'
+import ModalConfirm from '@/app/components/shared/components/ModalConfirm.tsx'
+import ArrowSvg from '@/app/components/shared/components/svg/ArrowSvg.tsx'
 
 export default function TopNav({
   handleSave,

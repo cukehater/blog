@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import axios from 'axios'
 
-import ModalConfirm from '@/app/shared/components/ModalConfirm.tsx'
+import ModalConfirm from '@/app/components/shared/components/ModalConfirm.tsx'
 
 export default function DeleteDraft({ id }: { id: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false)

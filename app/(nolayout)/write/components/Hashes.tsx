@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { v4 as uuid } from 'uuid'
 
-import Hash from '@/app/shared/components/Hash.tsx'
+import Hash from '@/app/components/shared/components/Hash.tsx'
 
 interface HashesProps {
   handleHashesChange: (hashes: string[]) => void

@@ -1,11 +1,9 @@
-import Footer from '../layout/footer/Footer.tsx'
-import Header from '../layout/header/Header.tsx'
-
-import InnerCol from '../shared/components/InnerCol.tsx'
-import List from '../shared/components/List.tsx'
-
 import Intro from './components/Profile.tsx'
 import SideNav from './components/SideNav.tsx'
+import Footer from '../components/layouts/footer/Footer.tsx'
+import Header from '../components/layouts/header/Header.tsx'
+import InnerCol from '../components/shared/components/InnerCol.tsx'
+import List from '../components/shared/components/List.tsx'
 
 import { getAllPosts } from '../services/postService.ts'
 

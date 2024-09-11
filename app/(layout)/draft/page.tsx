@@ -1,7 +1,7 @@
 import { getAllDrafts } from '@/app/services/draftService.ts'
 
-import InnerCol from '@/app/shared/components/InnerCol.tsx'
-import List from '@/app/shared/components/List.tsx'
+import InnerCol from '@/app/components/shared/components/InnerCol.tsx'
+import List from '@/app/components/shared/components/List.tsx'
 
 import listSortByDate from '@/app/utils/listSortByDate.ts'
 

@@ -4,11 +4,11 @@ import { getProfile } from '@/app/services/profileService.ts'
 
 import Error from '@/app/error.tsx'
 
-import ProfileImage from '@/app/shared/components/ProfileImage.tsx'
-import EmailSvg from '@/app/shared/components/svg/EmailSvg.tsx'
-import GithubSvg from '@/app/shared/components/svg/GithubSvg.tsx'
-import PortfolioSvg from '@/app/shared/components/svg/PortfolioSvg.tsx'
-import ResumeSvg from '@/app/shared/components/svg/ResumeSvg.tsx'
+import ProfileImage from '@/app/components/shared/components/ProfileImage.tsx'
+import EmailSvg from '@/app/components/shared/components/svg/EmailSvg.tsx'
+import GithubSvg from '@/app/components/shared/components/svg/GithubSvg.tsx'
+import PortfolioSvg from '@/app/components/shared/components/svg/PortfolioSvg.tsx'
+import ResumeSvg from '@/app/components/shared/components/svg/ResumeSvg.tsx'
 
 import type { ProfileData } from '@/app/types/types'
 

@@ -9,7 +9,7 @@ import MarkDownEditor from './MarkDownEditor.tsx'
 import Title from './Title.tsx'
 import TopNav from './TopNav.tsx'
 
-import Snackbar from '@/app/shared/components/Snackbar.tsx'
+import Snackbar from '@/app/components/shared/components/Snackbar.tsx'
 
 import type { ListItemType } from '@/app/types/types.ts'
 

@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid'
 
 import ListItem from './ListItem.tsx'
 
-import NoItems from '@/app/shared/components/NoItems.tsx'
+import NoItems from '@/app/components/shared/components/NoItems.tsx'
 
 import type { ListItemType } from '../../types/types.ts'
 

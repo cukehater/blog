@@ -4,8 +4,8 @@ import { useState } from 'react'
 
 import axios from 'axios'
 
-import Button from '@/app/shared/components/Button.tsx'
-import ProfileImage from '@/app/shared/components/ProfileImage.tsx'
+import Button from '@/app/components/shared/components/Button.tsx'
+import ProfileImage from '@/app/components/shared/components/ProfileImage.tsx'
 
 import addTimeToFileName from '@/app/utils/addTimeToFileName.ts'
 import uploadToS3 from '@/app/utils/uploadToS3.ts'

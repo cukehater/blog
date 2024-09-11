@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-import Button from '@/app/shared/components/Button.tsx'
-import ArrowSvg from '@/app/shared/components/svg/ArrowSvg.tsx'
+import Button from '@/app/components/shared/components/Button.tsx'
+import ArrowSvg from '@/app/components/shared/components/svg/ArrowSvg.tsx'
 
 import type { ListItemType } from '@/app/types/types.ts'
 
