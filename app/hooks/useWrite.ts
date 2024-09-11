@@ -49,7 +49,8 @@ export default function useWritePost(initialFormData: ListItemType) {
         `/api/article?id=${searchParams.get('id')}&type=drafts`
       )
     }
-    await axios.post('/api/article?type=posts', formData)
+    const { _id: id, ...body } = formData
+    await axios.post('/api/article?type=posts', body)
   }
 
   return {

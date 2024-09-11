@@ -27,7 +27,7 @@ export default async function Main() {
             총 <strong>{listData.length}</strong>개의 글이 있습니다.
           </p>
 
-          <div className="relative">
+          <div className="relative w-full">
             <SideNav />
             <List listData={listData} />
           </div>

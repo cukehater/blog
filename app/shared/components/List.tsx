@@ -17,7 +17,7 @@ export default function List({
     return <NoItems />
   }
   return (
-    <article className="w-full">
+    <article className="w-full flex-1">
       {listData.map((listItem) => (
         <ListItem key={uuid()} listItem={listItem} isDraft={isDraft} />
       ))}
