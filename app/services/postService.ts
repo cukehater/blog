@@ -2,7 +2,7 @@ import { MongoClient, ObjectId, OptionalId } from 'mongodb'
 
 import dbConnection from '../configs/dbConnection.ts'
 
-import processArray from '../utils/processArray.ts'
+import countStringOccurrences from '../utils/countStringOccurrences.ts'
 
 const DB_NAME = 'blog'
 const COLLECTION_NAME = 'posts'
@@ -41,7 +41,6 @@ export const insertPost = async (formData: OptionalId<Document>) => {
   }
 }
 
-// TODO: 쿼리 최적화 필요
 export const getPostsHashes = async () => {
   const client: MongoClient = dbConnection()
 
@@ -52,9 +51,9 @@ export const getPostsHashes = async () => {
       .find({}, { projection: { hashes: 1 } })
       .toArray()
 
-    const a = result.map((item) => [...item.hashes]).flat()
+    const flatArray = result.map((item) => [...item.hashes]).flat()
 
-    return processArray(a)
+    return countStringOccurrences(flatArray)
   } finally {
     await client.close()
   }
@@ -103,6 +102,16 @@ export const deletePost = async (id: string) => {
     await db.collection(COLLECTION_NAME).deleteOne({
       _id: new ObjectId(id)
     })
+  } finally {
+    await client.close()
+  }
+}
+
+export const getPostsByHash = async (hash: string) => {
+  const client: MongoClient = dbConnection()
+  try {
+    const db = (await client.connect()).db(DB_NAME)
+    return await db.collection(COLLECTION_NAME).find({ hashes: hash }).toArray()
   } finally {
     await client.close()
   }

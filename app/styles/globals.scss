@@ -1,33 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
   --accent-color: #14b4ac;
-
   --color: #333333;
   --background-color: #f1f1f1;
-
   --border-color: #ddd;
   --button-background-color: #ededed;
-
   --code-background-color: #e5e5e5;
   --code-color: #f75d10;
-
   &.dark-mode {
     --accent-color: #09ece1;
-
     --color: #ececec;
     --background-color: #12131f;
-
     --border-color: #2b2d45;
     --button-background-color: #22243a;
-
     --code-background-color: #24292e;
     --code-color: #f75d10;
   }
 }
-
 html,
 body {
   background-color: var(--background-color);
@@ -35,14 +26,12 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 main {
   margin-top: 120px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-
 * {
   color: var(--color);
   outline: none;
@@ -53,24 +42,23 @@ main {
 .custom-preview {
   background-color: transparent !important;
 }
-
 .cm-scroller {
   background-color: transparent !important;
   padding-right: 0 !important;
 }
-
 .custom-preview.detail .md-editor-preview-wrapper {
   padding: 0 !important;
 }
-
+.md-editor {
+  border: 1px solid var(--border-color) !important;
+  --md-scrollbar-bg-color: var(--border-color) !important;
+}
 .md-editor-toolbar-wrapper {
   border-bottom: 1px solid var(--border-color) !important;
 }
-
 .md-editor-preview {
   color: var(--color) !important;
   line-height: 1.8 !important;
-
   h1,
   h2,
   h3,
@@ -82,11 +70,9 @@ main {
     margin-top: 1em !important;
     padding-bottom: 0 !important;
   }
-
   hr {
     margin: 20px 0 !important;
   }
-
   :not(pre) > code {
     font-size: 0.85em !important;
     word-break: keep-all;
@@ -95,7 +81,6 @@ main {
     background-color: var(--code-background-color) !important;
     color: var(--code-color) !important;
   }
-
   .md-editor-code-lang,
   .md-editor-copy-button {
     color: #fff !important;
@@ -103,4 +88,7 @@ main {
   .md-editor-collapse-tips svg {
     fill: #fff !important;
   }
+}
+.md-editor-footer {
+  border-top: 1px solid var(--border-color) !important;
 }
