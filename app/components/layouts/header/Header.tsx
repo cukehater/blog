@@ -1,11 +1,12 @@
 import Link from 'next/link'
 
 import DarkModeToggle from './components/DarkModeToggle.tsx'
+import LogInOut from './components/LogInOut.tsx'
+import NavItem from './components/NavItem.tsx'
 
 import { getProfile } from '@/app/services/profileService.ts'
 
 import InnerCol from '@/app/components/shared/components/InnerCol.tsx'
-import NavItem from '@/app/components/shared/components/NavItem.tsx'
 
 import type { ProfileData } from '@/app/types/types.ts'
 
@@ -22,9 +23,8 @@ function Nav() {
       <Link href="/setting">
         <NavItem content="설정" />
       </Link>
-      <Link href="/logout">
-        <NavItem content="로그아웃" />
-      </Link>
+
+      <LogInOut />
       <DarkModeToggle />
     </nav>
   )
