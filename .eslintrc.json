@@ -40,6 +40,7 @@
   "ignorePatterns": ["build", "dist", "public"], // 린트 무시할 파일/폴더 (기본적으로 node_modules 폴더나 .로 시작하는 설정 파일은 무시)
   "rules": {
     // 규칙을 하나하나 세세하게 제어하기 위해 사용 (보통 extends 옵션에 의해 설정된 규칙을 덮어쓰고 싶을 때 사용)
+    "import/prefer-default-export": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
       "error",

@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
   const folderName = dir ? `${dir}/` : '' // 특정 폴더 이름 지정
   const key = `${folderName}${fileName}` // 폴더와 파일 이름 결합
 
-  const url = await s3.createPresignedPost({
+  const url = s3.createPresignedPost({
     Bucket: process.env.NEXT_S3_BUCKET_NAME,
     Fields: { key }, // 수정된 key 사용
     Expires: 60, // 초 단위
@@ -27,5 +27,3 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json({ message: 'Success', url }, { status: 200 })
 }
-
-export default GET
