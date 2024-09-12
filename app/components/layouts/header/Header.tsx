@@ -1,30 +1,39 @@
 import Link from 'next/link'
+import { Session } from 'next-auth'
 
 import DarkModeToggle from './components/DarkModeToggle.tsx'
-import LogInOut from './components/LogInOut.tsx'
+import LogOut from './components/LogOut.tsx'
 import NavItem from './components/NavItem.tsx'
 
 import { getProfile } from '@/app/services/profileService.ts'
+import { auth } from '@/auth.config.ts'
 
 import InnerCol from '@/app/components/shared/components/InnerCol.tsx'
 
 import type { ProfileData } from '@/app/types/types.ts'
 
-function Nav() {
+async function Nav() {
+  const session = (await auth()) as Session
+
   return (
     <nav className="flex items-center">
-      <Link href="/write">
-        <NavItem content="새 글 작성" />
-      </Link>
+      {session && (
+        <>
+          <Link href="/write">
+            <NavItem content="새 글 작성" />
+          </Link>
 
-      <Link href="/draft">
-        <NavItem content="임시 글" />
-      </Link>
-      <Link href="/setting">
-        <NavItem content="설정" />
-      </Link>
+          <Link href="/draft">
+            <NavItem content="임시 글" />
+          </Link>
 
-      <LogInOut />
+          <Link href="/setting">
+            <NavItem content="설정" />
+          </Link>
+
+          <LogOut />
+        </>
+      )}
       <DarkModeToggle />
     </nav>
   )

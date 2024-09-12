@@ -28,7 +28,7 @@ export default function MarkDownEditor({
     <>
       <MdEditor
         language="en-US"
-        className="flex-1 custom-preview"
+        className="flex-1"
         modelValue={formData.content}
         onChange={handleContentChange}
         onSave={() => {
