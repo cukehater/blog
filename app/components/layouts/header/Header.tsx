@@ -6,7 +6,7 @@ import LogOut from './components/LogOut.tsx'
 import NavItem from './components/NavItem.tsx'
 
 import { getProfile } from '@/app/services/profileService.ts'
-import { auth } from '@/auth.config.ts'
+import { auth } from '@/auth.ts'
 
 import InnerCol from '@/app/components/shared/components/InnerCol.tsx'
 
