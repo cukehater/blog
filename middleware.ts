@@ -1,28 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { getToken } from 'next-auth/jwt'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export default async function middleware(req: NextRequest) {
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+
+  // 응답 헤더에 pathname 추가
   const response = NextResponse.next()
-  if (req.nextUrl.pathname === '/write' || req.nextUrl.pathname === '/') {
-    const searchParams = req.nextUrl.searchParams.toString()
-    response.headers.set('x-search-params', searchParams)
-  }
-
-  const token = await getToken({
-    req,
-    secret: process.env.AUTH_SECRET as string,
-    salt: ''
-  })
-
-  if (
-    req.nextUrl.pathname === '/write' ||
-    req.nextUrl.pathname === '/setting' ||
-    req.nextUrl.pathname === '/draft'
-  ) {
-    if (!token) {
-      return NextResponse.redirect(new URL('/', req.url))
-    }
-  }
+  response.headers.set('x-pathname', pathname)
 
   return response
 }

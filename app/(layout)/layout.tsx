@@ -1,7 +1,8 @@
-import Footer from '../components/layouts/footer/Footer.tsx'
-import Header from '../components/layouts/header/Header.tsx'
+import Inner from '../components/layout/Inner'
+import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
@@ -9,7 +10,9 @@ export default function RootLayout({
   return (
     <>
       <Header />
-      {children}
+      <main className="flex-1 pt-40 pb-20">
+        <Inner>{children}</Inner>
+      </main>
       <Footer />
     </>
   )

@@ -1,95 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 :root {
-  --accent-color: #14b4ac;
-  --color: #333333;
-  --background-color: #f1f1f1;
-  --border-color: #ddd;
-  --button-background-color: #ededed;
-  --code-background-color: #e5e5e5;
-  --code-color: #f75d10;
-  &.dark-mode {
-    --accent-color: #09ece1;
-    --color: #ececec;
-    --background-color: #12131f;
-    --border-color: #2b2d45;
-    --button-background-color: #22243a;
-    --code-background-color: #24292e;
-    --code-color: #f75d10;
-  }
+  --primary-color: #12131f;
+  --secondary-color: #22243a;
+  --tertiary-color: #2b2d45;
+  --accent-color: #2bc3c8;
+  --accent-color-hover: #45eaf0;
+  --text-color: #ececec;
 }
-html,
-body {
-  background-color: var(--background-color);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-main {
-  margin-top: 120px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+
 * {
-  color: var(--color);
+  color: var(--text-color);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   outline: none;
-}
-.md-editor {
-  --md-scrollbar-bg-color: var(--border-color) !important;
-  --md-color: var(--color) !important;
-  --md-hover-color: var(--color) !important;
-  --md-bk-color: var(--background-color) !important;
-  --md-bk-color-outstand: var(--background-color) !important;
-  --md-bk-hover-color: var(--background-color) !important;
-  --md-border-color: var(--border-color) !important;
-  --md-border-hover-color: var(--border-color) !important;
-  --md-border-active-color: var(--border-color) !important;
-  --md-scrollbar-thumb-color: var(--color) !important;
-  --md-scrollbar-thumb-hover-color: var(--color) !important;
-  --md-scrollbar-thumb-active-color: var(--color) !important;
-}
-.custom-preview.detail .md-editor-preview-wrapper {
-  padding: 0 !important;
-}
-.md-editor-preview {
-  line-height: 1.8 !important;
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    border-bottom: none !important;
-    margin-top: 1em !important;
-    padding-bottom: 0 !important;
-  }
-  hr {
-    margin: 1em 0 !important;
-  }
-  :not(pre) > code {
-    font-size: 0.85em !important;
-    word-break: keep-all;
-    border-radius: 0.2em !important;
-    margin-right: 0.15em !important;
-  }
-}
-@media all and (max-width: 1024px) {
-  html {
-    font-size: 14px;
-  }
-}
-@media all and (max-width: 768px) {
-  html {
-    font-size: 1.666vw;
-  }
-}
-@media all and (max-width: 480px) {
-  html {
-    font-size: 3vw;
-  }
-  main {
-    margin-top: 10.667vw;
-  }
 }

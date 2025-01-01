@@ -3,15 +3,15 @@
 import { useState } from 'react'
 
 export default function useCallSnackbar(afterLoad?: () => void) {
-  const [showSnackbar, setShowSnackbar] = useState<boolean>(false)
+  const [isShowSnackbar, setIsShowSnackbar] = useState(false)
 
-  const displaySnackbar = () => {
-    setShowSnackbar(true)
+  const showSnackbar = () => {
+    setIsShowSnackbar(true)
     setTimeout(() => {
-      setShowSnackbar(false)
+      setIsShowSnackbar(false)
       afterLoad?.()
     }, 2000)
   }
 
-  return { showSnackbar, displaySnackbar }
+  return { isShowSnackbar, showSnackbar }
 }

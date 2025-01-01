@@ -1,11 +1,6 @@
-import { Inter } from 'next/font/google'
-import { cookies } from 'next/headers'
-
 import type { Metadata } from 'next'
-
-import '@/app/styles/globals.scss'
-
-const inter = Inter({ subsets: ['latin'] })
+import './styles/globals.scss'
+import SWRConfigContext from './context/SWRConfigContext'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,11 +12,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const mode = cookies().get('mode')
-
   return (
-    <html lang="ko" className={mode?.value === 'light' ? '' : 'dark-mode'}>
-      <body className={inter.className}>{children}</body>
+    <html lang="ko">
+      <body
+        className="bg-[--primary-color] flex min-h-screen flex-col"
+        suppressHydrationWarning={true}
+      >
+        <div id="portal"></div>
+        <SWRConfigContext>{children}</SWRConfigContext>
+      </body>
     </html>
   )
 }
