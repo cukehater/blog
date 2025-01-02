@@ -19,7 +19,7 @@ export default function PostCard({ type, post }: PostCardProps) {
         href={`/${
           type === 'post'
             ? `posts/${post._id.toString()}`
-            : `write?id=${post._id.toString()}&draft=true`
+            : `write?id=${post._id.toString()}`
         }`}
       >
         <h4 className="text-xl font-bold mb-4 line-clamp-2">{title}</h4>
@@ -34,9 +34,7 @@ export default function PostCard({ type, post }: PostCardProps) {
       </div>
 
       <div className="flex items-center justify-between">
-        <p className="text-sm text-neutral-500">
-          {parseDateFormat(regDate.toString())}
-        </p>
+        <p className="text-sm text-neutral-500">{parseDateFormat(regDate)}</p>
         {type === 'draft' && <Button type="button">삭제</Button>}
       </div>
     </article>

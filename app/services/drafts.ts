@@ -57,3 +57,17 @@ export const getDraftById = async (id: string) => {
     await client.close()
   }
 }
+
+export const deleteDraft = async (id: string) => {
+  const client = dbConnection()
+
+  try {
+    const db = (await client.connect()).db(DB_NAME)
+    const result = await db
+      .collection(COLLECTION_NAME)
+      .deleteOne({ _id: new ObjectId(id) })
+    return result
+  } finally {
+    await client.close()
+  }
+}

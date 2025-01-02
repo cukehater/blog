@@ -11,7 +11,6 @@ import '@/app/styles/md-editor.scss'
 import {
   Dispatch,
   SetStateAction,
-  useCallback,
   useEffect,
   useReducer,
   useState
@@ -24,14 +23,21 @@ import ModalConfirm from '@/app/components/ui/ModalConfirm'
 import ModalAlert from '@/app/components/ui/ModalAlert'
 import Snackbar from '@/app/components/ui/Snackbar'
 import useCallSnackbar from '@/app/hooks/useCallSnackbar'
-import useSWR from 'swr'
 
 export default function Page() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
   const postId = searchParams.get('id')
-  const isDraft = searchParams.get('draft') === 'true'
+  const isEdit = searchParams.get('edit') === 'true'
+
+  const [writeData, setWriteData] = useState<Omit<PostType, '_id'>>({
+    title: '',
+    description: '',
+    content: '',
+    regDate: parseKoreaDateFormat(),
+    categories: []
+  })
 
   const [isConfirmModalOpen, toggleConfirmModalOpen] = useReducer(
     (prev) => !prev,
@@ -44,13 +50,14 @@ export default function Page() {
 
   const { isShowSnackbar, showSnackbar } = useCallSnackbar()
 
-  const [writeData, setWriteData] = useState<Omit<PostType, '_id'>>({
-    title: '',
-    description: '',
-    content: '',
-    regDate: parseKoreaDateFormat(),
-    categories: []
-  })
+  const fetchData = async () => {
+    if (!postId) return
+    const { data } = await axios.get(
+      `/api/${isEdit ? 'posts' : 'drafts'}?id=${postId}`
+    )
+    const { _id, ...dataWithoutId } = data?.data
+    setWriteData(dataWithoutId)
+  }
 
   const postValidCheck = () => {
     if (writeData.title.trim() === '') return false
@@ -69,10 +76,9 @@ export default function Page() {
       // 첫 작성일 경우
       const { data } = await axios.post('/api/drafts', writeData)
       const insertedId = data?.data?.toString()
-      router.push(`/write?id=${insertedId}&draft=true`)
+      router.push(`/write?id=${insertedId}`)
     } else {
       // 임시저장 수정
-      console.log(postId)
       await axios.put('/api/drafts', {
         _id: postId,
         ...writeData
@@ -87,9 +93,19 @@ export default function Page() {
       return
     }
 
-    showSnackbar()
+    await axios.post('/api/posts', writeData)
+
+    // 임시저장 글을 발행할 때 임시저장 글 삭제
+    if (postId) {
+      await axios.delete('/api/drafts', { data: { id: postId } })
+    }
+
     router.push('/')
   }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -99,7 +115,7 @@ export default function Page() {
           <Button
             type="button"
             className="flex gap-2 items-center [&_path]:hover:fill-[--accent-color] [&_path]:transition-all"
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/drafts')}
           >
             <ArrowSvg className="w-4 h-4" />
             돌아가기
@@ -117,13 +133,21 @@ export default function Page() {
             defaultValue={writeData.regDate}
           />
 
-          <Button type="button" onClick={handleSave}>
-            임시저장
-          </Button>
+          {isEdit ? (
+            <Button type="button" highlight onClick={toggleConfirmModalOpen}>
+              수정
+            </Button>
+          ) : (
+            <>
+              <Button type="button" onClick={handleSave}>
+                임시저장
+              </Button>
 
-          <Button type="button" highlight onClick={toggleConfirmModalOpen}>
-            발행
-          </Button>
+              <Button type="button" highlight onClick={toggleConfirmModalOpen}>
+                발행
+              </Button>
+            </>
+          )}
         </nav>
       </section>
 

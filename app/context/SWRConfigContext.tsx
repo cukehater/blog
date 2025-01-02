@@ -1,5 +1,6 @@
 'use client'
 
+import axios from 'axios'
 import { SWRConfig } from 'swr'
 
 export default function SWRConfigContext({
@@ -10,7 +11,7 @@ export default function SWRConfigContext({
   return (
     <SWRConfig
       value={{
-        fetcher: (url: string) => fetch(url).then((res) => res.json())
+        fetcher: (url: string) => axios.get(url).then((res) => res.data)
       }}
     >
       {children}

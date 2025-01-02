@@ -1,36 +1,39 @@
 'use client'
 
+import { v4 as uuid } from 'uuid'
 import Button from '@/app/components/ui/Button'
 import CategoryButton from '@/app/components/ui/CategoryButton'
 import ArrowSvg from '@/app/components/ui/svg/ArrowSvg'
 import parseDateFormat from '@/app/utils/parseDateFormat'
 import { MdPreview } from 'md-editor-rt'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import 'md-editor-rt/lib/preview.css'
 import '@/app/styles/md-editor.scss'
+import useSWR from 'swr'
 
 export default function Page() {
   const router = useRouter()
-  const contents =
-    '#### 인용문\n\n> 이것은 인용문입니다. 중요한 내용을 강조할 때 사용합니다.\n\n#### 링크\n\n[Google](https://www.google.com)\n\n#### 이미지\n\n![대체 텍스트](https://via.placeholder.com/150)\n\n---\n\n이것은 수평선입니다. 문서의 섹션을 구분할 때 사용합니다.'
+  const { id } = useParams()
+
+  const { data, isLoading, error } = useSWR(`/api/posts?id=${id}`)
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error</div>
+
+  const { title, regDate, categories, content } = data?.data
 
   return (
     <>
       {/* 제목, 작성자, 작성일, 카테고리, 수정, 삭제 */}
       <section className="mb-10 pb-10 border-b border-[--secondary-color]">
         <hgroup>
-          <h2 className="text-4xl font-bold leading-snug mb-10">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti,
-            in soluta, amet iste quas ipsa consequuntur nihil sit quos fuga
-            facilis reiciendis perferendis laudantium quo nostrum veniam
-            deserunt dolores nisi?
-          </h2>
+          <h2 className="text-4xl font-bold leading-snug mb-10">{title}</h2>
 
           <div className="flex items-center gap-2 justify-between mb-10">
             <div className="flex items-center gap-2">
-              <p>Cuekehater</p> &middot;
-              <p>{parseDateFormat('2024-01-01')}</p>
+              <p>Cukehater</p> &middot;
+              <p>{parseDateFormat(regDate)}</p>
             </div>
 
             <div className="flex items-center gap-2">
@@ -41,8 +44,9 @@ export default function Page() {
         </hgroup>
 
         <div className="flex flex-wrap gap-2">
-          <CategoryButton name="프론트엔드" />
-          <CategoryButton name="프론트엔드" />
+          {categories.map((category: string) => (
+            <CategoryButton key={uuid()} name={category} />
+          ))}
         </div>
       </section>
 
@@ -50,7 +54,7 @@ export default function Page() {
       <section className="mb-20">
         <MdPreview
           editorId="preview-only"
-          modelValue={contents}
+          modelValue={content}
           previewTheme="github"
           language="en-US"
           className="flex-1 custom-preview detail"

@@ -1,4 +1,9 @@
-import { getDraftById, insertDraft, updateDraft } from '@/app/services/drafts'
+import {
+  deleteDraft,
+  getDraftById,
+  insertDraft,
+  updateDraft
+} from '@/app/services/drafts'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
@@ -6,19 +11,26 @@ export async function GET(req: NextRequest) {
   if (!id) return NextResponse.json({ message: 'id가 없습니다.' })
   const result = await getDraftById(id)
 
-  return NextResponse.json({ data: result, message: '임시저장 조회 완료' })
+  return NextResponse.json({ data: result, message: '임시저장 글 조회 완료' })
 }
 
 export async function POST(req: NextRequest) {
   const body = await req.json()
 
   const id = await insertDraft(body)
-  return NextResponse.json({ data: id, message: '임시저장 등록 완료' })
+  return NextResponse.json({ data: id, message: '임시저장 글 등록 완료' })
 }
 
 export async function PUT(req: NextRequest) {
   const body = await req.json()
   const { _id, ...formData } = body
   await updateDraft(_id, formData)
-  return NextResponse.json({ message: '임시저장 수정 완료' })
+  return NextResponse.json({ message: '임시저장 글 수정 완료' })
+}
+
+export async function DELETE(req: NextRequest) {
+  const body = await req.json()
+  const { id } = body
+  await deleteDraft(id)
+  return NextResponse.json({ message: '임시저장 글 삭제 완료' })
 }

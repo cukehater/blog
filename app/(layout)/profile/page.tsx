@@ -1,9 +1,10 @@
 'use client'
 
+import useSWR from 'swr'
 import Avatar from '../../components/ui/Avatar'
 import Button from '../../components/ui/Button'
 import Form from '../../components/ui/Form'
-import useSWR from 'swr'
+import axios from 'axios'
 
 export default function Page() {
   const { data, isLoading, error } = useSWR('/api/profile')
@@ -24,7 +25,6 @@ export default function Page() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
   }
-
   return (
     <section className="w-[540px] mx-auto">
       <div className="flex flex-col items-center gap-4">
