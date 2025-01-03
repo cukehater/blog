@@ -8,11 +8,14 @@ type InputProps = {
   id: string
   type: string
   placeholder: string
-  defaultValue?: string
+  value?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   required?: boolean
 }
 
-type TextareaProps = Omit<InputProps, 'type'>
+type TextareaProps = Omit<InputProps, 'type'> & {
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+}
 
 export default function Form({
   className = '',
@@ -31,7 +34,8 @@ Form.Input = function FormInput({
   type,
   placeholder,
   required,
-  defaultValue
+  onChange,
+  value
 }: InputProps) {
   return (
     <input
@@ -40,7 +44,8 @@ Form.Input = function FormInput({
       className="h-10 pl-4 bg-[--secondary-color] rounded-md w-full"
       placeholder={placeholder}
       required={required}
-      defaultValue={defaultValue}
+      value={value}
+      onChange={onChange}
     />
   )
 }
@@ -49,7 +54,8 @@ Form.Textarea = function FormTextarea({
   id,
   placeholder,
   required,
-  defaultValue
+  value,
+  onChange
 }: TextareaProps) {
   return (
     <textarea
@@ -57,8 +63,9 @@ Form.Textarea = function FormTextarea({
       className="px-4 py-2 bg-[--secondary-color] rounded-md w-full"
       rows={3}
       placeholder={placeholder}
+      value={value}
+      onChange={onChange}
       required={required}
-      defaultValue={defaultValue}
     />
   )
 }

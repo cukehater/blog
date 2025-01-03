@@ -5,7 +5,7 @@ import PostDeleteButton from '@/app/components/ui/PostDeleteButton'
 import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
 import PostEditButton from '@/app/components/ui/PostEditButton'
 import { PostType, PrevOrNextPostType } from '@/app/models/posts'
-import { getBlogTitle } from '@/app/services/profile'
+import { getNickname } from '@/app/services/profile'
 import PostMDPreview from '@/app/components/ui/PostMDPreview'
 import PostNavigation from '@/app/components/ui/PostNavigation'
 
@@ -13,8 +13,8 @@ export default async function Page({ params }: { params: { id: string[] } }) {
   const { id } = await params
   const postId = id[0]
 
-  const blogTitleData = await getBlogTitle()
-  const { blogTitle } = blogTitleData || { blogTitle: '' }
+  const nicknameData = await getNickname()
+  const { nickname } = nicknameData || { nickname: '' }
   const postData = await getPostById(postId)
 
   const prevPost = (await getPrevOrNextPost(
@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: { id: string[] } }) {
 
           <div className="flex items-center gap-2 justify-between mb-10">
             <div className="flex items-center gap-2">
-              <p>{blogTitle}</p> &middot;
+              <p>{nickname}</p> &middot;
               <p>{parseDateFormat(regDate)}</p>
             </div>
 

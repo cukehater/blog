@@ -112,3 +112,29 @@ export const getPrevOrNextPost = async (
     await client.close()
   }
 }
+
+export const getAllCategories = async () => {
+  const client = dbConnection()
+
+  try {
+    const db = client.db(DB_NAME)
+    const collection = db.collection(COLLECTION_NAME)
+    const result = await collection.distinct('categories')
+    return result
+  } finally {
+    await client.close()
+  }
+}
+
+export const getPostsByCategory = async (category: string) => {
+  const client = dbConnection()
+
+  try {
+    const db = client.db(DB_NAME)
+    const collection = db.collection(COLLECTION_NAME)
+    const result = await collection.find().toArray()
+    return result.filter((post) => post.categories.includes(category))
+  } finally {
+    await client.close()
+  }
+}

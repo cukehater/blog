@@ -1,7 +1,11 @@
 import { v4 as uuid } from 'uuid'
 import CategoryButton from '../components/ui/CategoryButton'
 import PostList from '../components/PostList'
-import { getAllPosts } from '../services/posts'
+import {
+  getAllCategories,
+  getAllPosts,
+  getPostsByCategory
+} from '../services/posts'
 import { PostType } from '../models/posts'
 import { getProfile } from '../services/profile'
 import { ProfileType } from '../models/profile'
@@ -13,27 +17,46 @@ import { Suspense } from 'react'
 import Avatar from '../components/ui/Avatar'
 import Link from 'next/link'
 import EmptyPost from '../components/EmptyPost'
+import { headers } from 'next/headers'
+import ProfileLink from '../components/ui/ProfileLink'
 
 export default async function Home() {
-  const categories = ['All', 'Web', 'Mobile', 'AI', 'Design', 'DevOps']
+  const categories = await getAllCategories()
 
-  const posts = (await getAllPosts()) as PostType[]
+  const headerList = await headers()
+  const search = headerList.get('x-search')
+  const searchValue = search ? decodeURIComponent(search.split('=')[1]) : ''
+
+  let posts: PostType[] = []
+
+  if (!search) {
+    posts = (await getAllPosts()) as PostType[]
+  } else {
+    posts = (await getPostsByCategory(searchValue)) as PostType[]
+  }
 
   return (
     <>
       <Hero />
 
       <nav className="flex flex-wrap gap-2 mt-10">
-        {Array.from({ length: 3 }).flatMap(() =>
-          categories.map((category) => (
-            <CategoryButton key={uuid()} name={category} />
-          ))
-        )}
+        <Link href="/">
+          <CategoryButton key={uuid()} name="All" isActive={!searchValue} />
+        </Link>
+        {categories
+          .sort((a, b) => b.localeCompare(a))
+          .map((category) => (
+            <CategoryButton
+              key={uuid()}
+              name={category}
+              isActive={searchValue.toLowerCase() === category.toLowerCase()}
+            />
+          ))}
       </nav>
 
       <p className="text-neutral-400 w-full mb-4 text-sm mt-10">
-        <strong className="text-[--text-color]">{posts.length}</strong>
-        개의 포스트
+        {searchValue || '전체'}{' '}
+        <strong className="text-[--text-color]">{posts.length}</strong>개 포스트
       </p>
 
       <section className="mt-10">
@@ -54,54 +77,56 @@ async function Hero() {
     profileImage,
     blogTitle,
     description,
+    nickname,
     email,
     portfolioUrl,
     githubUrl,
     resumeUrl
   } = profileData
 
-  const nav = [
-    {
-      name: 'E-Mail',
-      icon: <EmailSvg />,
-      href: `mailto:${email}`
-    },
-    {
-      name: 'Github',
-      icon: <GithubSvg />,
-      href: githubUrl
-    },
-    {
-      name: 'Portfolio',
-      icon: <PortfolioSvg />,
-      href: portfolioUrl
-    },
-    {
-      name: 'Resume',
-      icon: <ResumeSvg />,
-      href: resumeUrl
-    }
-  ]
-
   return (
     <Suspense fallback={<HeroSkeleton />}>
       <section className="pb-10 border-b border-[--secondary-color]">
         <div className="flex items-center gap-8">
-          <Avatar size="lg" src={profileImage} alt="cukehater" />
+          {profileImage && (
+            <Avatar size="lg" src={profileImage} alt="cukehater" />
+          )}
           <div>
             <h4 className="text-3xl font-bold">{blogTitle}</h4>
+            <p className="text-lg mt-4">{nickname}</p>
             <p className="text-sm mt-4">{description}</p>
             <nav className="flex gap-3 mt-4">
-              {nav.map((item) => (
-                <Link
-                  key={uuid()}
-                  href={item.href}
-                  className="flex items-center gap-1 [&_path]:hover:fill-[--accent-color-hover] [&_path]:transition-all [&_path]:duration-300 [&>p]:hover:text-[--accent-color-hover] [&>p]:transition-all [&>p]:duration-300"
-                >
-                  <div className="w-4 h-4">{item.icon}</div>
-                  <p className="text-sm text-[--accent-color]">{item.name}</p>
-                </Link>
-              ))}
+              {email && (
+                <ProfileLink
+                  href={`mailto:${email}`}
+                  icon={<EmailSvg />}
+                  name="E-Mail"
+                />
+              )}
+
+              {githubUrl && (
+                <ProfileLink
+                  href={githubUrl}
+                  icon={<GithubSvg />}
+                  name="Github"
+                />
+              )}
+
+              {portfolioUrl && (
+                <ProfileLink
+                  href={portfolioUrl}
+                  icon={<PortfolioSvg />}
+                  name="Portfolio"
+                />
+              )}
+
+              {resumeUrl && (
+                <ProfileLink
+                  href={resumeUrl}
+                  icon={<ResumeSvg />}
+                  name="Resume"
+                />
+              )}
             </nav>
           </div>
         </div>

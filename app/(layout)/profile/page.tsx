@@ -1,34 +1,62 @@
 'use client'
 
-import useSWR from 'swr'
 import Avatar from '../../components/ui/Avatar'
 import Button from '../../components/ui/Button'
 import Form from '../../components/ui/Form'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import useCallSnackbar from '@/app/hooks/useCallSnackbar'
+import ModalPortal from '@/app/components/layout/ModalPortal'
+import Snackbar from '@/app/components/ui/Snackbar'
 
 export default function Page() {
-  const { data, isLoading, error } = useSWR('/api/profile')
+  const { isShowSnackbar, showSnackbar } = useCallSnackbar()
+  const [profile, setProfile] = useState({
+    _id: '',
+    profileImage: '',
+    blogTitle: '',
+    description: '',
+    nickname: '',
+    email: '',
+    portfolioUrl: '',
+    githubUrl: '',
+    resumeUrl: ''
+  })
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error</div>
-
-  const {
-    profileImage,
-    blogTitle,
-    description,
-    email,
-    portfolioUrl,
-    githubUrl,
-    resumeUrl
-  } = data?.data
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const fetchData = async () => {
+    const { data } = await axios.get('/api/profile')
+    setProfile(data.data)
   }
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target
+    setProfile({ ...profile, [id]: value })
+
+    // 일괄 삭제를 감지 못하는 이슈
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      await axios.post('/api/profile', profile)
+      showSnackbar()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
     <section className="w-[540px] mx-auto">
       <div className="flex flex-col items-center gap-4">
-        <Avatar size="xl" src={profileImage} alt="cukehater" />
+        {profile.profileImage && (
+          <Avatar size="xl" src={profile.profileImage} alt="cukehater" />
+        )}
         <Button type="button">프로필 이미지 변경하기</Button>
       </div>
 
@@ -37,47 +65,63 @@ export default function Page() {
           id="blogTitle"
           type="text"
           placeholder="블로그 제목"
-          defaultValue={blogTitle}
+          value={profile?.blogTitle}
+          onChange={handleChange}
+          required
+        />
+        <Form.Input
+          id="nickname"
+          type="text"
+          placeholder="닉네임"
+          value={profile?.nickname}
+          onChange={handleChange}
           required
         />
         <Form.Textarea
           id="description"
           placeholder="간략 소개"
-          defaultValue={description}
+          value={profile?.description}
+          onChange={handleChange}
           required
         />
         <Form.Input
           id="email"
           type="email"
           placeholder="이메일"
-          defaultValue={email}
-          required
+          value={profile?.email}
+          onChange={handleChange}
         />
         <Form.Input
           id="portfolioUrl"
           type="text"
           placeholder="포트폴리오 URL"
-          defaultValue={portfolioUrl}
-          required
+          value={profile?.portfolioUrl}
+          onChange={handleChange}
         />
         <Form.Input
           id="githubUrl"
           type="text"
           placeholder="깃허브 URL"
-          defaultValue={githubUrl}
-          required
+          value={profile?.githubUrl}
+          onChange={handleChange}
         />
         <Form.Input
           id="resumeUrl"
           type="text"
           placeholder="이력서 URL"
-          defaultValue={resumeUrl}
-          required
+          value={profile?.resumeUrl}
+          onChange={handleChange}
         />
         <Button highlight className="w-28 mx-auto" type="submit">
           저장
         </Button>
       </Form>
+
+      {isShowSnackbar && (
+        <ModalPortal>
+          <Snackbar message="프로필 업데이트를 완료했습니다" type="success" />
+        </ModalPortal>
+      )}
     </section>
   )
 }
