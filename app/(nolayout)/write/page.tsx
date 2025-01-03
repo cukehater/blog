@@ -15,7 +15,6 @@ import {
   useReducer,
   useState
 } from 'react'
-import parseKoreaDateFormat from '@/app/utils/parseKoreaDateFormat'
 import { PostType } from '@/app/models/posts'
 import axios from 'axios'
 import ModalPortal from '@/app/components/layout/ModalPortal'
@@ -23,6 +22,7 @@ import ModalConfirm from '@/app/components/ui/ModalConfirm'
 import ModalAlert from '@/app/components/ui/ModalAlert'
 import Snackbar from '@/app/components/ui/Snackbar'
 import useCallSnackbar from '@/app/hooks/useCallSnackbar'
+import getKoreaTimeString from '@/app/utils/getKoreaTimeString'
 
 export default function Page() {
   const router = useRouter()
@@ -35,7 +35,7 @@ export default function Page() {
     title: '',
     description: '',
     content: '',
-    regDate: parseKoreaDateFormat(),
+    regDate: getKoreaTimeString(),
     categories: []
   })
 
@@ -52,9 +52,17 @@ export default function Page() {
 
   const fetchData = async () => {
     if (!postId) return
+
     const { data } = await axios.get(
       `/api/${isEdit ? 'posts' : 'drafts'}?id=${postId}`
     )
+
+    if (!data.data) {
+      window.alert('존재하지 않는 포스트입니다')
+      router.push('/')
+      return
+    }
+
     const { _id, ...dataWithoutId } = data?.data
     setWriteData(dataWithoutId)
   }
@@ -88,19 +96,26 @@ export default function Page() {
   }
 
   const handlePublish = async () => {
-    if (!postValidCheck()) {
-      toggleAlertModalOpen()
-      return
-    }
-
     await axios.post('/api/posts', writeData)
 
-    // 임시저장 글을 발행할 때 임시저장 글 삭제
     if (postId) {
       await axios.delete('/api/drafts', { data: { id: postId } })
     }
 
     router.push('/')
+  }
+
+  const handleUpdate = async () => {
+    await axios.put('/api/posts', { id: postId, ...writeData })
+    router.push('/')
+  }
+
+  const handleValidCheckBeforeConfirm = () => {
+    if (!postValidCheck()) {
+      toggleAlertModalOpen()
+      return
+    }
+    toggleConfirmModalOpen()
   }
 
   useEffect(() => {
@@ -125,16 +140,25 @@ export default function Page() {
             type="date"
             className="text-black text-sm px-2 py-1 rounded-md ml-auto"
             onChange={(e) =>
-              setWriteData((prev) => ({
-                ...prev,
-                regDate: e.target.value
-              }))
+              setWriteData((prev) => {
+                return {
+                  ...prev,
+                  regDate: prev.regDate.replace(
+                    prev.regDate.slice(0, 10),
+                    e.target.value
+                  )
+                }
+              })
             }
-            defaultValue={writeData.regDate}
+            value={writeData.regDate.slice(0, 10)}
           />
 
           {isEdit ? (
-            <Button type="button" highlight onClick={toggleConfirmModalOpen}>
+            <Button
+              type="button"
+              highlight
+              onClick={handleValidCheckBeforeConfirm}
+            >
               수정
             </Button>
           ) : (
@@ -143,7 +167,11 @@ export default function Page() {
                 임시저장
               </Button>
 
-              <Button type="button" highlight onClick={toggleConfirmModalOpen}>
+              <Button
+                type="button"
+                highlight
+                onClick={handleValidCheckBeforeConfirm}
+              >
                 발행
               </Button>
             </>
@@ -164,7 +192,7 @@ export default function Page() {
         />
         <textarea
           className="w-full bg-transparent resize-none px-2"
-          placeholder="게시글에 대한 간략한 내용을 입력해 주세요"
+          placeholder="포스트에 대한 간략한 내용을 입력해 주세요"
           rows={2}
           defaultValue={writeData.description}
           onChange={(e) =>
@@ -193,10 +221,12 @@ export default function Page() {
       {isConfirmModalOpen && (
         <ModalPortal>
           <ModalConfirm
-            title="포스트를 발행하시겠습니까?"
-            confirmText="발행"
+            title={`포스트를 ${isEdit ? '수정' : '발행'}하시겠습니까?`}
+            confirmText={isEdit ? '수정' : '발행'}
             cancelText="취소"
-            onConfirm={handlePublish}
+            onConfirm={() => {
+              isEdit ? handleUpdate() : handlePublish()
+            }}
             onCancel={toggleConfirmModalOpen}
           />
         </ModalPortal>

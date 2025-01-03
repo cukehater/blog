@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid'
 import parseDateFormat from '../utils/parseDateFormat'
 import CategoryButton from './ui/CategoryButton'
 import { PostType } from '../models/posts'
-import Button from './ui/Button'
+import PostDeleteButton from './ui/PostDeleteButton'
 
 type PostCardProps = {
   type: 'draft' | 'post'
@@ -35,7 +35,9 @@ export default function PostCard({ type, post }: PostCardProps) {
 
       <div className="flex items-center justify-between">
         <p className="text-sm text-neutral-500">{parseDateFormat(regDate)}</p>
-        {type === 'draft' && <Button type="button">삭제</Button>}
+        {type === 'draft' && (
+          <PostDeleteButton postId={post._id.toString()} type={type} />
+        )}
       </div>
     </article>
   )

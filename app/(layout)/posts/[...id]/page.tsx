@@ -1,27 +1,32 @@
-'use client'
-
 import { v4 as uuid } from 'uuid'
-import Button from '@/app/components/ui/Button'
 import CategoryButton from '@/app/components/ui/CategoryButton'
-import ArrowSvg from '@/app/components/ui/svg/ArrowSvg'
 import parseDateFormat from '@/app/utils/parseDateFormat'
-import { MdPreview } from 'md-editor-rt'
-import Link from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
-import 'md-editor-rt/lib/preview.css'
-import '@/app/styles/md-editor.scss'
-import useSWR from 'swr'
+import PostDeleteButton from '@/app/components/ui/PostDeleteButton'
+import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
+import PostEditButton from '@/app/components/ui/PostEditButton'
+import { PostType, PrevOrNextPostType } from '@/app/models/posts'
+import { getBlogTitle } from '@/app/services/profile'
+import PostMDPreview from '@/app/components/ui/PostMDPreview'
+import PostNavigation from '@/app/components/ui/PostNavigation'
 
-export default function Page() {
-  const router = useRouter()
-  const { id } = useParams()
+export default async function Page({ params }: { params: { id: string[] } }) {
+  const { id } = await params
+  const postId = id[0]
 
-  const { data, isLoading, error } = useSWR(`/api/posts?id=${id}`)
+  const blogTitleData = await getBlogTitle()
+  const { blogTitle } = blogTitleData || { blogTitle: '' }
+  const postData = await getPostById(postId)
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error</div>
+  const prevPost = (await getPrevOrNextPost(
+    postId,
+    'prev'
+  )) as PrevOrNextPostType
+  const nextPost = (await getPrevOrNextPost(
+    postId,
+    'next'
+  )) as PrevOrNextPostType
 
-  const { title, regDate, categories, content } = data?.data
+  const { title, regDate, categories, content } = postData as PostType
 
   return (
     <>
@@ -32,13 +37,13 @@ export default function Page() {
 
           <div className="flex items-center gap-2 justify-between mb-10">
             <div className="flex items-center gap-2">
-              <p>Cukehater</p> &middot;
+              <p>{blogTitle}</p> &middot;
               <p>{parseDateFormat(regDate)}</p>
             </div>
 
             <div className="flex items-center gap-2">
-              <Button type="button">수정</Button>
-              <Button type="button">삭제</Button>
+              <PostEditButton postId={postId} />
+              <PostDeleteButton postId={postId} type="post" />
             </div>
           </div>
         </hgroup>
@@ -51,64 +56,10 @@ export default function Page() {
       </section>
 
       {/*  콘텐츠 */}
-      <section className="mb-20">
-        <MdPreview
-          editorId="preview-only"
-          modelValue={content}
-          previewTheme="github"
-          language="en-US"
-          className="flex-1 custom-preview detail"
-          theme="dark"
-        />
-      </section>
+      <PostMDPreview content={content} />
 
       {/* 이전 글, 다음 글 네비게이션 */}
-      <nav className="flex justify-between items-center">
-        <div className="w-40 sm:w-56">
-          <Link
-            href={`/`}
-            className="flex items-center gap-1 opacity-85 hover:opacity-100 transition-opacity"
-          >
-            <ArrowSvg className="w-7 h-7 mr-2" />
-            <div className="flex-1">
-              <p className="text-xs mb-1">다음 글</p>
-              <p className="line-clamp-2 leading-5">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Voluptas velit ullam eius quia animi molestias placeat
-                architecto unde iusto ab aliquid, fugiat dolore maxime
-                cupiditate illum assumenda pariatur eaque aut.
-              </p>
-            </div>
-          </Link>
-        </div>
-
-        <Button
-          type="button"
-          highlight
-          className="text-base px-6"
-          onClick={() => router.push('/')}
-        >
-          목록으로
-        </Button>
-
-        <div className="w-40 sm:w-56">
-          <Link
-            href={`/`}
-            className="text-right flex items-center gap-1 opacity-85 hover:opacity-100 transition-opacity"
-          >
-            <div className="flex-1">
-              <p className="text-xs mb-1">이전 글</p>
-              <p className="line-clamp-2 leading-5">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque
-                nemo natus placeat excepturi nobis quaerat optio facilis quam
-                quae corrupti. Obcaecati non vitae velit quisquam, atque at?
-                Dolores, hic impedit?
-              </p>
-            </div>
-            <ArrowSvg className="w-7 h-7 ml-2 rotate-180" />
-          </Link>
-        </div>
-      </nav>
+      <PostNavigation prevPost={prevPost} nextPost={nextPost} />
     </>
   )
 }

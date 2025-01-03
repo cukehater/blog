@@ -8,3 +8,10 @@ export type PostType = {
   regDate: string
   categories: string[]
 }
+
+export type PrevOrNextPostType =
+  | {
+      _id: string
+      title: string
+    }
+  | undefined

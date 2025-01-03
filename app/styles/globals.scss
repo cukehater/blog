@@ -18,3 +18,19 @@
   padding: 0;
   outline: none;
 }
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 1.666vw;
+  }
+}
+@media (max-width: 480px) {
+  html {
+    font-size: 3vw;
+  }
+}
