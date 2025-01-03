@@ -1,15 +1,18 @@
 import { v4 as uuid } from 'uuid'
-import CategoryButton from '@/app/components/ui/CategoryButton'
+import CategoryButton from '@/app/components/CategoryButton'
 import parseDateFormat from '@/app/utils/parseDateFormat'
-import PostDeleteButton from '@/app/components/ui/PostDeleteButton'
+import PostDeleteButton from '@/app/components/PostDeleteButton'
 import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
-import PostEditButton from '@/app/components/ui/PostEditButton'
+import PostEditButton from '@/app/components/PostEditButton'
 import { PostType, PrevOrNextPostType } from '@/app/models/posts'
 import { getNickname } from '@/app/services/profile'
-import PostMDPreview from '@/app/components/ui/PostMDPreview'
-import PostNavigation from '@/app/components/ui/PostNavigation'
+import PostMDPreview from '@/app/components/PostMDPreview'
+import PostNavigation from '@/app/components/PostNavigation'
+import { auth } from '@/auth'
 
 export default async function Page({ params }: { params: { id: string[] } }) {
+  const session = await auth()
+
   const { id } = await params
   const postId = id[0]
 
@@ -41,10 +44,12 @@ export default async function Page({ params }: { params: { id: string[] } }) {
               <p>{parseDateFormat(regDate)}</p>
             </div>
 
-            <div className="flex items-center gap-2">
-              <PostEditButton postId={postId} />
-              <PostDeleteButton postId={postId} type="post" />
-            </div>
+            {session && (
+              <div className="flex items-center gap-2">
+                <PostEditButton postId={postId} />
+                <PostDeleteButton postId={postId} type="post" />
+              </div>
+            )}
           </div>
         </hgroup>
 

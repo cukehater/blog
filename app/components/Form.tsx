@@ -60,8 +60,8 @@ Form.Textarea = function FormTextarea({
   return (
     <textarea
       id={id}
-      className="px-4 py-2 bg-[--secondary-color] rounded-md w-full"
-      rows={3}
+      className="px-4 py-2 bg-[--secondary-color] rounded-md w-full resize-none"
+      rows={4}
       placeholder={placeholder}
       value={value}
       onChange={onChange}

@@ -1,13 +1,13 @@
 'use client'
 
-import Avatar from '../../components/ui/Avatar'
-import Button from '../../components/ui/Button'
-import Form from '../../components/ui/Form'
+import Avatar from '../../components/Avatar'
+import Button from '../../components/Button'
+import Form from '../../components/Form'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import useCallSnackbar from '@/app/hooks/useCallSnackbar'
 import ModalPortal from '@/app/components/layout/ModalPortal'
-import Snackbar from '@/app/components/ui/Snackbar'
+import Snackbar from '@/app/components/Snackbar'
 
 export default function Page() {
   const { isShowSnackbar, showSnackbar } = useCallSnackbar()
@@ -52,7 +52,7 @@ export default function Page() {
   }, [])
 
   return (
-    <section className="w-[540px] mx-auto">
+    <section className="max-w-md mx-auto px-4 md:px-0">
       <div className="flex flex-col items-center gap-4">
         {profile.profileImage && (
           <Avatar size="xl" src={profile.profileImage} alt="cukehater" />

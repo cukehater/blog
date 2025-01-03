@@ -1,7 +1,7 @@
 'use client'
 
 import { useReducer } from 'react'
-import ModalPortal from '../layout/ModalPortal'
+import ModalPortal from './layout/ModalPortal'
 import Button from './Button'
 import ModalConfirm from './ModalConfirm'
 import axios from 'axios'

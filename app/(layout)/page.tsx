@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid'
-import CategoryButton from '../components/ui/CategoryButton'
+import CategoryButton from '../components/CategoryButton'
 import PostList from '../components/PostList'
 import {
   getAllCategories,
@@ -9,16 +9,16 @@ import {
 import { PostType } from '../models/posts'
 import { getProfile } from '../services/profile'
 import { ProfileType } from '../models/profile'
-import EmailSvg from '../components/ui/svg/EmailSvg'
-import GithubSvg from '../components/ui/svg/GithubSvg'
-import PortfolioSvg from '../components/ui/svg/PortfolioSvg'
-import ResumeSvg from '../components/ui/svg/ResumeSvg'
+import EmailSvg from '../components/svg/EmailSvg'
+import GithubSvg from '../components/svg/GithubSvg'
+import PortfolioSvg from '../components/svg/PortfolioSvg'
+import ResumeSvg from '../components/svg/ResumeSvg'
 import { Suspense } from 'react'
-import Avatar from '../components/ui/Avatar'
+import Avatar from '../components/Avatar'
 import Link from 'next/link'
 import EmptyPost from '../components/EmptyPost'
 import { headers } from 'next/headers'
-import ProfileLink from '../components/ui/ProfileLink'
+import ProfileLink from '../components/ProfileLink'
 
 export default async function Home() {
   const categories = await getAllCategories()
@@ -93,7 +93,7 @@ async function Hero() {
           )}
           <div>
             <h4 className="text-3xl font-bold">{blogTitle}</h4>
-            <p className="text-lg mt-4">{nickname}</p>
+            <p className="text-lg font-medium mt-4">{nickname}</p>
             <p className="text-sm mt-4">{description}</p>
             <nav className="flex gap-3 mt-4">
               {email && (
