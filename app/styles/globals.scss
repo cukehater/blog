@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  ul,
+  ol {
+    list-style: revert;
+  }
+}
+
 :root {
   --primary-color: #12131f;
   --secondary-color: #22243a;
@@ -26,11 +33,11 @@
 }
 @media (max-width: 768px) {
   html {
-    font-size: 2.25vw;
+    font-size: 2.75vw;
   }
 }
 @media (max-width: 480px) {
   html {
-    font-size: 2.75vw;
+    font-size: 3.5vw;
   }
 }

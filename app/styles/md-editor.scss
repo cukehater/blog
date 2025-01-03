@@ -17,7 +17,7 @@
   padding: 0 !important;
 }
 .md-editor-preview {
-  line-height: 1.8 !important;
+  line-height: 1.5 !important;
   h1,
   h2,
   h3,
@@ -38,9 +38,61 @@
     border-radius: 0.2em !important;
     margin-right: 0.15em !important;
   }
+  blockquote {
+    --md-theme-quote-border: 0.25em solid var(--accent-color) !important;
+  }
 }
-
+.md-editor-preview ul.contains-task-list {
+  padding-left: 1rem;
+}
+.md-editor-preview ol .task-list-item,
+.md-editor-preview ul .task-list-item {
+  padding-left: 0.5rem;
+  input {
+    transform: translateY(0.1rem);
+  }
+}
 svg.md-editor-icon {
   width: 1.5em;
   height: 1.5em;
+}
+
+@media (max-width: 1024px) {
+  .md-editor-preview {
+    font-size: 1rem;
+  }
+  .md-editor-preview .md-editor-code pre code {
+    font-size: 0.8rem;
+  }
+  div.github-theme p,
+  div.github-theme blockquote,
+  div.github-theme ul,
+  div.github-theme ol,
+  div.github-theme dl,
+  div.github-theme table,
+  div.github-theme pre,
+  div.github-theme details,
+  div.github-theme h1,
+  div.github-theme h2,
+  div.github-theme h3,
+  div.github-theme h4,
+  div.github-theme h5,
+  div.github-theme h6 {
+    margin-bottom: 0.75rem !important;
+  }
+  .md-editor-preview .md-editor-code .md-editor-code-head {
+    font-size: 0.7rem;
+  }
+  .md-editor-preview ul.contains-task-list {
+    padding-left: 1.5rem;
+  }
+  .md-editor-preview ol .task-list-item,
+  .md-editor-preview ul .task-list-item {
+    padding-left: 0rem;
+    input {
+      width: 1rem;
+      height: 1rem;
+      transform: translateY(0.2rem);
+    }
+  }
 }

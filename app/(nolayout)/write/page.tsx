@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid'
 import Button from '@/app/components/Button'
 import CategoryButton from '@/app/components/CategoryButton'
 import ArrowSvg from '@/app/components/svg/ArrowSvg'
-import { MdEditor } from 'md-editor-rt'
+import { ExposeParam, MdEditor } from 'md-editor-rt'
 import { useRouter, useSearchParams } from 'next/navigation'
 import 'md-editor-rt/lib/style.css'
 import '@/app/styles/md-editor.scss'
@@ -13,6 +13,7 @@ import {
   SetStateAction,
   useEffect,
   useReducer,
+  useRef,
   useState
 } from 'react'
 import { PostType } from '@/app/models/posts'
@@ -126,7 +127,7 @@ export default function Page() {
     <div className="flex flex-col min-h-screen">
       {/* 뒤로가기, 임시저장, 발행 */}
       <section className="bg-[--tertiary-color] flex items-center justify-between p-4">
-        <nav className="flex items-center gap-2 w-full">
+        <nav className="flex items-center w-full gap-2">
           <Button
             type="button"
             className="flex gap-2 items-center [&_path]:hover:fill-[--accent-color] [&_path]:transition-all"
@@ -138,7 +139,7 @@ export default function Page() {
 
           <input
             type="date"
-            className="text-black text-sm px-2 py-1 rounded-md ml-auto"
+            className="px-2 py-1 ml-auto text-sm text-black rounded-md"
             onChange={(e) =>
               setWriteData((prev) => {
                 return {
@@ -180,7 +181,7 @@ export default function Page() {
       </section>
 
       {/* 제목, 내용 */}
-      <section className="pt-4 px-4">
+      <section className="px-4 pt-4">
         <input
           type="text"
           className="w-full text-2xl bg-transparent mb-4 font-semibold border-b-4 border-[var(--secondary-color)] pb-4 px-2"
@@ -191,7 +192,7 @@ export default function Page() {
           }
         />
         <textarea
-          className="w-full bg-transparent resize-none px-2"
+          className="w-full px-2 bg-transparent resize-none"
           placeholder="포스트에 대한 간략한 내용을 입력해 주세요"
           rows={2}
           defaultValue={writeData.description}
@@ -298,7 +299,7 @@ function CategoryInput({
   }
 
   return (
-    <section className="flex flex-wrap gap-2 py-4 px-6">
+    <section className="flex flex-wrap gap-2 px-6 py-4">
       {categories.map((category) => (
         <CategoryButton
           key={uuid()}
@@ -308,7 +309,7 @@ function CategoryInput({
       ))}
       <input
         type="text"
-        className="bg-transparent w-40 block"
+        className="block w-40 bg-transparent"
         placeholder="태그를 입력해 주세요"
         onKeyUp={handleKeyUp}
         onBlur={handleBlur}
@@ -328,12 +329,34 @@ function Editor({
   setWriteData: Dispatch<SetStateAction<Omit<PostType, '_id'>>>
   onSave: () => void
 }) {
+  const editorRef = useRef<ExposeParam>(null)
+  const [width, setWidth] = useState(0)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   const handleContentChange = (value: string) => {
     setWriteData((prev) => ({ ...prev, content: value }))
   }
 
-  return (
+  useEffect(() => {
+    setWidth(window.innerWidth)
+
+    const handleWindowResize = () => setWidth(window.innerWidth)
+    window.addEventListener('resize', handleWindowResize)
+
+    return () => window.removeEventListener('resize', handleWindowResize)
+  }, [])
+
+  useEffect(() => {
+    editorRef.current?.togglePreview(width > 480)
+  }, [width])
+
+  return isMounted ? (
     <MdEditor
+      ref={editorRef}
       language="en-US"
       className="flex-1"
       modelValue={content}
@@ -357,7 +380,8 @@ function Editor({
         }
       }
       theme="dark"
+      preview={false}
       footers={['markdownTotal']}
     />
-  )
+  ) : null
 }

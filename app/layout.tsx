@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './styles/globals.scss'
 import SWRConfigContext from './context/SWRConfigContext'
+import { Suspense } from 'react'
+import Loading from '@/loading'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +21,9 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <div id="portal"></div>
-        <SWRConfigContext>{children}</SWRConfigContext>
+        <Suspense fallback={<Loading />}>
+          <SWRConfigContext>{children}</SWRConfigContext>
+        </Suspense>
       </body>
     </html>
   )

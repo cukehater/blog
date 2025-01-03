@@ -9,36 +9,32 @@ import { getNickname } from '@/app/services/profile'
 import PostMDPreview from '@/app/components/PostMDPreview'
 import PostNavigation from '@/app/components/PostNavigation'
 import { auth } from '@/auth'
+import { Suspense } from 'react'
 
-export default async function Page({ params }: { params: { id: string[] } }) {
+type Params = Promise<{ id: string }>
+
+export default async function Page({ params }: { params: Params }) {
   const session = await auth()
 
   const { id } = await params
-  const postId = id[0]
 
   const nicknameData = await getNickname()
   const { nickname } = nicknameData || { nickname: '' }
-  const postData = await getPostById(postId)
+  const postData = await getPostById(id)
 
-  const prevPost = (await getPrevOrNextPost(
-    postId,
-    'prev'
-  )) as PrevOrNextPostType
-  const nextPost = (await getPrevOrNextPost(
-    postId,
-    'next'
-  )) as PrevOrNextPostType
+  const prevPost = (await getPrevOrNextPost(id, 'prev')) as PrevOrNextPostType
+  const nextPost = (await getPrevOrNextPost(id, 'next')) as PrevOrNextPostType
 
   const { title, regDate, categories, content } = postData as PostType
 
   return (
     <>
       {/* 제목, 작성자, 작성일, 카테고리, 수정, 삭제 */}
-      <section className="mb-10 pb-10 border-b border-[--secondary-color]">
+      <section className="mb-6 pb-6 border-b border-[--secondary-color]">
         <hgroup>
-          <h2 className="text-4xl font-bold leading-snug mb-10">{title}</h2>
+          <h2 className="mb-6 text-4xl font-bold leading-snug">{title}</h2>
 
-          <div className="flex items-center gap-2 justify-between mb-10">
+          <div className="flex items-center justify-between gap-2 mb-6">
             <div className="flex items-center gap-2">
               <p>{nickname}</p> &middot;
               <p>{parseDateFormat(regDate)}</p>
@@ -46,8 +42,8 @@ export default async function Page({ params }: { params: { id: string[] } }) {
 
             {session && (
               <div className="flex items-center gap-2">
-                <PostEditButton postId={postId} />
-                <PostDeleteButton postId={postId} type="post" />
+                <PostEditButton postId={id} />
+                <PostDeleteButton postId={id} type="post" />
               </div>
             )}
           </div>
