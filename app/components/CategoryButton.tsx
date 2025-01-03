@@ -27,7 +27,7 @@ export default function CategoryButton({
         if (onRemoveCategory) {
           onRemoveCategory(name)
         } else {
-          router.push(`/?searchs=${name}`)
+          router.push(`/?keyword=${name}`)
         }
       }}
     >

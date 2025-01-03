@@ -25,14 +25,16 @@ export default async function Home() {
 
   const headerList = await headers()
   const search = headerList.get('x-search')
-  const searchValue = search ? decodeURIComponent(search.split('=')[1]) : ''
+
+  const keyword = search ? new URLSearchParams(search).get('keyword') : ''
+  console.log('keyword', keyword)
 
   let posts: PostType[] = []
 
-  if (!search) {
+  if (!keyword) {
     posts = (await getAllPosts()) as PostType[]
   } else {
-    posts = (await getPostsByCategory(searchValue)) as PostType[]
+    posts = (await getPostsByCategory(keyword)) as PostType[]
   }
 
   return (
@@ -41,7 +43,7 @@ export default async function Home() {
 
       <nav className="flex flex-wrap gap-2 mt-10">
         <Link href="/">
-          <CategoryButton key={uuid()} name="All" isActive={!searchValue} />
+          <CategoryButton key={uuid()} name="All" isActive={!keyword} />
         </Link>
         {categories
           .sort((a, b) => b.localeCompare(a))
@@ -49,13 +51,13 @@ export default async function Home() {
             <CategoryButton
               key={uuid()}
               name={category}
-              isActive={searchValue.toLowerCase() === category.toLowerCase()}
+              isActive={keyword?.toLowerCase() === category.toLowerCase()}
             />
           ))}
       </nav>
 
-      <p className="text-neutral-400 w-full mb-4 text-sm mt-10">
-        {searchValue || '전체'}{' '}
+      <p className="w-full mt-10 mb-4 text-sm text-neutral-400">
+        {keyword || '전체'}{' '}
         <strong className="text-[--text-color]">{posts.length}</strong>개 포스트
       </p>
 
@@ -93,8 +95,8 @@ async function Hero() {
           )}
           <div>
             <h4 className="text-3xl font-bold">{blogTitle}</h4>
-            <p className="text-lg font-medium mt-4">{nickname}</p>
-            <p className="text-sm mt-4">{description}</p>
+            <p className="mt-4 text-lg font-medium">{nickname}</p>
+            <p className="mt-4 text-sm">{description}</p>
             <nav className="flex gap-3 mt-4">
               {email && (
                 <ProfileLink
@@ -137,7 +139,7 @@ async function Hero() {
 
 function HeroSkeleton() {
   return (
-    <section className="mt-20 pb-10">
+    <section className="pb-10 mt-20">
       <div className="flex items-center gap-8">
         <div className="w-32 h-32 bg-[--secondary-color] rounded-full animate-pulse"></div>
         <div>

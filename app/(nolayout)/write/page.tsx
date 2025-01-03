@@ -277,7 +277,7 @@ function CategoryInput({
     if (e.key === 'Enter' && checkValid(value)) {
       setWriteData((prev) => ({
         ...prev,
-        categories: [...prev.categories, value]
+        categories: [...prev.categories, value.trim()]
       }))
     }
   }
@@ -286,7 +286,7 @@ function CategoryInput({
     if (checkValid(value)) {
       setWriteData((prev) => ({
         ...prev,
-        categories: [...prev.categories, value]
+        categories: [...prev.categories, value.trim()]
       }))
     }
   }
