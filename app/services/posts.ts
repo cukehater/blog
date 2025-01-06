@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { PostType } from '../models/posts'
-import dbConnection from '../utils/dbComnnet'
+import dbConnection from '../utils/dbConnection'
 
 const DB_NAME = 'blog'
 const COLLECTION_NAME = 'posts'

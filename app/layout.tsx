@@ -21,9 +21,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <div id="portal"></div>
-        <Suspense fallback={<Loading />}>
-          <SWRConfigContext>{children}</SWRConfigContext>
-        </Suspense>
+        <SWRConfigContext>{children}</SWRConfigContext>
       </body>
     </html>
   )

@@ -27,7 +27,6 @@ export default async function Home() {
   const search = headerList.get('x-search')
 
   const keyword = search ? new URLSearchParams(search).get('keyword') : ''
-  console.log('keyword', keyword)
 
   let posts: PostType[] = []
 

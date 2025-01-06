@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { ProfileType } from '../models/profile'
-import dbConnection from '../utils/dbComnnet'
+import dbConnection from '../utils/dbConnection'
 import { NextResponse } from 'next/server'
 
 const DB_NAME = 'blog'

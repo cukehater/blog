@@ -1,5 +1,5 @@
 import { PostType } from '@/app/models/posts'
-import dbConnection from '../utils/dbComnnet'
+import dbConnection from '../utils/dbConnection'
 import { ObjectId } from 'mongodb'
 
 const DB_NAME = 'blog'

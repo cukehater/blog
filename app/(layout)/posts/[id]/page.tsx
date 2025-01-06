@@ -9,7 +9,6 @@ import { getNickname } from '@/app/services/profile'
 import PostMDPreview from '@/app/components/PostMDPreview'
 import PostNavigation from '@/app/components/PostNavigation'
 import { auth } from '@/auth'
-import { Suspense } from 'react'
 
 type Params = Promise<{ id: string }>
 
