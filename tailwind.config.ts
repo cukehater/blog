@@ -7,17 +7,17 @@ export default {
     './app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
+    screens: {
+      sm: '480px',
+      md: '768px',
+      lg: '1024px'
+    },
     extend: {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)'
       }
     }
-  },
-  screens: {
-    sm: '480px',
-    md: '768px',
-    lg: '1024px'
   },
   plugins: []
 } satisfies Config
