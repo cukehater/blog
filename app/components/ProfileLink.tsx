@@ -10,6 +10,7 @@ export default function ProfileLink({ href, icon, name }: Props) {
   return (
     <Link
       href={href}
+      target="_blank"
       className="flex items-center gap-1 [&_path]:hover:fill-[--accent-color-hover] [&_path]:transition-all [&_path]:duration-300 [&>p]:hover:text-[--accent-color-hover] [&>p]:transition-all [&>p]:duration-300"
     >
       <div className="w-4 h-4">{icon}</div>

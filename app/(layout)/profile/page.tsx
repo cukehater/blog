@@ -8,6 +8,9 @@ import { useEffect, useState } from 'react'
 import useCallSnackbar from '@/app/hooks/useCallSnackbar'
 import ModalPortal from '@/app/components/layout/ModalPortal'
 import Snackbar from '@/app/components/Snackbar'
+import addTimeToFileName from '@/app/utils/addTimeToFileName'
+import { createSupabaseClient } from '@/app/utils/createSupabaseClient'
+import { ProfileType } from '@/app/models/profile'
 
 export default function Page() {
   const { isShowSnackbar, showSnackbar } = useCallSnackbar()
@@ -33,8 +36,6 @@ export default function Page() {
   ) => {
     const { id, value } = e.target
     setProfile({ ...profile, [id]: value })
-
-    // 일괄 삭제를 감지 못하는 이슈
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,14 +53,8 @@ export default function Page() {
   }, [])
 
   return (
-    <section className="max-w-md mx-auto px-4 md:px-0">
-      <div className="flex flex-col items-center gap-4">
-        {profile.profileImage && (
-          <Avatar size="xl" src={profile.profileImage} alt="cukehater" />
-        )}
-        <Button type="button">프로필 이미지 변경하기</Button>
-      </div>
-
+    <section className="max-w-md mx-auto px-0">
+      <ProfileImage profile={profile} setProfile={setProfile} />
       <Form className="mt-10" onSubmit={handleSubmit}>
         <Form.Input
           id="blogTitle"
@@ -123,5 +118,72 @@ export default function Page() {
         </ModalPortal>
       )}
     </section>
+  )
+}
+
+const ProfileImage = ({
+  profile,
+  setProfile
+}: {
+  profile: ProfileType
+  setProfile: (profile: ProfileType) => void
+}) => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setIsLoading(true)
+
+    const fileName = addTimeToFileName(file.name)
+    await createSupabaseClient.storage
+      .from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME!)
+      .upload(fileName, file)
+
+    const {
+      data: { publicUrl }
+    } = createSupabaseClient.storage
+      .from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME!)
+      .getPublicUrl(fileName)
+
+    setIsLoading(false)
+    setProfile({
+      ...profile,
+      profileImage: publicUrl
+    })
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      {isLoading ? (
+        <Button type="button" className="!bg-green-500 !text-white">
+          업로드 중..
+        </Button>
+      ) : (
+        <>
+          {profile.profileImage && (
+            <Avatar size="xl" src={profile.profileImage} alt="cukehater" />
+          )}
+          <Button
+            type="button"
+            onClick={() => {
+              document.getElementById('profileImageInput')?.click()
+            }}
+          >
+            {profile.profileImage
+              ? '프로필 이미지 변경하기'
+              : '프로필 이미지 업로드하기'}
+          </Button>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+            id="profileImageInput"
+          />
+        </>
+      )}
+    </div>
   )
 }

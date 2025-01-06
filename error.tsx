@@ -10,7 +10,7 @@ interface ErrorProps {
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
     // 에러를 로깅하는 서비스로 전송할 수 있습니다
-    console.error('Error:', error)
+    console.error(error)
   }, [error])
 
   return (

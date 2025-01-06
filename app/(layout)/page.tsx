@@ -88,15 +88,15 @@ async function Hero() {
   return (
     <Suspense fallback={<HeroSkeleton />}>
       <section className="pb-10 border-b border-[--secondary-color]">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-8 sm:flex-row flex-col text-center sm:text-left">
           {profileImage && (
-            <Avatar size="lg" src={profileImage} alt="cukehater" />
+            <Avatar size="xl" src={profileImage} alt="cukehater" />
           )}
           <div>
             <h4 className="text-3xl font-bold">{blogTitle}</h4>
             <p className="mt-4 text-lg font-medium">{nickname}</p>
             <p className="mt-4 text-sm">{description}</p>
-            <nav className="flex gap-3 mt-4">
+            <nav className="flex gap-3 mt-4 justify-center sm:justify-start">
               {email && (
                 <ProfileLink
                   href={`mailto:${email}`}

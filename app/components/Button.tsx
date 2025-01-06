@@ -3,7 +3,7 @@ type Props = {
   className?: string
   children: React.ReactNode
   onClick?: () => void
-  type: 'button' | 'submit' | 'reset'
+  type: 'button' | 'submit'
 }
 
 export default function Button({
