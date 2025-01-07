@@ -52,6 +52,10 @@
     transform: translateY(0.1rem);
   }
 }
+.md-editor-preview ol,
+.md-editor-preview ul {
+  padding-left: 1em;
+}
 svg.md-editor-icon {
   width: 1.5em;
   height: 1.5em;

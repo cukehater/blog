@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { v4 as uuid } from 'uuid'
@@ -19,7 +20,16 @@ import {
   getAllPosts,
   getPostsByCategory
 } from '../services/posts'
-import { getProfile } from '../services/profile'
+import { getBlogTitle, getProfile } from '../services/profile'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [blogTitle, posts] = await Promise.all([getBlogTitle(), getAllPosts()])
+
+  return {
+    title: blogTitle?.blogTitle,
+    description: posts?.map((post) => post.description).join(' | ')
+  }
+}
 
 async function Hero() {
   const profileData = (await getProfile()) as unknown as ProfileType
@@ -85,20 +95,19 @@ async function Hero() {
 }
 
 export default async function Home() {
-  const categories = await getAllCategories()
+  const [categories, headerList] = await Promise.all([
+    getAllCategories(),
+    headers()
+  ])
 
-  const headerList = await headers()
   const search = headerList.get('x-search')
-
   const keyword = search ? new URLSearchParams(search).get('keyword') : ''
 
-  let posts: PostType[] = []
+  const posts = (await (keyword
+    ? getPostsByCategory(keyword)
+    : getAllPosts())) as PostType[]
 
-  if (!keyword) {
-    posts = (await getAllPosts()) as PostType[]
-  } else {
-    posts = (await getPostsByCategory(keyword)) as PostType[]
-  }
+  const sortedCategories = categories.sort((a, b) => b.localeCompare(a))
 
   return (
     <>
@@ -108,15 +117,13 @@ export default async function Home() {
         <Link href="/">
           <CategoryButton key={uuid()} name="All" isActive={!keyword} />
         </Link>
-        {categories
-          .sort((a, b) => b.localeCompare(a))
-          .map((category) => (
-            <CategoryButton
-              key={uuid()}
-              name={category}
-              isActive={keyword?.toLowerCase() === category.toLowerCase()}
-            />
-          ))}
+        {sortedCategories.map((category) => (
+          <CategoryButton
+            key={uuid()}
+            name={category}
+            isActive={keyword?.toLowerCase() === category.toLowerCase()}
+          />
+        ))}
       </nav>
 
       <p className="w-full mt-10 mb-4 text-sm text-neutral-400">
