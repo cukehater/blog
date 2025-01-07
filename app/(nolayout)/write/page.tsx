@@ -29,6 +29,7 @@ import { PostType } from '@/app/models/posts'
 
 import ModalPortal from '@/app/components/layout/ModalPortal'
 
+import { createSupabaseClient } from '@/app/utils/createSupabaseClient'
 import getKoreaTimeString from '@/app/utils/getKoreaTimeString'
 
 function CategoryInput({
@@ -138,24 +139,29 @@ function Editor({
       className="flex-1"
       modelValue={content}
       onChange={handleContentChange}
-      onSave={() => {
-        onSave()
-        // displaySnackbar()
+      onSave={onSave}
+      onUploadImg={async (
+        files: File[],
+        callback: (urls: string[]) => void
+      ) => {
+        const uploadPromises = files.map(async (file) => {
+          await createSupabaseClient.storage
+            .from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME!)
+            .upload(`posts/${file.name}`, file)
+
+          const {
+            data: { publicUrl }
+          } = createSupabaseClient.storage
+            .from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME!)
+            .getPublicUrl(`posts/${file.name}`)
+
+          return publicUrl
+        })
+
+        const uploadedUrls = await Promise.all(uploadPromises)
+
+        callback(uploadedUrls)
       }}
-      onUploadImg={async () =>
-        // files: File[],
-        // callback: (urls: string[]) => void
-        {
-          // const uploadPromises = files.map(async (file) => {
-          //   const { data } = await axios.get(
-          //     `/api/upload?file=${file.name}&dir=posts`
-          //   )
-          //   return uploadToS3(data, file.name, file, 'posts/')
-          // })
-          // const uploadedUrls = await Promise.all(uploadPromises)
-          // callback(uploadedUrls)
-        }
-      }
       theme="dark"
       preview={false}
       footers={['markdownTotal']}

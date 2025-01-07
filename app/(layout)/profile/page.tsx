@@ -35,13 +35,13 @@ function ProfileImage({
     const fileName = addTimeToFileName(file.name)
     await createSupabaseClient.storage
       .from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME!)
-      .upload(fileName, file)
+      .upload(`profile-images/${fileName}`, file)
 
     const {
       data: { publicUrl }
     } = createSupabaseClient.storage
       .from(process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME!)
-      .getPublicUrl(fileName)
+      .getPublicUrl(`profile-images/${fileName}`)
 
     setIsLoading(false)
     setProfile({
