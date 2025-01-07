@@ -1,6 +1,6 @@
-import Inner from '../components/layout/Inner'
-import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
+import Header from '../components/layout/Header'
+import Inner from '../components/layout/Inner'
 
 export default async function RootLayout({
   children

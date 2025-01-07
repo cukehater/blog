@@ -1,14 +1,16 @@
 import { v4 as uuid } from 'uuid'
+
 import CategoryButton from '@/app/components/CategoryButton'
-import parseDateFormat from '@/app/utils/parseDateFormat'
 import PostDeleteButton from '@/app/components/PostDeleteButton'
-import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
 import PostEditButton from '@/app/components/PostEditButton'
-import { PostType, PrevOrNextPostType } from '@/app/models/posts'
-import { getNickname } from '@/app/services/profile'
 import PostMDPreview from '@/app/components/PostMDPreview'
 import PostNavigation from '@/app/components/PostNavigation'
+import { PostType, PrevOrNextPostType } from '@/app/models/posts'
+import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
+import { getNickname } from '@/app/services/profile'
 import { auth } from '@/auth'
+
+import parseDateFormat from '@/app/utils/parseDateFormat'
 
 type Params = Promise<{ id: string }>
 

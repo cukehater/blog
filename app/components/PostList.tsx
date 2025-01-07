@@ -1,5 +1,7 @@
 import { v4 as uuid } from 'uuid'
+
 import { PostType } from '../models/posts'
+
 import PostCard from './PostCard'
 
 type PostListProps = {

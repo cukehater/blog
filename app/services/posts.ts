@@ -1,5 +1,7 @@
 import { ObjectId } from 'mongodb'
+
 import { PostType } from '../models/posts'
+
 import dbConnection from '../utils/dbConnection'
 
 const DB_NAME = 'blog'
@@ -106,8 +108,10 @@ export const getPrevOrNextPost = async (
       return
     }
 
-    const { _id, title } = result[0]
-    return { _id: _id.toString(), title }
+    const { _id: resultId, title } = result[0]
+
+    // eslint-disable-next-line consistent-return
+    return { _id: resultId.toString(), title }
   } finally {
     await client.close()
   }

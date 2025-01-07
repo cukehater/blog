@@ -1,5 +1,6 @@
-import Loading from '@/loading'
 import { Suspense } from 'react'
+
+import Loading from '@/loading'
 
 export default async function RootLayout({
   children

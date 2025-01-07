@@ -1,10 +1,11 @@
+import { NextRequest, NextResponse } from 'next/server'
+
 import {
   deleteDraft,
   getDraftById,
   insertDraft,
   updateDraft
 } from '@/app/services/drafts'
-import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
   const id = req.nextUrl.searchParams.get('id')
@@ -23,8 +24,8 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   const body = await req.json()
-  const { _id, ...formData } = body
-  await updateDraft(_id, formData)
+  const { _id: id, ...formData } = body
+  await updateDraft(id, formData)
   return NextResponse.json({ message: '임시저장 글 수정 완료' })
 }
 

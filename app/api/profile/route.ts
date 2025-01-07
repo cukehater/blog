@@ -1,5 +1,6 @@
-import { getProfile, updateProfile } from '@/app/services/profile'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { getProfile, updateProfile } from '@/app/services/profile'
 
 export async function GET() {
   const result = await getProfile()

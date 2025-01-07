@@ -1,10 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import ArrowSvg from './svg/ArrowSvg'
-import Button from './Button'
 import { useRouter } from 'next/navigation'
-import { PostType, PrevOrNextPostType } from '@/app/models/posts'
+
+import { PrevOrNextPostType } from '@/app/models/posts'
+
+import Button from './Button'
+import ArrowSvg from './svg/ArrowSvg'
 
 export default function PostNavigation({
   prevPost,

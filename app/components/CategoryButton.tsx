@@ -17,6 +17,7 @@ export default function CategoryButton({
 
   return (
     <button
+      type="button"
       className={`rounded-full px-4 py-2
         ${
           isActive

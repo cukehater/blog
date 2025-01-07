@@ -1,9 +1,12 @@
 import Link from 'next/link'
 import { v4 as uuid } from 'uuid'
-import parseDateFormat from '../utils/parseDateFormat'
-import CategoryButton from './CategoryButton'
+
 import { PostType } from '../models/posts'
+
+import CategoryButton from './CategoryButton'
 import PostDeleteButton from './PostDeleteButton'
+
+import parseDateFormat from '../utils/parseDateFormat'
 
 type PostCardProps = {
   type: 'draft' | 'post'

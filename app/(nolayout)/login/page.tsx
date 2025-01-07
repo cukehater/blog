@@ -1,6 +1,7 @@
-import { signIn } from '@/auth'
-import { AuthError } from 'next-auth'
 import { redirect } from 'next/navigation'
+import { AuthError } from 'next-auth'
+
+import { signIn } from '@/auth'
 
 export default async function Page() {
   return (
@@ -9,8 +10,10 @@ export default async function Page() {
         <form
           action={async (formData) => {
             'use server'
+
             try {
               await signIn('credentials', formData)
+              return redirect('/')
             } catch (error) {
               if (error instanceof AuthError) {
                 return redirect(`/error?error=${error.type}`)
@@ -22,28 +25,28 @@ export default async function Page() {
         >
           <div>
             <label htmlFor="id" className="block text-sm font-medium">
-              ID
+              <span>ID</span>
+              <input
+                id="id"
+                name="id"
+                type="text"
+                required
+                className="mt-1 block w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[--accent-color] focus:border-[--accent-color] text-[--primary-color]"
+              />
             </label>
-            <input
-              id="id"
-              name="id"
-              type="text"
-              required
-              className="mt-1 block w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[--accent-color] focus:border-[--accent-color] text-[--primary-color]"
-            />
           </div>
 
           <div>
             <label htmlFor="password" className="block text-sm font-medium">
-              Password
+              <span>Password</span>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                className="mt-1 block w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[--accent-color] focus:border-[--accent-color] text-[--primary-color]"
+              />
             </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              className="mt-1 block w-full px-3 py-2 text-sm border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[--accent-color] focus:border-[--accent-color] text-[--primary-color]"
-            />
           </div>
 
           <button

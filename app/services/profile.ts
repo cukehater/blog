@@ -1,7 +1,9 @@
 import { ObjectId } from 'mongodb'
-import { ProfileType } from '../models/profile'
-import dbConnection from '../utils/dbConnection'
 import { NextResponse } from 'next/server'
+
+import { ProfileType } from '../models/profile'
+
+import dbConnection from '../utils/dbConnection'
 
 const DB_NAME = 'blog'
 const COLLECTION_NAME = 'profile'
@@ -58,8 +60,8 @@ export async function updateProfile(data: ProfileType) {
     const db = client.db(DB_NAME)
     const collection = db.collection(COLLECTION_NAME)
 
-    const { _id, ...rest } = data
-    await collection.updateOne({ _id: new ObjectId(_id) }, { $set: rest })
+    const { _id: id, ...rest } = data
+    await collection.updateOne({ _id: new ObjectId(id) }, { $set: rest })
 
     return NextResponse.json({ message: '프로필 업데이트 완료' })
   } catch (error) {

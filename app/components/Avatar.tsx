@@ -7,7 +7,8 @@ type Props = {
 }
 
 export default function Avatar({ size, src, alt }: Props) {
-  let width, height
+  let width
+  let height
 
   switch (size) {
     case 'sm':

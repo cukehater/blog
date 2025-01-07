@@ -1,9 +1,12 @@
 import Link from 'next/link'
-import Inner from './Inner'
-import Button from '../Button'
+import { signOut } from 'next-auth/react'
+
 import { getBlogTitle } from '@/app/services/profile'
 import { auth } from '@/auth'
-import { signOut } from 'next-auth/react'
+
+import Button from '../Button'
+
+import Inner from './Inner'
 
 export default async function Header() {
   const session = await auth()

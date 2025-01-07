@@ -1,7 +1,8 @@
-import { getAllDrafts } from '@/app/services/drafts'
-import PostList from '../../components/PostList'
-import { PostType } from '@/app/models/posts'
 import EmptyPost from '@/app/components/EmptyPost'
+import { PostType } from '@/app/models/posts'
+import { getAllDrafts } from '@/app/services/drafts'
+
+import PostList from '../../components/PostList'
 
 export default async function Page() {
   const drafts = (await getAllDrafts()) as PostType[]
