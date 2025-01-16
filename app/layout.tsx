@@ -4,12 +4,39 @@ import SWRConfigContext from './context/SWRConfigContext'
 import './styles/globals.scss'
 import { getBlogTitle } from './services/profile'
 
+type BlogTitleType = {
+  blogTitle: string
+  description: string
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const blogTitleData = await getBlogTitle()
+  const { blogTitle, description } = blogTitleData as unknown as BlogTitleType
 
   return {
-    title: blogTitleData?.blogTitle,
-    description: `${blogTitleData?.blogTitle}의 기술 블로그`
+    title: {
+      template: `%s | ${blogTitle} 기술 블로그`,
+      default: `${blogTitle} 기술 블로그`
+    },
+    description,
+    icons: {
+      icon: '/favicon.ico'
+    },
+    openGraph: {
+      title: `${blogTitle} 기술 블로그`,
+      description,
+      siteName: `${blogTitle} 기술 블로그`,
+      locale: 'ko_KR',
+      type: 'website',
+      url: 'https://blog-nine-beige-27.vercel.app/',
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630
+        }
+      ]
+    }
   }
 }
 

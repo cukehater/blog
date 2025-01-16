@@ -29,7 +29,10 @@ export async function getBlogTitle() {
   try {
     const db = client.db(DB_NAME)
     const collection = db.collection(COLLECTION_NAME)
-    return await collection.findOne({}, { projection: { blogTitle: 1 } })
+    return await collection.findOne(
+      {},
+      { projection: { blogTitle: 1, description: 1 } }
+    )
   } catch (error) {
     console.error(error)
     return null

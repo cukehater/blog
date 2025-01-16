@@ -14,6 +14,17 @@ import parseDateFormat from '@/app/utils/parseDateFormat'
 
 type Params = Promise<{ id: string }>
 
+export async function generateMetadata({ params }: { params: Params }) {
+  const { id } = await params
+  const postData = await getPostById(id)
+  const { title, description } = postData as PostType
+
+  return {
+    title,
+    description
+  }
+}
+
 export default async function Page({ params }: { params: Params }) {
   const session = await auth()
 
