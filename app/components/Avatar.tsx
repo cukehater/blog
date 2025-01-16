@@ -39,6 +39,7 @@ export default function Avatar({ size, src, alt }: Props) {
       height={height}
       alt={alt}
       className="rounded-full object-cover aspect-[1/1]"
+      priority
     />
   )
 }

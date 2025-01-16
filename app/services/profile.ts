@@ -38,21 +38,6 @@ export async function getBlogTitle() {
   }
 }
 
-export async function getNickname() {
-  const client = dbConnection()
-
-  try {
-    const db = client.db(DB_NAME)
-    const collection = db.collection(COLLECTION_NAME)
-    return await collection.findOne({}, { projection: { nickname: 1 } })
-  } catch (error) {
-    console.error(error)
-    return null
-  } finally {
-    await client.close()
-  }
-}
-
 export async function updateProfile(data: ProfileType) {
   const client = dbConnection()
 

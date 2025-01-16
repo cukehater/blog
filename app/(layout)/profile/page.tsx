@@ -91,7 +91,6 @@ export default function Page() {
     profileImage: '',
     blogTitle: '',
     description: '',
-    nickname: '',
     email: '',
     portfolioUrl: '',
     githubUrl: '',
@@ -133,14 +132,6 @@ export default function Page() {
           type="text"
           placeholder="블로그 제목"
           value={profile?.blogTitle}
-          onChange={handleChange}
-          required
-        />
-        <Form.Input
-          id="nickname"
-          type="text"
-          placeholder="닉네임"
-          value={profile?.nickname}
           onChange={handleChange}
           required
         />

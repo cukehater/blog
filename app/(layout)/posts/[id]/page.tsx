@@ -7,7 +7,7 @@ import PostMDPreview from '@/app/components/PostMDPreview'
 import PostNavigation from '@/app/components/PostNavigation'
 import { PostType, PrevOrNextPostType } from '@/app/models/posts'
 import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
-import { getNickname } from '@/app/services/profile'
+import { getBlogTitle } from '@/app/services/profile'
 import { auth } from '@/auth'
 
 import parseDateFormat from '@/app/utils/parseDateFormat'
@@ -19,8 +19,7 @@ export default async function Page({ params }: { params: Params }) {
 
   const { id } = await params
 
-  const nicknameData = await getNickname()
-  const { nickname } = nicknameData || { nickname: '' }
+  const blogTitleData = await getBlogTitle()
   const postData = await getPostById(id)
 
   const prevPost = (await getPrevOrNextPost(id, 'prev')) as PrevOrNextPostType
@@ -37,7 +36,7 @@ export default async function Page({ params }: { params: Params }) {
 
           <div className="flex items-center justify-between gap-2 mb-6">
             <div className="flex items-center gap-2">
-              <p>{nickname}</p> &middot;
+              <p>{blogTitleData?.blogTitle}</p> &middot;
               <p>{parseDateFormat(regDate)}</p>
             </div>
 

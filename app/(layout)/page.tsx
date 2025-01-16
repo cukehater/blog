@@ -1,4 +1,3 @@
-import { Metadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { v4 as uuid } from 'uuid'
@@ -20,16 +19,7 @@ import {
   getAllPosts,
   getPostsByCategory
 } from '../services/posts'
-import { getBlogTitle, getProfile } from '../services/profile'
-
-export async function generateMetadata(): Promise<Metadata> {
-  const [blogTitle, posts] = await Promise.all([getBlogTitle(), getAllPosts()])
-
-  return {
-    title: blogTitle?.blogTitle,
-    description: posts?.map((post) => post.description).join(' | ')
-  }
-}
+import { getProfile } from '../services/profile'
 
 async function Hero() {
   const profileData = (await getProfile()) as unknown as ProfileType
@@ -38,7 +28,6 @@ async function Hero() {
     profileImage,
     blogTitle,
     description,
-    nickname,
     email,
     portfolioUrl,
     githubUrl,
@@ -53,7 +42,6 @@ async function Hero() {
         )}
         <div>
           <h4 className="text-3xl font-bold">{blogTitle}</h4>
-          <p className="mt-4 text-lg font-medium">{nickname}</p>
           <p className="mt-4 text-sm">{description}</p>
           <nav className="flex gap-3 mt-4 justify-center sm:justify-start">
             {email && (

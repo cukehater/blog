@@ -3,7 +3,6 @@ export type ProfileType = {
   profileImage: string
   blogTitle: string
   description: string
-  nickname: string
   email: string
   portfolioUrl: string
   githubUrl: string
