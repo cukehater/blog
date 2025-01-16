@@ -4,7 +4,7 @@ type Props = {
 
 export default function EmptyPost({ text }: Props) {
   return (
-    <div className="flex items-center justify-center p-20">
+    <div className="absolute inset-0 flex items-center justify-center">
       <p className="text-neutral-200">{text}</p>
     </div>
   )

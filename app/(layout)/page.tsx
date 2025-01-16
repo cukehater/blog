@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid'
 
 import Avatar from '../components/Avatar'
 import CategoryButton from '../components/CategoryButton'
-import EmptyPost from '../components/EmptyPost'
 import PostList from '../components/PostList'
 import ProfileLink from '../components/ProfileLink'
 import EmailSvg from '../components/svg/EmailSvg'
@@ -120,11 +119,7 @@ export default async function Home() {
       </p>
 
       <section className="mt-10">
-        {posts.length === 0 ? (
-          <EmptyPost text="등록된 포스트가 없습니다 😢" />
-        ) : (
-          <PostList type="post" posts={posts} />
-        )}
+        <PostList type="post" posts={posts} />
       </section>
     </>
   )
