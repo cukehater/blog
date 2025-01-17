@@ -46,35 +46,47 @@ export default function TableOfContents({
   }, [content])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const { id } = entry.target
-          const firstHeading = previewRef.current?.querySelector('#heading-1')
+    const handleScroll = () => {
+      const headingElements = previewRef.current?.querySelectorAll(
+        'h1, h2, h3, h4, h5, h6'
+      )
+      if (!headingElements?.length) return
 
-          if (firstHeading) {
-            const firstHeadingTop = firstHeading.getBoundingClientRect().top
+      const firstHeading = previewRef.current?.querySelector('#heading-1')
+      if (firstHeading) {
+        const firstHeadingTop = firstHeading.getBoundingClientRect().top
+        if (window.scrollY < firstHeadingTop + window.scrollY - 80) {
+          setActiveId('')
+          return
+        }
+      }
 
-            if (window.scrollY < firstHeadingTop + window.scrollY - 80) {
-              setActiveId('')
-              return
-            }
-          }
+      let closestHeading = ''
+      let closestDistance = Infinity
 
-          if (entry.isIntersecting) {
-            setActiveId(id)
-          }
-        })
-      },
-      { rootMargin: `0px 0px ${(window.innerHeight - 81) * -1}px 0px` }
-    )
+      headingElements.forEach((element) => {
+        const { top } = element.getBoundingClientRect()
+        const distance = Math.abs(top - 80)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestHeading = element.id
+        }
+      })
 
-    const headingElements = previewRef.current?.querySelectorAll(
-      'h1, h2, h3, h4, h5, h6'
-    )
-    headingElements?.forEach((element) => observer.observe(element))
+      if (closestHeading) {
+        setActiveId(closestHeading)
+      }
+    }
 
-    return () => observer.disconnect()
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleScroll)
+
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [previewRef, toc])
 
   return (
