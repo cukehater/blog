@@ -14,7 +14,7 @@ export default function PostMDPreview({ content }: { content: string }) {
     `heading-${index}`
 
   return (
-    <section ref={previewRef} className="mb-20">
+    <section ref={previewRef} className="mb-32">
       <MdPreview
         editorId="preview-only"
         modelValue={content}

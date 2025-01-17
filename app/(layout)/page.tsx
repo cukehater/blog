@@ -20,7 +20,7 @@ import {
 } from '../services/posts'
 import { getProfile } from '../services/profile'
 
-async function Hero() {
+export async function Hero() {
   const profileData = (await getProfile()) as unknown as ProfileType
 
   const {

@@ -18,7 +18,7 @@ export default function PostNavigation({
   const router = useRouter()
 
   return (
-    <nav className="flex justify-between items-center">
+    <nav className="mt-20 flex justify-between items-center">
       <div className="w-40 sm:w-56">
         {nextPost && (
           <Link

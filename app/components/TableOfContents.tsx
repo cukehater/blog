@@ -16,6 +16,7 @@ export default function TableOfContents({
   content: string
 }) {
   const [toc, setToc] = useState<TocItem[]>([])
+  const [activeId, setActiveId] = useState<string>('')
 
   const handleClick = (id: string) => {
     if (typeof document === 'undefined') return
@@ -44,9 +45,41 @@ export default function TableOfContents({
     setToc(tocItems)
   }, [content])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const { id } = entry.target
+          const firstHeading = previewRef.current?.querySelector('#heading-1')
+
+          if (firstHeading) {
+            const firstHeadingTop = firstHeading.getBoundingClientRect().top
+
+            if (window.scrollY < firstHeadingTop + window.scrollY - 80) {
+              setActiveId('')
+              return
+            }
+          }
+
+          if (entry.isIntersecting) {
+            setActiveId(id)
+          }
+        })
+      },
+      { rootMargin: `0px 0px ${(window.innerHeight - 81) * -1}px 0px` }
+    )
+
+    const headingElements = previewRef.current?.querySelectorAll(
+      'h1, h2, h3, h4, h5, h6'
+    )
+    headingElements?.forEach((element) => observer.observe(element))
+
+    return () => observer.disconnect()
+  }, [previewRef, toc])
+
   return (
     <nav className="fixed right-[calc(50vw-42rem)] w-60 border-l-2 border-[--tertiary-color] pl-4 top-44 hidden lg:block max-h-[calc(100vh-12rem)] overflow-y-auto">
-      <ul className="space-y-1.5">
+      <ul className="space-y-2">
         {toc.map((item) => (
           <li
             key={item.id}
@@ -56,7 +89,8 @@ export default function TableOfContents({
             <button
               type="button"
               onClick={() => handleClick(item.id)}
-              className="hover:text-[--accent-color-hover] transition-colors text-left break-word"
+              className={`hover:text-[--accent-color-hover] hover:scale-105 transition-all origin-left duration-200 text-left break-word
+                ${activeId === item.id ? 'text-[--accent-color] scale-105' : ''}`}
             >
               {item.text}
             </button>

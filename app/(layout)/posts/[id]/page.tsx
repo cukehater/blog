@@ -10,6 +10,8 @@ import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
 import { getBlogTitle } from '@/app/services/profile'
 import { auth } from '@/auth'
 
+import { Hero } from '../../page'
+
 import parseDateFormat from '@/app/utils/parseDateFormat'
 
 type Params = Promise<{ id: string }>
@@ -69,6 +71,9 @@ export default async function Page({ params }: { params: Params }) {
 
       {/*  콘텐츠 */}
       <PostMDPreview content={content} />
+
+      {/* 프로필 */}
+      <Hero />
 
       {/* 이전 글, 다음 글 네비게이션 */}
       <PostNavigation prevPost={prevPost} nextPost={nextPost} />

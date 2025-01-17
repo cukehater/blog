@@ -10,7 +10,7 @@ export default async function RootLayout({
   return (
     <>
       <Header />
-      <main className="relative flex-1 pt-40 pb-20">
+      <main className="relative flex-1 py-40">
         <Inner>{children}</Inner>
       </main>
       <Footer />
