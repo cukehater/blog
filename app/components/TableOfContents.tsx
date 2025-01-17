@@ -78,7 +78,7 @@ export default function TableOfContents({
   }, [previewRef, toc])
 
   return (
-    <nav className="fixed right-[calc(50vw-42rem)] w-60 border-l-2 border-[--tertiary-color] pl-4 top-44 hidden lg:block max-h-[calc(100vh-12rem)] overflow-y-auto">
+    <nav className="fixed right-[calc(50vw-42rem)] w-60 border-l-2 border-[--tertiary-color] pl-4 top-44 hidden xl:block max-h-[calc(100vh-12rem)] overflow-y-auto">
       <ul className="space-y-2">
         {toc.map((item) => (
           <li
