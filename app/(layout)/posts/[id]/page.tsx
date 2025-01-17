@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid'
 
 import CategoryButton from '@/app/components/CategoryButton'
+import Hero from '@/app/components/Hero'
 import PostDeleteButton from '@/app/components/PostDeleteButton'
 import PostEditButton from '@/app/components/PostEditButton'
 import PostMDPreview from '@/app/components/PostMDPreview'
@@ -9,8 +10,6 @@ import { PostType, PrevOrNextPostType } from '@/app/models/posts'
 import { getPostById, getPrevOrNextPost } from '@/app/services/posts'
 import { getBlogTitle } from '@/app/services/profile'
 import { auth } from '@/auth'
-
-import { Hero } from '../../page'
 
 import parseDateFormat from '@/app/utils/parseDateFormat'
 
