@@ -53,6 +53,10 @@ export default function RootLayout({
           name="google-site-verification"
           content="ZSBCOBhbZHQGU_NOJ_A1fsoGlblAoyOBMd5rGmOHe24"
         />
+        <meta
+          name="naver-site-verification"
+          content="a14c46934e5b2876fdf1fea543c68bd908f15a7e"
+        />
       </head>
       <body
         className="bg-[--primary-color] flex min-h-screen flex-col"
