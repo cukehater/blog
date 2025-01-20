@@ -47,6 +47,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="ZSBCOBhbZHQGU_NOJ_A1fsoGlblAoyOBMd5rGmOHe24"
+        />
+      </head>
       <body
         className="bg-[--primary-color] flex min-h-screen flex-col"
         suppressHydrationWarning
