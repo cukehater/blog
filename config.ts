@@ -1,1 +1,1 @@
-export const DOMAIN = 'https://cukehater-blog.vercel.app/'
+export const DOMAIN = 'https://cukehater-blog.vercel.app'
