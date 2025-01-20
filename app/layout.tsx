@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 
 import SWRConfigContext from './context/SWRConfigContext'
@@ -59,6 +60,7 @@ export default function RootLayout({
       >
         <div id="portal" />
         <SWRConfigContext>{children}</SWRConfigContext>
+        <SpeedInsights />
       </body>
     </html>
   )
