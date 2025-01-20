@@ -1,6 +1,8 @@
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 
+import { DOMAIN } from '@/config'
+
 import SWRConfigContext from './context/SWRConfigContext'
 import './styles/globals.scss'
 import { getBlogTitle } from './services/profile'
@@ -29,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: `${blogTitle} 기술 블로그`,
       locale: 'ko_KR',
       type: 'website',
-      url: 'https://blog-nine-beige-27.vercel.app/',
+      url: DOMAIN,
       images: [
         {
           url: '/og-image.jpg',
