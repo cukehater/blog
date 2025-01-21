@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: DOMAIN,
       images: [
         {
-          url: '/og-image.jpg',
+          url: 'https://vshplselkzxwtmuwjjji.supabase.co/storage/v1/object/public/blog-bucket/profile-images/og-image_1737342039243.jpg',
           width: 1200,
           height: 630
         }
