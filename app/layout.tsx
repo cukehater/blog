@@ -1,5 +1,6 @@
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
+import { Noto_Sans_KR } from 'next/font/google'
 
 import { DOMAIN } from '@/config'
 
@@ -43,13 +44,19 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+const notoSansKr = Noto_Sans_KR({
+  subsets: ['latin'],
+  weight: ['100', '300', '400', '500', '600', '700', '900'],
+  preload: true
+})
+
 export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={notoSansKr.className}>
       <head>
         <meta
           name="google-site-verification"
