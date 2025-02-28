@@ -101,8 +101,8 @@ export default function TableOfContents({
             <button
               type="button"
               onClick={() => handleClick(item.id)}
-              className={`hover:text-[--accent-color-hover] hover:scale-105 transition-all origin-left duration-200 text-left break-word
-                ${activeId === item.id ? 'text-[--accent-color] scale-105' : ''}`}
+              className={`hover:text-[--code-text-color] hover:scale-105 transition-all origin-left duration-200 text-left break-word
+                ${activeId === item.id ? 'text-[--code-text-color] scale-105' : ''}`}
             >
               {item.text}
             </button>

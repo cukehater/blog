@@ -66,6 +66,9 @@ svg.md-editor-icon {
 .md-editor-preview-wrapper {
   overflow: hidden !important;
 }
+.md-editor div.github-theme {
+  --md-theme-code-inline-color: var(--code-text-color) !important;
+}
 
 @media (max-width: 1024px) {
   .md-editor-preview {

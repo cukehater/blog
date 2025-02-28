@@ -18,7 +18,7 @@ export default function CategoryButton({
   return (
     <button
       type="button"
-      className={`rounded-full px-4 py-2
+      className={`rounded-full px-4 py-2 font-medium
         ${
           isActive
             ? 'bg-[--accent-color] hover:bg-[--accent-color-hover]'

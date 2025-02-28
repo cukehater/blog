@@ -22,7 +22,6 @@ export default function PostMDPreview({ content }: { content: string }) {
         language="en-US"
         className="flex-1 custom-preview detail"
         mdHeadingId={mdHeadingId}
-        theme="dark"
       />
 
       <TableOfContents previewRef={previewRef} content={content} />

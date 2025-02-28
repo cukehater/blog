@@ -271,11 +271,12 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* 뒤로가기, 임시저장, 발행 */}
-      <section className="bg-[--tertiary-color] flex items-center justify-between p-4">
+      <section className="flex items-center justify-between p-4 border-[--tertiary-color] border-b-2">
         <nav className="flex items-center w-full gap-2">
           <Button
             type="button"
-            className="flex gap-2 items-center [&_path]:hover:fill-[--accent-color] [&_path]:transition-all"
+            highlight
+            className="flex gap-2 items-center"
             onClick={() => router.push('/drafts')}
           >
             <ArrowSvg className="w-4 h-4" />
@@ -329,7 +330,7 @@ export default function Page() {
       <section className="px-4 pt-4">
         <input
           type="text"
-          className="w-full text-2xl bg-transparent mb-4 font-semibold border-b-4 border-[var(--secondary-color)] pb-4 px-2"
+          className="w-full text-2xl bg-transparent mb-4 font-semibold border-b-4 border-[var(--secondary-color)] pb-4 px-2 placeholder-gray-400"
           placeholder="제목을 입력해 주세요"
           defaultValue={writeData.title}
           onChange={(e) =>
